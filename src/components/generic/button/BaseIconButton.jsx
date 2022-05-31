@@ -1,10 +1,15 @@
 import clsx from 'clsx'
 
-const BaseButton = ({ children, className, secondary = false, ...props }) => {
+const BaseIconButton = ({
+  children,
+  className,
+  secondary = false,
+  ...props
+}) => {
   return (
     <button
       className={clsx(
-        `${className} px-4 py-2 sm:text-sm text-base font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2`,
+        `${className} rounded-full p-3 sm:text-sm text-base font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2`,
         {
           'text-secondary bg-primary hover:bg-accent focus:ring-primary':
             !secondary,
@@ -19,4 +24,4 @@ const BaseButton = ({ children, className, secondary = false, ...props }) => {
   )
 }
 
-export default BaseButton
+export default BaseIconButton

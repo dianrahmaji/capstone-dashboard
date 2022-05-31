@@ -1,14 +1,12 @@
 import BaseButton from './generic/button/BaseButton'
 import BaseForm from './generic/form/BaseForm'
-import BaseInput from './generic/form/BaseInput'
 import BaseModal from './generic/modal/BaseModal'
 
-const FormModal = ({ title, open, setOpen, ...props }) => {
+const FormModal = ({ title, open, setOpen, children, ...props }) => {
   return (
     <BaseModal title={title} open={open} setOpen={setOpen}>
       <BaseForm {...props}>
-        <BaseInput label="Email" name="email" type="email" />
-        <BaseInput label="Password" name="password" type="password" />
+        {children}
         <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
           <BaseButton
             type="submit"
