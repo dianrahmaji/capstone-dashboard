@@ -35,7 +35,6 @@ const ProposalTable = () => {
             <tr key={p._id}>
               <BaseTableItem className="font-medium">{p.title}</BaseTableItem>
               <BaseTableItem>
-                {' '}
                 <span
                   className={clsx(
                     'inline-flex rounded-full  px-2 text-xs font-semibold leading-5 ',
