@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-const BaseButton = ({ children, className, secondary = false, ...props }) => {
+const BaseButton = ({ children, className, secondary, ...props }) => {
   return (
     <button
       className={clsx(

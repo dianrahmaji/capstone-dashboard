@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { XIcon } from '@heroicons/react/outline'
+import { XIcon, LogoutIcon } from '@heroicons/react/outline'
 
 import dashboard from '~/config/dashboard'
 
@@ -67,6 +67,9 @@ const NavigationBarMobile = ({ sidebarOpen, setSidebarOpen }) => {
                 {dashboard.map(({ navigation }) => (
                   <NavigationBarItem {...navigation} key={navigation.name} />
                 ))}
+                <div className="pt-3">
+                  <NavigationBarItem name="Keluar" path="#" icon={LogoutIcon} />
+                </div>
               </nav>
             </div>
           </div>

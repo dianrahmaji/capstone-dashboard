@@ -1,8 +1,13 @@
+import { LogoutIcon } from '@heroicons/react/outline'
 import dashboard from '~/config/dashboard'
 
 import NavigationBarItem from './NavigationBarItem'
 
 const NavigationBarDesktop = () => {
+  const handleLogout = () => {
+    console.log('logout')
+  }
+
   return (
     <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
       <div className="flex flex-col flex-grow pt-5 bg-primary overflow-y-auto">
@@ -18,6 +23,14 @@ const NavigationBarDesktop = () => {
             {dashboard.map(({ navigation }) => (
               <NavigationBarItem {...navigation} key={navigation.name} />
             ))}
+            <div className="pt-3">
+              <NavigationBarItem
+                name="Keluar"
+                path="#"
+                icon={LogoutIcon}
+                onLogout={handleLogout}
+              />
+            </div>
           </nav>
         </div>
       </div>

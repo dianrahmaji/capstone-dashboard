@@ -6,7 +6,7 @@ const BaseCheckbox = ({ label, ...props }) => {
   return (
     <div className="flex items-center mt-3">
       <input
-        className="h-4 w-4 text-primary focus:ring-accent border-gray-300 rounded"
+        className="h-4 w-4 text-primary focus:ring-accent border-gray-300 rounded disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
         type="checkbox"
         {...field}
         {...props}
