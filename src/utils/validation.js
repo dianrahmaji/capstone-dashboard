@@ -3,6 +3,7 @@ import * as Yup from 'yup'
 export const accountType = Yup.string().required('Account type is required')
 export const date = Yup.date().required('Date is required')
 export const description = Yup.string().required('Description is required')
+export const documentName = Yup.string().required('Document name is required')
 export const email = Yup.string()
 export const faculty = Yup.string().required('Faculty is required')
 export const fullName = Yup.string().required('Full name is required')
