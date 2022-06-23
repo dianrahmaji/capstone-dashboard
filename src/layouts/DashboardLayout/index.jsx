@@ -1,9 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import NavigationBar from './components/NavigationBar'
 
 const DashboardLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const navigate = useNavigate()
+
+  const { user } = useSelector(state => state.userLogin)
+
+  useEffect(() => {
+    if (!user) navigate('/login')
+  }, [user, navigate])
 
   return (
     <div className="min-h-screen">

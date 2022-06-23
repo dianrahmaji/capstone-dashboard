@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { LockClosedIcon } from '@heroicons/react/outline'
 
 import { email, password } from '~/utils/validation'
@@ -11,9 +13,16 @@ import BaseInput from '~/components/generic/form/BaseInput'
 const Login = () => {
   const initialValues = { email: '', password: '', remember: false }
 
-  const handleSubmit = (values, { setSubmitting }) => {
+  const navigate = useNavigate()
+
+  const { user } = useSelector(state => state.userLogin)
+
+  useEffect(() => {
+    if (user) navigate('/', { replace: true })
+  }, [user, navigate])
+
+  const handleSubmit = values => {
     console.log(values)
-    setSubmitting(false)
   }
 
   return (
