@@ -12,12 +12,12 @@ import {
   accountType,
   password
 } from '~/utils/validation'
+import { register } from '~/store/actions/userActions'
 
 import BaseButton from '~/components/generic/button/BaseButton'
 import BaseForm from '~/components/generic/form/BaseForm'
 import BaseInput from '~/components/generic/form/BaseInput'
 import BaseSelect from '~/components/generic/form/BaseSelect'
-import { register } from '../store/actions/userActions'
 
 const Register = () => {
   const initialValues = {

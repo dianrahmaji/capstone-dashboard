@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { LockClosedIcon } from '@heroicons/react/outline'
 
 import { email, password } from '~/utils/validation'
+import { login } from '~/store/actions/userActions'
 
 import BaseButton from '~/components/generic/button/BaseButton'
 import BaseCheckbox from '~/components/generic/form/BaseCheckbox'
@@ -13,6 +14,7 @@ import BaseInput from '~/components/generic/form/BaseInput'
 const Login = () => {
   const initialValues = { email: '', password: '', remember: false }
 
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const { user } = useSelector(state => state.userLogin)
@@ -22,7 +24,8 @@ const Login = () => {
   }, [user, navigate])
 
   const handleSubmit = values => {
-    console.log(values)
+    const { email, password } = values
+    dispatch(login(email, password))
   }
 
   return (
