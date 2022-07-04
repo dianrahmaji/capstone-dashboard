@@ -10,9 +10,9 @@ const DashboardLayout = ({ children }) => {
 
   const { user } = useSelector(state => state.userLogin)
 
-  useEffect(() => {
-    if (!user) navigate('/login')
-  }, [user, navigate])
+  // useEffect(() => {
+  //   if (!user) navigate('/login')
+  // }, [user, navigate])
 
   return (
     <div className="min-h-screen">
