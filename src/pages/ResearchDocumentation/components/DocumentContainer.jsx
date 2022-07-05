@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react'
 import DocumentItem from './DocumentItem'
-import RenameModal from './RenameModal'
+import DocumentModal from './DocumentModal'
 
 const DocumentContainer = () => {
   const [openDialog, setOpenDialog] = useState(false)
@@ -17,7 +17,9 @@ const DocumentContainer = () => {
         <DocumentItem type="file" onRename={handleRename} />
         <DocumentItem onRename={handleRename} />
       </div>
-      <RenameModal
+      <DocumentModal
+        type="folder"
+        action="rename"
         open={openDialog}
         setOpen={setOpenDialog}
         initialValues={selectedDocument}
