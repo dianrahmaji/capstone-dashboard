@@ -3,10 +3,12 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
+import { teamListReducer } from './reducers/teamReducers'
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
-  userRegister: userRegisterReducer
+  userRegister: userRegisterReducer,
+  teamList: teamListReducer
 })
 
 const userFromStorage = localStorage.getItem('user-researcher')

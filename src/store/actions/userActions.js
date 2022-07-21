@@ -14,7 +14,7 @@ export const login = (email, password) => async dispatch => {
   try {
     dispatch({ type: USER_LOGIN_REQUEST })
 
-    const { data } = await axios.post('/api/users/login', { email, password })
+    const { data } = await axios.post('/api/user/login', { email, password })
 
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
     localStorage.setItem('user-researcher', JSON.stringify(data))
@@ -39,7 +39,7 @@ export const register =
   async dispatch => {
     dispatch({ type: USER_REGISTER_REQUEST })
 
-    const { data } = await axios.post('/api/users', {
+    const { data } = await axios.post('/api/user', {
       fullName,
       email,
       userId,
