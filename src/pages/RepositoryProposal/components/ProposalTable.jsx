@@ -10,14 +10,6 @@ import BaseTableItem from '~/components/generic/table/BaseTableItem'
 import ProposalModal from './ProposalModal'
 
 const header = ['Title', 'Status', 'Actions']
-const proposal = [
-  {
-    _id: 1,
-    title: 'Capstone Project',
-    description: 'Best project ever',
-    status: 'updated'
-  }
-]
 
 const ProposalTable = () => {
   const [openDialog, setOpenDialog] = useState(false)
@@ -33,7 +25,8 @@ const ProposalTable = () => {
   }, [dispatch, user])
 
   const handleEdit = p => {
-    setSelectedProposal(p)
+    const { repository, ...rest } = p
+    setSelectedProposal({ ...repository, ...rest })
     console.log(selectedProposal)
     setOpenDialog(true)
   }
@@ -45,7 +38,7 @@ const ProposalTable = () => {
         {teams &&
           teams.map(p => (
             <tr key={p._id}>
-              <BaseTableItem className="font-medium">{p.title}</BaseTableItem>
+              <BaseTableItem className="font-medium">{p.name}</BaseTableItem>
               <BaseTableItem>
                 <span
                   className={clsx(

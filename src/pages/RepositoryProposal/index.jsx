@@ -1,15 +1,27 @@
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { PlusSmIcon } from '@heroicons/react/outline'
+
+import { createTeam } from '~/store/actions/teamActions'
 
 import BaseIconButton from '~/components/generic/button/BaseIconButton'
 import DashboardLayout from '~/layouts/DashboardLayout'
 import ProposalModal from './components/ProposalModal'
 import ProposalTable from './components/ProposalTable'
 
-const initialValues = { title: '', description: '' }
-
 const RepositoryProlosal = () => {
   const [openDialog, setOpenDialog] = useState(false)
+
+  const dispatch = useDispatch()
+
+  const {
+    user: { _id }
+  } = useSelector(state => state.userLogin)
+
+  const handleSubmit = values => {
+    dispatch(createTeam({ administrator: _id, ...values }))
+    setOpenDialog(false)
+  }
 
   return (
     <DashboardLayout>
@@ -25,8 +37,7 @@ const RepositoryProlosal = () => {
             title="Add Repository"
             open={openDialog}
             setOpen={setOpenDialog}
-            initialValues={initialValues}
-            handleSubmit={console.log}
+            handleSubmit={handleSubmit}
           />
           <div className="flex mt-3 px-8 justify-end">
             <BaseIconButton onClick={() => setOpenDialog(true)}>
