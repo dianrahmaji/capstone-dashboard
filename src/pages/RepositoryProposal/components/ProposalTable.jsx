@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import clsx from 'clsx'
 import { PencilAltIcon, TrashIcon } from '@heroicons/react/outline'
 
-import { teamList } from '~/store/actions/teamActions'
+import { teamList, updateTeam } from '~/store/actions/teamActions'
 
 import BaseTable from '~/components/generic/table/BaseTable'
 import BaseTableItem from '~/components/generic/table/BaseTableItem'
@@ -26,11 +26,18 @@ const ProposalTable = () => {
 
   const handleEdit = p => {
     const { repository, ...rest } = p
+    repository.startDate = repository.startDate.slice(0, 10)
+    repository.endDate = repository.endDate.slice(0, 10)
     setSelectedProposal({ ...repository, ...rest })
-    console.log(selectedProposal)
     setOpenDialog(true)
   }
+
   const handleDelete = () => {}
+
+  const handleSubmit = ({ status, ...rest }) => {
+    dispatch(updateTeam(rest))
+    setOpenDialog(false)
+  }
 
   return (
     <Fragment>
@@ -72,7 +79,7 @@ const ProposalTable = () => {
         open={openDialog}
         setOpen={setOpenDialog}
         initialValues={selectedProposal}
-        handleSubmit={console.log}
+        handleSubmit={handleSubmit}
       />
     </Fragment>
   )

@@ -6,7 +6,10 @@ import {
   CREATE_TEAM_SUCCESS,
   FETCH_TEAM_FAIL,
   FETCH_TEAM_REQUEST,
-  FETCH_TEAM_SUCCESS
+  FETCH_TEAM_SUCCESS,
+  UPDATE_TEAM_FAIL,
+  UPDATE_TEAM_REQUEST,
+  UPDATE_TEAM_SUCCESS
 } from '../constants/teamConstants'
 
 export const teamList = id => async dispatch => {
@@ -37,6 +40,24 @@ export const createTeam = payload => async dispatch => {
   } catch (error) {
     dispatch({
       type: CREATE_TEAM_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
+
+export const updateTeam = payload => async dispatch => {
+  try {
+    dispatch({ type: UPDATE_TEAM_REQUEST })
+
+    const { data } = await axios.put(`/api/team/${payload._id}`, payload)
+
+    dispatch({ type: UPDATE_TEAM_SUCCESS, payload: data })
+  } catch (error) {
+    dispatch({
+      type: UPDATE_TEAM_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

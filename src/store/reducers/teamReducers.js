@@ -4,7 +4,10 @@ import {
   FETCH_TEAM_SUCCESS,
   CREATE_TEAM_FAIL,
   CREATE_TEAM_REQUEST,
-  CREATE_TEAM_SUCCESS
+  CREATE_TEAM_SUCCESS,
+  UPDATE_TEAM_REQUEST,
+  UPDATE_TEAM_SUCCESS,
+  UPDATE_TEAM_FAIL
 } from '../constants/teamConstants'
 
 export const createTeamReducer = (state = {}, action) => {
@@ -14,6 +17,19 @@ export const createTeamReducer = (state = {}, action) => {
     case CREATE_TEAM_SUCCESS:
       return { loading: false, team: action.payload }
     case CREATE_TEAM_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const updateTeamReducer = (state = {}, action) => {
+  switch (action.type) {
+    case UPDATE_TEAM_REQUEST:
+      return { loading: true }
+    case UPDATE_TEAM_SUCCESS:
+      return { loading: false, team: action.payload }
+    case UPDATE_TEAM_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state
