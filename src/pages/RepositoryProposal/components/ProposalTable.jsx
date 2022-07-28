@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import clsx from 'clsx'
 import { PencilAltIcon, TrashIcon } from '@heroicons/react/outline'
 
-import { teamList, updateTeam } from '~/store/actions/teamActions'
+import { teamList, updateTeam, deleteTeam } from '~/store/actions/teamActions'
 
 import BaseTable from '~/components/generic/table/BaseTable'
 import BaseTableItem from '~/components/generic/table/BaseTableItem'
@@ -32,7 +32,9 @@ const ProposalTable = () => {
     setOpenDialog(true)
   }
 
-  const handleDelete = () => {}
+  const handleDelete = id => {
+    dispatch(deleteTeam(id))
+  }
 
   const handleSubmit = ({ status, ...rest }) => {
     dispatch(updateTeam(rest))
@@ -68,7 +70,7 @@ const ProposalTable = () => {
                 />
                 <TrashIcon
                   className="h-6 w-6 text-gray-400 rounded-md hover:cursor-pointer hover:text-red-700"
-                  onClick={() => handleDelete()}
+                  onClick={() => handleDelete(p._id)}
                 />
               </BaseTableItem>
             </tr>

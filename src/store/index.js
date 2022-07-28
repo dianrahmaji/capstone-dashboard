@@ -6,7 +6,8 @@ import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 import {
   teamListReducer,
   updateTeamReducer,
-  createTeamReducer
+  createTeamReducer,
+  deleteTeamReducer
 } from './reducers/teamReducers'
 
 const reducer = combineReducers({
@@ -14,7 +15,8 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   teamList: teamListReducer,
   createTeam: createTeamReducer,
-  updateTeam: updateTeamReducer
+  updateTeam: updateTeamReducer,
+  deleteTeam: deleteTeamReducer
 })
 
 const userFromStorage = localStorage.getItem('user-researcher')
