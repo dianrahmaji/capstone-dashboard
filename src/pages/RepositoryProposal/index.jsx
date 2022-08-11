@@ -15,8 +15,8 @@ const RepositoryProlosal = () => {
   const dispatch = useDispatch()
 
   const {
-    user: { _id }
-  } = useSelector(state => state.userLogin)
+    data: { _id }
+  } = useSelector(state => state.user)
 
   const handleSubmit = values => {
     dispatch(createTeam({ administrator: _id, ...values }))

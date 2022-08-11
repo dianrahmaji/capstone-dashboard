@@ -1,65 +1,55 @@
 import {
-  FETCH_TEAM_FAIL,
-  FETCH_TEAM_REQUEST,
-  FETCH_TEAM_SUCCESS,
-  CREATE_TEAM_FAIL,
-  CREATE_TEAM_REQUEST,
-  CREATE_TEAM_SUCCESS,
-  UPDATE_TEAM_REQUEST,
-  UPDATE_TEAM_SUCCESS,
-  UPDATE_TEAM_FAIL,
-  DELETE_TEAM_REQUEST,
-  DELETE_TEAM_SUCCESS,
-  DELETE_TEAM_FAIL
+  CREATE_TEAM,
+  EDIT_TEAM,
+  FETCH_TEAM,
+  LOADING_TEAM,
+  DELETE_TEAM
 } from '../constants/teamConstants'
 
-export const createTeamReducer = (state = {}, action) => {
+/**
+ * Cases
+ * 1. Fetch teams
+ * 2. Create team
+ * 3. Delete team
+ * 4. Update team
+ * 5. Delete team
+ */
+export const teamsReducer = (
+  state = { loading: false, error: null, data: [] },
+  action
+) => {
   switch (action.type) {
-    case CREATE_TEAM_REQUEST:
-      return { loading: true }
-    case CREATE_TEAM_SUCCESS:
-      return { loading: false, team: action.payload }
-    case CREATE_TEAM_FAIL:
-      return { loading: false, error: action.payload }
-    default:
-      return state
-  }
-}
+    case LOADING_TEAM: {
+      return { loading: true, error: null, data: state.data }
+    }
+    case FETCH_TEAM: {
+      return { loading: false, error: null, data: action.payload }
+    }
+    case CREATE_TEAM: {
+      return {
+        loading: false,
+        error: null,
+        data: [...state.data, action.payload]
+      }
+    }
+    case EDIT_TEAM: {
+      const data = state.data.map(r =>
+        r._id === action.payload._id ? { ...r, ...action.payload } : r
+      )
 
-export const updateTeamReducer = (state = {}, action) => {
-  switch (action.type) {
-    case UPDATE_TEAM_REQUEST:
-      return { loading: true }
-    case UPDATE_TEAM_SUCCESS:
-      return { loading: false, team: action.payload }
-    case UPDATE_TEAM_FAIL:
-      return { loading: false, error: action.payload }
-    default:
-      return state
-  }
-}
-
-export const deleteTeamReducer = (state = {}, action) => {
-  switch (action.type) {
-    case DELETE_TEAM_REQUEST:
-      return { loading: true }
-    case DELETE_TEAM_SUCCESS:
-      return { loading: false, team: action.payload }
-    case DELETE_TEAM_FAIL:
-      return { loading: false, error: action.payload }
-    default:
-      return state
-  }
-}
-
-export const teamListReducer = (state = [], action) => {
-  switch (action.type) {
-    case FETCH_TEAM_REQUEST:
-      return { loading: true }
-    case FETCH_TEAM_SUCCESS:
-      return { loading: false, teams: action.payload }
-    case FETCH_TEAM_FAIL:
-      return { loading: false, error: action.payload }
+      return {
+        loading: false,
+        error: null,
+        data
+      }
+    }
+    case DELETE_TEAM: {
+      return {
+        loading: false,
+        error: null,
+        data: state.filter(r => r._id !== action.payload)
+      }
+    }
     default:
       return state
   }
