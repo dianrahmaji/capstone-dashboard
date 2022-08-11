@@ -14,12 +14,10 @@ const RepositoryProlosal = () => {
 
   const dispatch = useDispatch()
 
-  const {
-    data: { _id }
-  } = useSelector(state => state.user)
+  const { data } = useSelector(state => state.user)
 
   const handleSubmit = values => {
-    dispatch(createTeam({ administrator: _id, ...values }))
+    dispatch(createTeam({ administrator: data?._id, ...values }))
     setOpenDialog(false)
   }
 

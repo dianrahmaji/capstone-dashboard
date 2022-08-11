@@ -21,7 +21,7 @@ const ProposalTable = () => {
   const { data: teams } = useSelector(state => state.teams)
 
   useEffect(() => {
-    dispatch(fetchTeams(data._id))
+    dispatch(fetchTeams(data?._id))
   }, [dispatch, data])
 
   const handleEdit = p => {

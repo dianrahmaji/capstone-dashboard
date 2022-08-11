@@ -1,12 +1,29 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon, LogoutIcon } from '@heroicons/react/outline'
 
 import dashboard from '~/config/dashboard'
 
+import BaseCombobox from '~/components/generic/form/BaseCombobox'
 import NavigationBarItem from './NavigationBarItem'
 
+const people = [
+  { id: 1, name: 'Leslie Alexander' }
+
+  // More users...
+]
+
 const NavigationBarMobile = ({ sidebarOpen, setSidebarOpen }) => {
+  const [query, setQuery] = useState('')
+  const [selectedPerson, setSelectedPerson] = useState()
+
+  const filteredPeople =
+    query === ''
+      ? people
+      : people.filter(person => {
+          return person.name.toLowerCase().includes(query.toLowerCase())
+        })
+
   return (
     <Transition.Root show={sidebarOpen} as={Fragment}>
       <Dialog
@@ -64,6 +81,13 @@ const NavigationBarMobile = ({ sidebarOpen, setSidebarOpen }) => {
             </div>
             <div className="mt-5 flex-1 h-0 overflow-y-auto">
               <nav className="px-2 space-y-1">
+                <BaseCombobox
+                  className="mb-4"
+                  value={selectedPerson}
+                  onChange={setSelectedPerson}
+                  filteredPeople={filteredPeople}
+                  setQuery={setQuery}
+                />
                 {dashboard.map(({ navigation }) => (
                   <NavigationBarItem {...navigation} key={navigation.name} />
                 ))}
