@@ -1,45 +1,41 @@
 import { Fragment, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import BaseButton from '~/components/generic/button/BaseButton'
 import RepositoryEditModal from './RepositoryEditModal'
 
-const research = {
-  _id: 1,
-  title: 'Capstone Project',
-  topic: ['Information System', 'Web Development', 'Knowledge Management'],
-  startDate: '2021-08-01',
-  endDate: '2022-08-01',
-  description: 'Best project ever',
-  faculty: 'Engineering',
-  approval: 'approved',
-  status: 'active'
-}
-
-const RepositoryDetails = () => {
+const RepositoryDetails = ({ detail }) => {
   const [openDialog, setOpenDialog] = useState(false)
+
+  const { data } = useSelector(state => state.user)
 
   return (
     <Fragment>
       <h1 className="mt-3 text-2xl font-semibold text-gray-900">
-        {research.title}
+        {detail?.name}
       </h1>
       <div className="ml-4 my-6 flex flex-col">
         <div className="text-lg font-medium">Topic</div>
-        <div>{research.topic.reduce((prev, curr) => prev + ', ' + curr)}</div>
+        {/* TODO: Add this field to db */}
+        <div>Information System, Web Development, Knowledge Management</div>
         <div className="text-lg font-medium  mt-5">Time</div>
         <div>
-          {research.startDate} - {research.endDate}
+          {detail?.repository?.startDate} - {detail?.repository?.endDate}
         </div>
         <div className="text-lg font-medium  mt-5">Description</div>
-        <div>{research.description}</div>
-        <BaseButton className="ml-auto" onClick={() => setOpenDialog(true)}>
-          Edit
-        </BaseButton>
+        <div
+          dangerouslySetInnerHTML={{ __html: detail?.repository?.description }}
+        />
+        {data?._id === detail?.administrator?._id && (
+          <BaseButton className="ml-auto" onClick={() => setOpenDialog(true)}>
+            Edit
+          </BaseButton>
+        )}
       </div>
       <RepositoryEditModal
         open={openDialog}
         setOpen={setOpenDialog}
-        initialValues={research}
+        initialValues={detail}
       />
     </Fragment>
   )
