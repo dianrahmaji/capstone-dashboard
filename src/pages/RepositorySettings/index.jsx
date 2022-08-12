@@ -38,6 +38,8 @@ const RepositorySettings = () => {
           <MemberTable
             administrator={teamDetail.administrator}
             members={teamDetail.members}
+            teamDetail={teamDetail}
+            setTeamDetail={setTeamDetail}
           />
         </div>
       </div>
