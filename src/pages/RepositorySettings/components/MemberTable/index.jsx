@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { PencilAltIcon, PlusSmIcon, TrashIcon } from '@heroicons/react/outline'
 
@@ -23,6 +24,16 @@ const MemberTable = ({ teamDetail, setTeamDetail }) => {
     setSelectedMember(m)
     setOpenEditDialog(true)
   }
+
+  const handleDelete = async userId => {
+    await axios.delete(`/api/team/${teamId}/member/${userId}`)
+
+    setTeamDetail(detail => ({
+      ...detail,
+      members: detail.members.filter(({ _id }) => _id !== userId)
+    }))
+  }
+
   return (
     <div>
       <h2 className="mt-3 text-xl font-medium">Research Member</h2>
@@ -34,18 +45,6 @@ const MemberTable = ({ teamDetail, setTeamDetail }) => {
           <BaseTableItem>{administrator?.faculty}</BaseTableItem>
           <BaseTableItem>{administrator?.accountType}</BaseTableItem>
           <BaseTableItem>Administrator</BaseTableItem>
-          {data?._id === administrator?._id && (
-            <BaseTableItem className="relative flex gap-2">
-              <PencilAltIcon
-                className="h-6 w-6 text-gray-400 rounded-md hover:cursor-pointer hover:text-blue-700"
-                onClick={() => handleEdit(administrator)}
-              />
-              <TrashIcon
-                className="h-6 w-6 text-gray-400 rounded-md hover:cursor-pointer hover:text-red-700"
-                onClick={() => {}}
-              />
-            </BaseTableItem>
-          )}
         </tr>
         {members &&
           members.map(m => (
@@ -57,11 +56,11 @@ const MemberTable = ({ teamDetail, setTeamDetail }) => {
               <BaseTableItem className="relative flex gap-2">
                 <PencilAltIcon
                   className="h-6 w-6 text-gray-400 rounded-md hover:cursor-pointer hover:text-blue-700"
-                  onClick={() => handleEdit(m)}
+                  onClick={() => {}}
                 />
                 <TrashIcon
                   className="h-6 w-6 text-gray-400 rounded-md hover:cursor-pointer hover:text-red-700"
-                  onClick={() => {}}
+                  onClick={() => handleDelete(m._id)}
                 />
               </BaseTableItem>
             </tr>
