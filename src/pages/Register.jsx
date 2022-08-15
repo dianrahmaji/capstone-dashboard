@@ -33,11 +33,13 @@ const Register = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { data } = useSelector(state => state.user)
+  const {
+    data: { token }
+  } = useSelector(state => state.user)
 
   useEffect(() => {
-    if (data) navigate('/', { replace: true })
-  }, [data, navigate])
+    if (token) navigate('/', { replace: true })
+  }, [token, navigate])
 
   const handleSubmit = values => {
     const { fullName, email, userId, faculty, major, accountType, password } =

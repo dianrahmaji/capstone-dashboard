@@ -15,7 +15,6 @@ export const login = (email, password) => async dispatch => {
     const { data } = await axios.post('/api/user/login', { email, password })
 
     dispatch({ type: USER_LOGIN, payload: data })
-    localStorage.setItem('user-researcher', JSON.stringify(data))
   } catch (error) {
     dispatch({
       type: ERROR_USER,
@@ -61,6 +60,5 @@ export const register =
   }
 
 export const logout = () => dispatch => {
-  localStorage.removeItem('user-researcher')
   dispatch({ type: USER_LOGOUT })
 }
