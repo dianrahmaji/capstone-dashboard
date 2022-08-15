@@ -8,6 +8,7 @@ import RepositoryDetails from './components/RepositoryDetails'
 
 const RepositorySettings = () => {
   const [teamDetail, setTeamDetail] = useState({})
+  const [isLoading, setIsLoading] = useState(true)
 
   const {
     data: { selectedTeam }
@@ -16,7 +17,9 @@ const RepositorySettings = () => {
   useEffect(() => {
     const fetchTeamDetails = async () => {
       try {
+        setIsLoading(true)
         const { data } = await axios.get(`/api/team/${selectedTeam._id}`)
+        setIsLoading(false)
 
         setTeamDetail(data)
       } catch (_) {}
@@ -34,7 +37,7 @@ const RepositorySettings = () => {
           </h1>
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-          <RepositoryDetails detail={teamDetail} />
+          {!isLoading && <RepositoryDetails detail={teamDetail} />}
           <MemberTable
             administrator={teamDetail.administrator}
             members={teamDetail.members}

@@ -1,25 +1,32 @@
+import axios from 'axios'
+
 import BaseInput from '~/components/generic/form/BaseInput'
-import BaseTextArea from '~/components/generic/form/BaseTextArea'
 import FormModal from '~/components/FormModal'
+import TextEditorInput from '~/components/TextEditorInput'
 
-import { title, description, date, topic } from '~/utils/validation'
+import { name, title, description, date } from '~/utils/validation'
 
-const RepositoryEditModal = props => {
+const ProposalModal = props => {
+  const handleSubmit = async values => {
+    await axios.put(`/api/team/${values._id}`, values)
+    props.setOpen(false)
+  }
+
   return (
     <FormModal
-      title="Edit Repository"
-      validation={{ title, description, date }}
-      handleSubmit={console.log}
+      validation={{ name, title, description, startDate: date, endDate: date }}
+      handleSubmit={handleSubmit}
       {...props}
     >
-      <BaseInput label="Title" name="title" type="text" />
+      <BaseInput label="Team Name" name="name" type="text" />
+      <BaseInput label="Repository Title" name="title" type="text" />
       <div className="grid grid-cols-2 gap-3">
         <BaseInput label="Start Date" name="startDate" type="date" />
         <BaseInput label="End Date" name="endDate" type="date" />
       </div>
-      <BaseTextArea label="Description" name="description" />
+      <TextEditorInput label="Description" name="description" />
     </FormModal>
   )
 }
 
-export default RepositoryEditModal
+export default ProposalModal

@@ -2,10 +2,15 @@ import { Fragment, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import BaseButton from '~/components/generic/button/BaseButton'
+import { toLocaleFormat } from '~/utils/date'
 import RepositoryEditModal from './RepositoryEditModal'
 
 const RepositoryDetails = ({ detail }) => {
   const [openDialog, setOpenDialog] = useState(false)
+  const { repository, ...rest } = detail
+
+  repository.startDate = toLocaleFormat(repository?.startDate && new Date())
+  repository.endDate = toLocaleFormat(repository?.endDate && new Date())
 
   const { data } = useSelector(state => state.user)
 
@@ -33,9 +38,10 @@ const RepositoryDetails = ({ detail }) => {
         )}
       </div>
       <RepositoryEditModal
+        title="Repository Edit Modal"
         open={openDialog}
         setOpen={setOpenDialog}
-        initialValues={detail}
+        initialValues={{ ...repository, ...rest }}
       />
     </Fragment>
   )
