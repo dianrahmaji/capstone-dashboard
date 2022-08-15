@@ -1,8 +1,11 @@
 import axios from 'axios'
 
 import {
+  ADD_TEAM_MEMBER,
   CREATE_TEAM,
   DELETE_TEAM,
+  DELETE_TEAM_MEMBER,
+  EDIT_ACCEPTED_TEAM,
   EDIT_TEAM,
   ERROR_ACCEPTED_TEAM,
   ERROR_TEAM,
@@ -10,7 +13,7 @@ import {
   FETCH_TEAM,
   LOADING_ACCEPTED_TEAM,
   LOADING_TEAM,
-  SELECT_ACCEPTED_TEAM
+  SELECT_ACCEPTED_TEAM_ID
 } from '../constants/teamConstants'
 
 export const fetchTeams = id => async dispatch => {
@@ -52,7 +55,7 @@ export const createTeam = payload => async dispatch => {
 
 export const updateTeam = payload => async dispatch => {
   try {
-    const { data } = await axios.put(`/api/team/${payload._id}`, payload)
+    await axios.put(`/api/team/${payload._id}`, payload)
 
     dispatch({ type: EDIT_TEAM, payload })
   } catch (error) {
@@ -69,7 +72,6 @@ export const updateTeam = payload => async dispatch => {
 export const deleteTeam = id => async dispatch => {
   try {
     await axios.delete(`/api/team/${id}`)
-    console.log(id)
 
     dispatch({ type: DELETE_TEAM, payload: id })
   } catch (error) {
@@ -89,13 +91,8 @@ export const fetchAcceptedTeams = id => async dispatch => {
 
     const { data } = await axios.get(`/api/user/${id}/team?accepted=true`)
 
-    //TODO: Fetch only the id and name
-    const teams = data.map(({ _id, name }) => ({ _id, name }))
-
-    if (!localStorage.getItem('selected-team')) {
-      localStorage.setItem('selected-team', JSON.stringify(teams[0]))
-    }
-    dispatch({ type: FETCH_ACCEPTED_TEAM, payload: teams })
+    dispatch({ type: FETCH_ACCEPTED_TEAM, payload: data })
+    localStorage.setItem('selected-team-id', data[0]._id)
   } catch (error) {
     dispatch({
       type: ERROR_ACCEPTED_TEAM,
@@ -107,7 +104,59 @@ export const fetchAcceptedTeams = id => async dispatch => {
   }
 }
 
-export const selectTeam = team => dispatch => {
-  localStorage.setItem('selected-team', JSON.stringify(team))
-  dispatch({ type: SELECT_ACCEPTED_TEAM, payload: team })
+export const addTeamMember = payload => async dispatch => {
+  try {
+    await axios.put(`/api/team/${payload.teamId}/member`, {
+      userId: payload.researcher._id
+    })
+
+    dispatch({ type: ADD_TEAM_MEMBER, payload })
+  } catch (error) {
+    dispatch({
+      type: ERROR_ACCEPTED_TEAM,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
+
+export const deleteTeamMember =
+  ({ teamId, userId }) =>
+  async dispatch => {
+    try {
+      await axios.delete(`/api/team/${teamId}/member/${userId}`)
+
+      dispatch({ type: DELETE_TEAM_MEMBER, payload: { userId, teamId } })
+    } catch (error) {
+      dispatch({
+        type: ERROR_ACCEPTED_TEAM,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+      })
+    }
+  }
+
+export const updateAcceptedTeam = payload => async dispatch => {
+  try {
+    await axios.put(`/api/team/${payload._id}`, payload)
+
+    dispatch({ type: EDIT_ACCEPTED_TEAM, payload })
+  } catch (error) {
+    dispatch({
+      type: ERROR_ACCEPTED_TEAM,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
+
+export const selectTeam = id => dispatch => {
+  localStorage.setItem('selected-team-id', id)
+  dispatch({ type: SELECT_ACCEPTED_TEAM_ID, payload: id })
 }

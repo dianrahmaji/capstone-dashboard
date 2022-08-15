@@ -1,14 +1,17 @@
-import axios from 'axios'
+import { useDispatch } from 'react-redux'
 
 import BaseInput from '~/components/generic/form/BaseInput'
 import FormModal from '~/components/FormModal'
 import TextEditorInput from '~/components/TextEditorInput'
 
 import { name, title, description, date } from '~/utils/validation'
+import { updateAcceptedTeam } from '~/store/actions/teamActions'
 
 const ProposalModal = props => {
+  const dispatch = useDispatch()
+
   const handleSubmit = async values => {
-    await axios.put(`/api/team/${values._id}`, values)
+    dispatch(updateAcceptedTeam(values))
     props.setOpen(false)
   }
 

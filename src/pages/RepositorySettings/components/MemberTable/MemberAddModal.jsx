@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux'
 import { Form, Formik, useField } from 'formik'
 import * as Yup from 'yup'
 import debounce from 'lodash.debounce'
@@ -10,6 +11,7 @@ import { researcher } from '~/utils/validation'
 
 import BaseButton from '~/components/generic/button/BaseButton'
 import BaseModal from '~/components/generic/modal/BaseModal'
+import { addTeamMember } from '~/store/actions/teamActions'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -117,9 +119,11 @@ const ResearcherCombobox = ({
   )
 }
 
-const MemberAddModal = ({ open, setOpen, members, teamId, setTeamDetail }) => {
+const MemberAddModal = ({ open, setOpen, members, teamId }) => {
   const [researchers, setResearchers] = useState([])
   const [selectedReseracher, setSelectedResearcher] = useState(null)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     fetchResearchers('')
@@ -140,15 +144,12 @@ const MemberAddModal = ({ open, setOpen, members, teamId, setTeamDetail }) => {
       return
     }
 
-    await axios.put(`/api/team/${teamId}/member`, { userId: values.researcher })
-
-    setTeamDetail(detail => ({
-      ...detail,
-      members: [
-        ...detail.members,
-        researchers.find(({ _id }) => _id === values.researcher)
-      ]
-    }))
+    dispatch(
+      addTeamMember({
+        teamId,
+        researcher: researchers.find(({ _id }) => _id === values.researcher)
+      })
+    )
 
     setSubmitting(false)
     setOpen(false)

@@ -3,30 +3,28 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import { userReducer } from './reducers/userReducers'
-import { teamsReducer, acceptedTeamsReducer } from './reducers/teamReducers'
+import {
+  teamsReducer,
+  acceptedTeamsReducer,
+  selectedTeamIdReducer
+} from './reducers/teamReducers'
 
 const reducer = combineReducers({
   user: userReducer,
   teams: teamsReducer,
-  acceptedTeams: acceptedTeamsReducer
+  acceptedTeams: acceptedTeamsReducer,
+  selectedTeamId: selectedTeamIdReducer
 })
 
 const userFromStorage = localStorage.getItem('user-researcher')
   ? { data: JSON.parse(localStorage.getItem('user-researcher')) }
   : { data: null }
 
-const acceptedTeamsFromStorage = localStorage.getItem('selected-team')
-  ? {
-      data: {
-        selectedTeam: JSON.parse(localStorage.getItem('selected-team')),
-        acceptedTeams: [JSON.parse(localStorage.getItem('selected-team'))]
-      }
-    }
-  : { data: { selectedTeam: null, acceptedTeams: [] } }
+const selectedTeamIdFromStorage = localStorage.getItem('selected-team-id') || ''
 
 const initialState = {
   user: userFromStorage,
-  acceptedTeams: acceptedTeamsFromStorage
+  selectedTeamId: selectedTeamIdFromStorage
 }
 
 const middlewares = [thunk]

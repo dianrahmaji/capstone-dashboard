@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LogoutIcon } from '@heroicons/react/outline'
 import dashboard from '~/config/dashboard'
@@ -10,12 +10,12 @@ import NavigationBarItem from './NavigationBarItem'
 
 const NavigationBarDesktop = () => {
   const [query, setQuery] = useState('')
+  const [selectedTeam, setSelectedTeam] = useState({})
 
   const dispatch = useDispatch()
 
-  const {
-    data: { selectedTeam, acceptedTeams }
-  } = useSelector(state => state.acceptedTeams)
+  const { data: acceptedTeams } = useSelector(state => state.acceptedTeams)
+  const selectedTeamId = useSelector(state => state.selectedTeamId)
 
   const filteredTeams =
     query === ''
@@ -24,8 +24,12 @@ const NavigationBarDesktop = () => {
           return team.name.toLowerCase().includes(query.toLowerCase())
         })
 
-  const handleSelectTeam = team => {
-    dispatch(selectTeam(team))
+  useEffect(() => {
+    setSelectedTeam(acceptedTeams.find(({ _id }) => _id === selectedTeamId))
+  }, [selectedTeamId, acceptedTeams])
+
+  const handleSelectTeam = ({ _id }) => {
+    dispatch(selectTeam(_id))
   }
 
   const handleLogout = () => {
