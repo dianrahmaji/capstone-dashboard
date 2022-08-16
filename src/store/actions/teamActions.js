@@ -111,9 +111,9 @@ export const fetchAcceptedTeams = id => async dispatch => {
 
 export const addTeamMember = payload => async dispatch => {
   try {
-    await axios.put(`/api/team/${payload.teamId}/member`, {
-      userId: payload.researcher._id
-    })
+    await axios.put(
+      `/api/team/${payload.teamId}/member/${payload.researcher._id}`
+    )
 
     dispatch({ type: ADD_TEAM_MEMBER, payload })
   } catch (error) {
