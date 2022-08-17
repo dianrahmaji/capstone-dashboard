@@ -7,7 +7,7 @@ const research = {
   members: ['Dian Rahmaji', 'Dzakiy Harissalam']
 }
 
-const DiscussionHeader = () => {
+const DiscussionHeader = ({ setOpen }) => {
   return (
     <div className="w-full mx-auto px-4 sm:px-6 md:px-8">
       <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
@@ -29,7 +29,7 @@ const DiscussionHeader = () => {
             </div>
           </div>
           <div className="ml-4 mt-4 flex-shrink-0 flex">
-            <BaseIconButton secondary>
+            <BaseIconButton secondary onClick={() => setOpen(true)}>
               <InformationCircleIcon className="h6 w-6" />
             </BaseIconButton>
           </div>

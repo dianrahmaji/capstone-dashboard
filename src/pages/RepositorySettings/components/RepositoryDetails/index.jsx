@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import BaseButton from '~/components/generic/button/BaseButton'
-import { toLocaleFormat } from '~/utils/date'
+import { toYupFormat, toLocaleFormat } from '~/utils/date'
 import RepositoryEditModal from './RepositoryEditModal'
 
 const RepositoryDetails = () => {
@@ -13,9 +13,6 @@ const RepositoryDetails = () => {
   })
 
   const { repository, ...rest } = detail
-
-  repository.startDate = toLocaleFormat(repository?.startDate && new Date())
-  repository.endDate = toLocaleFormat(repository?.endDate && new Date())
 
   const { data } = useSelector(state => state.user)
 
@@ -30,7 +27,13 @@ const RepositoryDetails = () => {
         <div>Information System, Web Development, Knowledge Management</div>
         <div className="text-lg font-medium  mt-5">Time</div>
         <div>
-          {detail?.repository?.startDate} - {detail?.repository?.endDate}
+          <time dateTime={detail?.repository?.startDate}>
+            {toLocaleFormat(detail?.repository?.startDate)}
+          </time>{' '}
+          -{' '}
+          <time dateTime={detail?.repository?.endDate}>
+            {toLocaleFormat(detail?.repository?.endDate)}
+          </time>
         </div>
         <div className="text-lg font-medium  mt-5">Description</div>
         <div
@@ -46,7 +49,12 @@ const RepositoryDetails = () => {
         title="Repository Edit Modal"
         open={openDialog}
         setOpen={setOpenDialog}
-        initialValues={{ ...repository, ...rest }}
+        initialValues={{
+          ...repository,
+          startDate: toYupFormat(repository?.startDate),
+          endDate: toYupFormat(repository?.endDate),
+          ...rest
+        }}
       />
     </Fragment>
   )
