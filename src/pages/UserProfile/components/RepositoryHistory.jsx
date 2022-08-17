@@ -10,6 +10,7 @@ const header = ['Name', 'Title', 'Time', 'Status', 'Year']
 
 const RepositoryHistory = () => {
   const [teams, setTeams] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const {
     data: { _id }
@@ -17,9 +18,10 @@ const RepositoryHistory = () => {
 
   useEffect(() => {
     async function fetchTeams() {
+      setLoading(true)
       const { data } = await axios.get(`/api/user/${_id}/team?all=true`)
       setTeams(data)
-      console.log(data)
+      setLoading(false)
     }
 
     fetchTeams()
@@ -30,7 +32,7 @@ const RepositoryHistory = () => {
       <h1 className="text-2xl font-semibold text-gray-900">
         Repository Penelitian
       </h1>
-      <BaseTable header={header}>
+      <BaseTable header={header} loading={loading} empty={teams.length === 0}>
         {teams &&
           teams.map(t => (
             <tr key={t._id}>

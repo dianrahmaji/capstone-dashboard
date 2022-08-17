@@ -18,7 +18,7 @@ const ProposalTable = () => {
   const dispatch = useDispatch()
 
   const { data } = useSelector(state => state.user)
-  const { data: teams } = useSelector(state => state.teams)
+  const { data: teams, loading } = useSelector(state => state.teams)
 
   useEffect(() => {
     dispatch(fetchTeams(data?._id))
@@ -43,7 +43,7 @@ const ProposalTable = () => {
 
   return (
     <Fragment>
-      <BaseTable header={header}>
+      <BaseTable header={header} loading={loading} empty={teams.length === 0}>
         {teams &&
           teams.map(p => (
             <tr key={p._id}>

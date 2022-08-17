@@ -28,7 +28,7 @@ const MemberTable = () => {
     state.acceptedTeams.data.find(({ _id }) => _id === selectedTeamId)
   )
 
-  const { data } = useSelector(state => state.user)
+  const { data, loading } = useSelector(state => state.user)
 
   const handleEdit = m => {
     setSelectedMember(m)
@@ -46,6 +46,7 @@ const MemberTable = () => {
       <h2 className="mt-3 text-xl font-medium">Research Member</h2>
       <BaseTable
         header={[...header, data?._id === administrator?._id && 'Action']}
+        loading={loading}
       >
         <tr key={administrator?._id}>
           <BaseTableItem>{administrator?.fullName}</BaseTableItem>
