@@ -8,7 +8,7 @@ import {
   USER_REGISTER
 } from '../constants/userConstants'
 
-export const login = (email, password) => async dispatch => {
+export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: LOADING_USER })
 
@@ -19,9 +19,7 @@ export const login = (email, password) => async dispatch => {
     dispatch({
       type: ERROR_USER,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
+        error.response && error.response.data.message ? error.response.data.message : error.message
     })
     MySwal.fire({
       icon: 'error',
@@ -32,8 +30,7 @@ export const login = (email, password) => async dispatch => {
 }
 
 export const register =
-  (fullName, email, userId, faculty, major, accountType, password) =>
-  async dispatch => {
+  (fullName, email, userId, faculty, major, accountType, password) => async (dispatch) => {
     dispatch({ type: LOADING_USER })
 
     const { data } = await axios.post('/api/user', {
@@ -59,6 +56,6 @@ export const register =
     }
   }
 
-export const logout = () => dispatch => {
+export const logout = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT })
 }

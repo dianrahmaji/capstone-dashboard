@@ -13,10 +13,7 @@ import {
  * 3. User logout
  * 4. User error
  */
-export const userReducer = (
-  state = { loading: false, error: null, data: {} },
-  action
-) => {
+export const userReducer = (state = { loading: false, error: null, data: {} }, action) => {
   switch (action.type) {
     case LOADING_USER: {
       return { loading: true, error: null, data: state.data }

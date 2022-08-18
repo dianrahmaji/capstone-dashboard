@@ -19,23 +19,21 @@ const MemberTable = () => {
 
   const dispatch = useDispatch()
 
-  const selectedTeamId = useSelector(state => state.selectedTeamId)
+  const selectedTeamId = useSelector((state) => state.selectedTeamId)
   const {
     _id: teamId,
     members,
     administrator
-  } = useSelector(state =>
-    state.acceptedTeams.data.find(({ _id }) => _id === selectedTeamId)
-  )
+  } = useSelector((state) => state.acceptedTeams.data.find(({ _id }) => _id === selectedTeamId))
 
-  const { data, loading } = useSelector(state => state.user)
+  const { data, loading } = useSelector((state) => state.user)
 
-  const handleEdit = m => {
+  const handleEdit = (m) => {
     setSelectedMember(m)
     setOpenEditDialog(true)
   }
 
-  const handleDelete = userId => {
+  const handleDelete = (userId) => {
     dispatch(deleteTeamMember({ userId, teamId }))
   }
 
@@ -55,7 +53,7 @@ const MemberTable = () => {
           <BaseTableItem>Administrator</BaseTableItem>
         </tr>
         {members &&
-          members.map(m => (
+          members.map((m) => (
             <tr key={m._id}>
               <BaseTableItem>{m.fullName}</BaseTableItem>
               <BaseTableItem>{m.faculty}</BaseTableItem>
@@ -63,11 +61,11 @@ const MemberTable = () => {
               <BaseTableItem>Researcher</BaseTableItem>
               <BaseTableItem className="relative flex gap-2">
                 <PencilAltIcon
-                  className="h-6 w-6 text-gray-400 rounded-md hover:cursor-pointer hover:text-blue-700"
+                  className="h-6 w-6 rounded-md text-gray-400 hover:cursor-pointer hover:text-blue-700"
                   onClick={() => {}}
                 />
                 <TrashIcon
-                  className="h-6 w-6 text-gray-400 rounded-md hover:cursor-pointer hover:text-red-700"
+                  className="h-6 w-6 rounded-md text-gray-400 hover:cursor-pointer hover:text-red-700"
                   onClick={() => handleDelete(m._id)}
                 />
               </BaseTableItem>
@@ -75,7 +73,7 @@ const MemberTable = () => {
           ))}
       </BaseTable>
       {data?._id === administrator?._id && (
-        <div className="flex mt-3 px-8 justify-end">
+        <div className="mt-3 flex justify-end px-8">
           <BaseIconButton onClick={() => setOpenAddDialog(true)}>
             <PlusSmIcon className="h-6 w-6" aria-hidden="true" />
           </BaseIconButton>
@@ -84,7 +82,7 @@ const MemberTable = () => {
       <MemberAddModal
         open={openAddDialog}
         setOpen={setOpenAddDialog}
-        members={[...members, administrator].map(m => m?._id)}
+        members={[...members, administrator].map((m) => m?._id)}
         teamId={teamId}
         setTeamDetail={setTeamDetail}
       />

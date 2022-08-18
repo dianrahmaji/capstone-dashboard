@@ -1,28 +1,13 @@
 function TableRow({ colSpan, type = 'empty' }) {
   return (
     <tr>
-      <td
-        colSpan={colSpan}
-        className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6"
-      >
+      <td colSpan={colSpan} className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
         {type === 'empty' ? (
-          <div className="flex items-center justify-center opacity-50 italic">
-            table is empty
-          </div>
+          <div className="flex items-center justify-center italic opacity-50">table is empty</div>
         ) : (
           <div className="flex items-center justify-center">
-            <svg
-              className="animate-spin ml-3 h-5 w-5 mr-3 ..."
-              viewBox="0 0 24 24"
-              fill="white"
-            >
-              <circle
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="white"
-                strokeWidth="4"
-              ></circle>
+            <svg className="... ml-3 mr-3 h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="white">
+              <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="4"></circle>
               <path
                 className="opacity-50"
                 fill="black"
@@ -46,7 +31,7 @@ const BaseTable = ({ header, loading, empty, children }) => {
               <table className="min-w-full divide-y divide-gray-300">
                 <thead className="bg-gray-50">
                   <tr>
-                    {header.map(h => (
+                    {header.map((h) => (
                       <th
                         scope="col"
                         className="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-6"

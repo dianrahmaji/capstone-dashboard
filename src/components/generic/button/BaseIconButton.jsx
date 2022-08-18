@@ -1,20 +1,13 @@
 import clsx from 'clsx'
 
-const BaseIconButton = ({
-  children,
-  className,
-  secondary,
-  loading,
-  ...props
-}) => {
+const BaseIconButton = ({ children, className, secondary, loading, ...props }) => {
   return (
     <button
       className={clsx(
-        `${className} rounded-full p-3 sm:text-sm text-base font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-auto `,
+        `${className} rounded-full p-3 text-base font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-auto disabled:opacity-50 sm:text-sm `,
         {
-          'text-secondary bg-primary hover:bg-accent focus:ring-primary':
-            !secondary,
-          'text-primary hover:text-accent border-gray-300 bg-white hover:bg-gray-50 focus:ring-primary':
+          'bg-primary text-secondary hover:bg-accent focus:ring-primary': !secondary,
+          'border-gray-300 bg-white text-primary hover:bg-gray-50 hover:text-accent focus:ring-primary':
             secondary
         }
       )}
@@ -22,7 +15,7 @@ const BaseIconButton = ({
       {...props}
     >
       {loading ? (
-        <svg class="animate-spin ml-3 h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
+        <svg class="... ml-3 mr-3 h-5 w-5 animate-spin" viewBox="0 0 24 24">
           <circle
             class="opacity-25"
             cx="12"

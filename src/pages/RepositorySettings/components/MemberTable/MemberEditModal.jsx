@@ -4,7 +4,7 @@ import FormModal from '~/components/FormModal'
 
 import { fullName, role } from '~/utils/validation'
 
-const MemberEditModal = props => {
+const MemberEditModal = (props) => {
   return (
     <FormModal
       title="Edit Member"

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 
-const getProfileFromFullName = fullName => {
+const getProfileFromFullName = (fullName) => {
   const names = fullName.split(' ')
 
   if (names.length < 2) return fullName.slice(0, 2).toUpperCase()
@@ -8,12 +8,12 @@ const getProfileFromFullName = fullName => {
 }
 
 const DetailProfile = () => {
-  const { data: user } = useSelector(state => state.user)
+  const { data: user } = useSelector((state) => state.user)
 
   return (
-    <div className="py-6 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+    <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 md:px-8">
       <h1 className="text-2xl font-semibold text-gray-900">Profil Peneliti</h1>
-      <div className="ml-8 flex sm:gap-5 lg:gap-20 mt-5">
+      <div className="ml-8 mt-5 flex sm:gap-5 lg:gap-20">
         {user.pictureUrl ? (
           <img
             className="h-40 w-40 rounded-full"
@@ -22,8 +22,8 @@ const DetailProfile = () => {
           />
         ) : (
           // TODO: Fix Responsive
-          <div className="flex lg:ml-8 my-auto items-center justify-center h-20 w-20 lg:h-40 lg:w-40 rounded-full bg-blue-100">
-            <div className=" text-primary text-xl md:text-3xl lg:text-7xl">
+          <div className="my-auto flex h-20 w-20 items-center justify-center rounded-full bg-blue-100 lg:ml-8 lg:h-40 lg:w-40">
+            <div className=" text-xl text-primary md:text-3xl lg:text-7xl">
               {getProfileFromFullName(user.fullName)}
             </div>
           </div>

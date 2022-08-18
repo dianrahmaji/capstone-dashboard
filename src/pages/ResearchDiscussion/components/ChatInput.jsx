@@ -5,14 +5,14 @@ import BaseIconButton from '~/components/generic/button/BaseIconButton'
 
 const ChatInput = () => {
   return (
-    <div className="pb-10 px-10 w-full">
-      <div className="flex gap-2 align-center justify-end">
+    <div className="w-full px-10 pb-10">
+      <div className="align-center flex justify-end gap-2">
         <div className="mt-1 grow">
           <input
             type="text"
             name="name"
             id="name"
-            className="shadow-sm focus:ring-primary focus:border-primary block w-full sm:text-sm border-gray-300 px-4 rounded-full"
+            className="block w-full rounded-full border-gray-300 px-4 shadow-sm focus:border-primary focus:ring-primary sm:text-sm"
             placeholder="Message"
           />
         </div>

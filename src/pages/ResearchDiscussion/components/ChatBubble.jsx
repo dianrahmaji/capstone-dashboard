@@ -10,10 +10,10 @@ const ChatBubble = ({ user }) => {
         'justify-end': user._id === loggedInId
       })}
     >
-      <div className="text-black w-fit max-w-xl">
+      <div className="w-fit max-w-xl text-black">
         {user._id !== loggedInId && <p className="text-sm">{user.fullName}</p>}
         <p
-          className={clsx(' p-4 mb-3 rounded-xl', {
+          className={clsx(' mb-3 rounded-xl p-4', {
             'bg-gray-200': user._id !== loggedInId,
             'bg-primary text-white': user._id === loggedInId
           })}

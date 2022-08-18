@@ -5,11 +5,7 @@ import storage from 'redux-persist/lib/storage'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import { userReducer } from './reducers/userReducers'
-import {
-  teamsReducer,
-  acceptedTeamsReducer,
-  selectedTeamIdReducer
-} from './reducers/teamReducers'
+import { teamsReducer, acceptedTeamsReducer, selectedTeamIdReducer } from './reducers/teamReducers'
 
 const persistConfig = {
   key: 'root',
@@ -28,10 +24,7 @@ const middlewares = [thunk]
 
 const persistedReducer = persistReducer(persistConfig, reducer)
 
-const store = createStore(
-  persistedReducer,
-  composeWithDevTools(applyMiddleware(...middlewares))
-)
+const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(...middlewares)))
 
 const persistor = persistStore(store)
 

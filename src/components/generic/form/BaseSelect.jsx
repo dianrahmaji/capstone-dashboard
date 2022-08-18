@@ -5,14 +5,11 @@ const BaseSelect = ({ label, ...props }) => {
 
   return (
     <div className="mt-3">
-      <label
-        htmlFor={props.id || props.name}
-        className="block text-sm font-medium text-gray-700"
-      >
+      <label htmlFor={props.id || props.name} className="block text-sm font-medium text-gray-700">
         {label}
       </label>
       <select
-        className="mt-1 appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+        className="mt-1 block w-full appearance-none rounded-md border px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary focus:outline-none focus:ring-primary disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none sm:text-sm"
         {...field}
         {...props}
       />

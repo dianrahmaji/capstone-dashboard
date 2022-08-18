@@ -19,21 +19,21 @@ const Login = () => {
 
   const {
     data: { token }
-  } = useSelector(state => state.user)
+  } = useSelector((state) => state.user)
 
   useEffect(() => {
     if (token) navigate('/', { replace: true })
   }, [token, navigate])
 
-  const handleSubmit = values => {
+  const handleSubmit = (values) => {
     const { email, password } = values
     dispatch(login(email, password))
   }
 
   return (
-    <div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-blue-100">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
           <LockClosedIcon className="h-108 w-10 text-primary" />
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -51,26 +51,20 @@ const Login = () => {
             <BaseInput label="Password" name="password" type="password" />
             <div className="flex items-center justify-between">
               <BaseCheckbox label="Remember me" name="remember" />
-              <div className="text-sm mt-3">
-                <Link
-                  to="#"
-                  className="font-medium text-primary hover:text-accent"
-                >
+              <div className="mt-3 text-sm">
+                <Link to="#" className="font-medium text-primary hover:text-accent">
                   Forgot your password?
                 </Link>
               </div>
             </div>
-            <BaseButton className="w-full mt-6" type="submit">
+            <BaseButton className="mt-6 w-full" type="submit">
               Sign In
             </BaseButton>
           </BaseForm>
           <div className="mt-6">
             <p className="mt-2 text-center text-sm text-gray-600">
               Don't have an account?{' '}
-              <Link
-                to="/register"
-                className="font-medium text-primary hover:text-accent"
-              >
+              <Link to="/register" className="font-medium text-primary hover:text-accent">
                 Register
               </Link>
             </p>

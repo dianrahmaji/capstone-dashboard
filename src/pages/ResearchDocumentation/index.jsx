@@ -14,14 +14,14 @@ const ResearchDocumentation = () => {
   return (
     <DashboardLayout>
       <div className="py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
           <BaseBreadcrumbs pages={pages} separator={ChevronRightIcon} />
         </div>
-        <div className="flex items-center mt-4" aria-hidden="true">
+        <div className="mt-4 flex items-center" aria-hidden="true">
           <div className="w-full border-t border-gray-300" />
         </div>
         <ActionContainer />
-        <div className="max-w-7xl mx-auto pt-4 px-4 sm:px-6 md:px-8">
+        <div className="mx-auto max-w-7xl px-4 pt-4 sm:px-6 md:px-8">
           <DocumentContainer />
         </div>
       </div>

@@ -1,4 +1,4 @@
-export const toYupFormat = date =>
+export const toYupFormat = (date) =>
   new Intl.DateTimeFormat('id', {
     month: '2-digit',
     day: '2-digit',
@@ -9,7 +9,7 @@ export const toYupFormat = date =>
     .reverse()
     .join('-')
 
-export const toLocaleFormat = date =>
+export const toLocaleFormat = (date) =>
   new Intl.DateTimeFormat('id', {
     weekday: 'long',
     year: 'numeric',

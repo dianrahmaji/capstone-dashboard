@@ -7,7 +7,7 @@ import { XIcon } from '@heroicons/react/outline'
 
 import { toLocaleFormat } from '~/utils/date'
 
-const getProfileFromFullName = fullName => {
+const getProfileFromFullName = (fullName) => {
   const names = fullName.split(' ')
 
   if (names.length < 2) return fullName.slice(0, 2).toUpperCase()
@@ -125,69 +125,57 @@ export default function TeamInfo({ open, setOpen }) {
                         <div className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
                           Members
                         </div>
-                        <ul
-                          role="list"
-                          className="flex-1 divide-y divide-gray-200 overflow-y-auto"
-                        >
+                        <ul role="list" className="flex-1 divide-y divide-gray-200 overflow-y-auto">
                           {data &&
-                            [...data.members, data.administrator].map(
-                              person => (
-                                <li key={person._id}>
-                                  <div className="group relative flex items-center py-6 px-5">
-                                    <a
-                                      href="#"
-                                      className="-m-1 block flex-1 p-1"
-                                    >
-                                      <div
-                                        className="absolute inset-0 group-hover:bg-gray-50"
-                                        aria-hidden="true"
-                                      />
-                                      <div className="relative flex min-w-0 flex-1 items-center">
-                                        <span className="relative inline-block flex-shrink-0">
-                                          {person.pictureUrl ? (
-                                            <img
-                                              className="h-10 w-10 rounded-full"
-                                              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                              alt=""
-                                            />
-                                          ) : (
-                                            <div className="flex my-auto items-center justify-center h-12 w-12 rounded-full bg-blue-100">
-                                              <div className=" text-primary text-sm">
-                                                {getProfileFromFullName(
-                                                  person.fullName
-                                                )}
-                                              </div>
-                                            </div>
-                                          )}
-
-                                          <span
-                                            className={clsx(
-                                              {
-                                                'bg-green-400':
-                                                  person.status === 'online',
-                                                'bg-gray-300':
-                                                  person.status !== 'online'
-                                              },
-
-                                              'absolute top-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white'
-                                            )}
-                                            aria-hidden="true"
+                            [...data.members, data.administrator].map((person) => (
+                              <li key={person._id}>
+                                <div className="group relative flex items-center py-6 px-5">
+                                  <a href="#" className="-m-1 block flex-1 p-1">
+                                    <div
+                                      className="absolute inset-0 group-hover:bg-gray-50"
+                                      aria-hidden="true"
+                                    />
+                                    <div className="relative flex min-w-0 flex-1 items-center">
+                                      <span className="relative inline-block flex-shrink-0">
+                                        {person.pictureUrl ? (
+                                          <img
+                                            className="h-10 w-10 rounded-full"
+                                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                            alt=""
                                           />
-                                        </span>
-                                        <div className="ml-4 truncate">
-                                          <p className="truncate text-sm font-medium text-gray-900">
-                                            {person.fullName}
-                                          </p>
-                                          <p className="truncate text-sm text-gray-500">
-                                            {'@' + person.fullName}
-                                          </p>
-                                        </div>
+                                        ) : (
+                                          <div className="my-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
+                                            <div className=" text-sm text-primary">
+                                              {getProfileFromFullName(person.fullName)}
+                                            </div>
+                                          </div>
+                                        )}
+
+                                        <span
+                                          className={clsx(
+                                            {
+                                              'bg-green-400': person.status === 'online',
+                                              'bg-gray-300': person.status !== 'online'
+                                            },
+
+                                            'absolute top-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white'
+                                          )}
+                                          aria-hidden="true"
+                                        />
+                                      </span>
+                                      <div className="ml-4 truncate">
+                                        <p className="truncate text-sm font-medium text-gray-900">
+                                          {person.fullName}
+                                        </p>
+                                        <p className="truncate text-sm text-gray-500">
+                                          {'@' + person.fullName}
+                                        </p>
                                       </div>
-                                    </a>
-                                  </div>
-                                </li>
-                              )
-                            )}
+                                    </div>
+                                  </a>
+                                </div>
+                              </li>
+                            ))}
                         </ul>
                       </div>
                     </div>

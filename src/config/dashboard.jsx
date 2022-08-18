@@ -45,7 +45,11 @@ const dashboard = [
   },
   {
     route: { path: '/proposal', element: <RepositoryProposal /> },
-    navigation: { name: 'Ajukan Repository', path: '/proposal', icon: PlusIcon }
+    navigation: {
+      name: 'Ajukan Repository',
+      path: '/proposal',
+      icon: PlusIcon
+    }
   },
   {
     route: { path: '/profile', element: <UserProfile /> },

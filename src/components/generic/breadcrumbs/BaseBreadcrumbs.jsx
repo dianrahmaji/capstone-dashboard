@@ -10,7 +10,7 @@ const BaseBreadcrumbs = ({ pages, separator: SeparatorIcon }) => {
             <div className="flex items-center">
               {i !== 0 && (
                 <SeparatorIcon
-                  className="flex-shrink-0 h-5 w-5 text-gray-400 mx-4"
+                  className="mx-4 h-5 w-5 flex-shrink-0 text-gray-400"
                   aria-hidden="true"
                 />
               )}

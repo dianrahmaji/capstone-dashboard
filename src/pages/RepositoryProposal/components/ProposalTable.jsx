@@ -17,14 +17,14 @@ const ProposalTable = () => {
 
   const dispatch = useDispatch()
 
-  const { data } = useSelector(state => state.user)
-  const { data: teams, loading } = useSelector(state => state.teams)
+  const { data } = useSelector((state) => state.user)
+  const { data: teams, loading } = useSelector((state) => state.teams)
 
   useEffect(() => {
     dispatch(fetchTeams(data?._id))
   }, [dispatch, data])
 
-  const handleEdit = p => {
+  const handleEdit = (p) => {
     const { repository, ...rest } = p
     repository.startDate = repository.startDate.slice(0, 10)
     repository.endDate = repository.endDate.slice(0, 10)
@@ -32,7 +32,7 @@ const ProposalTable = () => {
     setOpenDialog(true)
   }
 
-  const handleDelete = id => {
+  const handleDelete = (id) => {
     dispatch(deleteTeam(id))
   }
 
@@ -45,7 +45,7 @@ const ProposalTable = () => {
     <Fragment>
       <BaseTable header={header} loading={loading} empty={teams.length === 0}>
         {teams &&
-          teams.map(p => (
+          teams.map((p) => (
             <tr key={p._id}>
               <BaseTableItem className="font-medium">{p.name}</BaseTableItem>
               <BaseTableItem>
@@ -65,11 +65,11 @@ const ProposalTable = () => {
               </BaseTableItem>
               <BaseTableItem className="relative flex gap-2">
                 <PencilAltIcon
-                  className="h-6 w-6 text-gray-400 rounded-md hover:cursor-pointer hover:text-blue-700"
+                  className="h-6 w-6 rounded-md text-gray-400 hover:cursor-pointer hover:text-blue-700"
                   onClick={() => handleEdit(p)}
                 />
                 <TrashIcon
-                  className="h-6 w-6 text-gray-400 rounded-md hover:cursor-pointer hover:text-red-700"
+                  className="h-6 w-6 rounded-md text-gray-400 hover:cursor-pointer hover:text-red-700"
                   onClick={() => handleDelete(p._id)}
                 />
               </BaseTableItem>

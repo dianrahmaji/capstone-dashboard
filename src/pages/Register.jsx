@@ -3,15 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { LockClosedIcon } from '@heroicons/react/outline'
 
-import {
-  fullName,
-  email,
-  userId,
-  faculty,
-  major,
-  accountType,
-  password
-} from '~/utils/validation'
+import { fullName, email, userId, faculty, major, accountType, password } from '~/utils/validation'
 import { register } from '~/store/actions/userActions'
 
 import BaseButton from '~/components/generic/button/BaseButton'
@@ -35,24 +27,21 @@ const Register = () => {
 
   const {
     data: { token }
-  } = useSelector(state => state.user)
+  } = useSelector((state) => state.user)
 
   useEffect(() => {
     if (token) navigate('/', { replace: true })
   }, [token, navigate])
 
-  const handleSubmit = values => {
-    const { fullName, email, userId, faculty, major, accountType, password } =
-      values
-    dispatch(
-      register(fullName, email, userId, faculty, major, accountType, password)
-    )
+  const handleSubmit = (values) => {
+    const { fullName, email, userId, faculty, major, accountType, password } = values
+    dispatch(register(fullName, email, userId, faculty, major, accountType, password))
   }
 
   return (
-    <div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-blue-100">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
           <LockClosedIcon className="h-108 w-10 text-primary" />
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -87,17 +76,14 @@ const Register = () => {
               <option value="student">Student</option>
             </BaseSelect>
             <BaseInput label="Password" name="password" type="password" />
-            <BaseButton className="w-full mt-6" type="submit">
+            <BaseButton className="mt-6 w-full" type="submit">
               Register
             </BaseButton>
           </BaseForm>
           <div className="mt-6">
             <p className="mt-2 text-center text-sm text-gray-600">
               Already have an account?{' '}
-              <Link
-                to="/login"
-                className="font-medium text-primary hover:text-accent"
-              >
+              <Link to="/login" className="font-medium text-primary hover:text-accent">
                 Sign In
               </Link>
             </p>

@@ -7,10 +7,10 @@ import TextEditorInput from '~/components/TextEditorInput'
 import { name, title, description, date } from '~/utils/validation'
 import { updateAcceptedTeam } from '~/store/actions/teamActions'
 
-const ProposalModal = props => {
+const ProposalModal = (props) => {
   const dispatch = useDispatch()
 
-  const handleSubmit = async values => {
+  const handleSubmit = async (values) => {
     dispatch(updateAcceptedTeam(values))
     props.setOpen(false)
   }

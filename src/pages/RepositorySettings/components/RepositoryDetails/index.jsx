@@ -14,18 +14,16 @@ const RepositoryDetails = () => {
 
   const { repository, ...rest } = detail
 
-  const { data } = useSelector(state => state.user)
+  const { data } = useSelector((state) => state.user)
 
   return (
     <Fragment>
-      <h1 className="mt-3 text-2xl font-semibold text-gray-900">
-        {detail?.name}
-      </h1>
-      <div className="ml-4 my-6 flex flex-col">
+      <h1 className="mt-3 text-2xl font-semibold text-gray-900">{detail?.name}</h1>
+      <div className="my-6 ml-4 flex flex-col">
         <div className="text-lg font-medium">Topic</div>
         {/* TODO: Add this field to db */}
         <div>Information System, Web Development, Knowledge Management</div>
-        <div className="text-lg font-medium  mt-5">Time</div>
+        <div className="mt-5 text-lg  font-medium">Time</div>
         <div>
           <time dateTime={detail?.repository?.startDate}>
             {toLocaleFormat(detail?.repository?.startDate)}
@@ -35,10 +33,8 @@ const RepositoryDetails = () => {
             {toLocaleFormat(detail?.repository?.endDate)}
           </time>
         </div>
-        <div className="text-lg font-medium  mt-5">Description</div>
-        <div
-          dangerouslySetInnerHTML={{ __html: detail?.repository?.description }}
-        />
+        <div className="mt-5 text-lg  font-medium">Description</div>
+        <div dangerouslySetInnerHTML={{ __html: detail?.repository?.description }} />
         {data?._id === detail?.administrator?._id && (
           <BaseButton className="ml-auto" onClick={() => setOpenDialog(true)}>
             Edit

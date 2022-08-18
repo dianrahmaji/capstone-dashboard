@@ -12,7 +12,7 @@ const initialValues = {
   endDate: ''
 }
 
-const ProposalModal = props => {
+const ProposalModal = (props) => {
   return (
     <FormModal
       validation={{ name, title, description, startDate: date, endDate: date }}

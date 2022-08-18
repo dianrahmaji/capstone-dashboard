@@ -14,9 +14,9 @@ const RepositoryProlosal = () => {
 
   const dispatch = useDispatch()
 
-  const { data } = useSelector(state => state.user)
+  const { data } = useSelector((state) => state.user)
 
-  const handleSubmit = values => {
+  const handleSubmit = (values) => {
     dispatch(createTeam({ administrator: data?._id, ...values }))
     setOpenDialog(false)
   }
@@ -24,12 +24,10 @@ const RepositoryProlosal = () => {
   return (
     <DashboardLayout>
       <div className="py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-          <h1 className="text-2xl font-semibold text-gray-900">
-            Pengajuan Repository
-          </h1>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+          <h1 className="text-2xl font-semibold text-gray-900">Pengajuan Repository</h1>
         </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
           <ProposalTable />
           <ProposalModal
             title="Add Repository"
@@ -37,7 +35,7 @@ const RepositoryProlosal = () => {
             setOpen={setOpenDialog}
             handleSubmit={handleSubmit}
           />
-          <div className="flex mt-3 px-8 justify-end">
+          <div className="mt-3 flex justify-end px-8">
             <BaseIconButton onClick={() => setOpenDialog(true)}>
               <PlusSmIcon className="h-6 w-6" aria-hidden="true" />
             </BaseIconButton>

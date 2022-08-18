@@ -16,7 +16,7 @@ import {
   SELECT_ACCEPTED_TEAM_ID
 } from '../constants/teamConstants'
 
-export const fetchTeams = id => async dispatch => {
+export const fetchTeams = (id) => async (dispatch) => {
   try {
     dispatch({ type: LOADING_TEAM })
 
@@ -27,14 +27,12 @@ export const fetchTeams = id => async dispatch => {
     dispatch({
       type: ERROR_TEAM,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
+        error.response && error.response.data.message ? error.response.data.message : error.message
     })
   }
 }
 
-export const createTeam = payload => async dispatch => {
+export const createTeam = (payload) => async (dispatch) => {
   try {
     const { data } = await axios.post(`/api/team`, payload)
 
@@ -46,14 +44,12 @@ export const createTeam = payload => async dispatch => {
     dispatch({
       type: ERROR_TEAM,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
+        error.response && error.response.data.message ? error.response.data.message : error.message
     })
   }
 }
 
-export const updateTeam = payload => async dispatch => {
+export const updateTeam = (payload) => async (dispatch) => {
   try {
     await axios.put(`/api/team/${payload._id}`, payload)
 
@@ -62,14 +58,12 @@ export const updateTeam = payload => async dispatch => {
     dispatch({
       type: ERROR_TEAM,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
+        error.response && error.response.data.message ? error.response.data.message : error.message
     })
   }
 }
 
-export const deleteTeam = id => async dispatch => {
+export const deleteTeam = (id) => async (dispatch) => {
   try {
     await axios.delete(`/api/team/${id}`)
 
@@ -78,14 +72,12 @@ export const deleteTeam = id => async dispatch => {
     dispatch({
       type: ERROR_TEAM,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
+        error.response && error.response.data.message ? error.response.data.message : error.message
     })
   }
 }
 
-export const fetchAcceptedTeams = id => async dispatch => {
+export const fetchAcceptedTeams = (id) => async (dispatch) => {
   try {
     dispatch({ type: LOADING_ACCEPTED_TEAM })
 
@@ -102,34 +94,28 @@ export const fetchAcceptedTeams = id => async dispatch => {
     dispatch({
       type: ERROR_ACCEPTED_TEAM,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
+        error.response && error.response.data.message ? error.response.data.message : error.message
     })
   }
 }
 
-export const addTeamMember = payload => async dispatch => {
+export const addTeamMember = (payload) => async (dispatch) => {
   try {
-    await axios.put(
-      `/api/team/${payload.teamId}/member/${payload.researcher._id}`
-    )
+    await axios.put(`/api/team/${payload.teamId}/member/${payload.researcher._id}`)
 
     dispatch({ type: ADD_TEAM_MEMBER, payload })
   } catch (error) {
     dispatch({
       type: ERROR_ACCEPTED_TEAM,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
+        error.response && error.response.data.message ? error.response.data.message : error.message
     })
   }
 }
 
 export const deleteTeamMember =
   ({ teamId, userId }) =>
-  async dispatch => {
+  async (dispatch) => {
     try {
       await axios.delete(`/api/team/${teamId}/member/${userId}`)
 
@@ -145,7 +131,7 @@ export const deleteTeamMember =
     }
   }
 
-export const updateAcceptedTeam = payload => async dispatch => {
+export const updateAcceptedTeam = (payload) => async (dispatch) => {
   try {
     await axios.put(`/api/team/${payload._id}`, payload)
 
@@ -154,13 +140,11 @@ export const updateAcceptedTeam = payload => async dispatch => {
     dispatch({
       type: ERROR_ACCEPTED_TEAM,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
+        error.response && error.response.data.message ? error.response.data.message : error.message
     })
   }
 }
 
-export const selectTeam = id => dispatch => {
+export const selectTeam = (id) => (dispatch) => {
   dispatch({ type: SELECT_ACCEPTED_TEAM_ID, payload: id })
 }

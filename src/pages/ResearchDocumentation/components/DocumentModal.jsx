@@ -14,11 +14,7 @@ const DocumentModal = ({ action, type, ...props }) => {
       handleSubmit={console.log}
       {...props}
     >
-      <BaseInput
-        label={`${uppercaseType} Name`}
-        name="documentName"
-        type="text"
-      />
+      <BaseInput label={`${uppercaseType} Name`} name="documentName" type="text" />
     </FormModal>
   )
 }

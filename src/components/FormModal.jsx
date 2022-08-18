@@ -7,16 +7,16 @@ const FormModal = ({ title, open, setOpen, children, ...props }) => {
     <BaseModal title={title} open={open} setOpen={setOpen}>
       <BaseForm {...props}>
         {children}
-        <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
+        <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
           <BaseButton
             type="submit"
-            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 focus:outline-none sm:col-start-2 sm:text-sm"
+            className="inline-flex w-full justify-center rounded-md border border-transparent px-4 py-2 shadow-sm focus:outline-none sm:col-start-2 sm:text-sm"
           >
             Simpan
           </BaseButton>
           <BaseButton
             type="button"
-            className="mt-3 w-full inline-flex justify-center rounded-md border shadow-sm px-4 py-2 sm:mt-0 sm:col-start-1 sm:text-sm"
+            className="mt-3 inline-flex w-full justify-center rounded-md border px-4 py-2 shadow-sm sm:col-start-1 sm:mt-0 sm:text-sm"
             secondary
             onClick={() => setOpen(false)}
           >

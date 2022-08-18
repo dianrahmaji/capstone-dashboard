@@ -22,10 +22,7 @@ import {
  * 4. Update team
  * 5. Delete team
  */
-export const teamsReducer = (
-  state = { loading: false, error: null, data: [] },
-  action
-) => {
+export const teamsReducer = (state = { loading: false, error: null, data: [] }, action) => {
   switch (action.type) {
     case LOADING_TEAM: {
       return { loading: true, error: null, data: state.data }
@@ -41,7 +38,7 @@ export const teamsReducer = (
       }
     }
     case EDIT_TEAM: {
-      const data = state.data.map(r =>
+      const data = state.data.map((r) =>
         r._id === action.payload._id ? { ...r, ...action.payload } : r
       )
 
@@ -55,7 +52,7 @@ export const teamsReducer = (
       return {
         loading: false,
         error: null,
-        data: state.data.filter(r => r._id !== action.payload)
+        data: state.data.filter((r) => r._id !== action.payload)
       }
     }
     case ERROR_TEAM: {
@@ -104,7 +101,7 @@ export const acceptedTeamsReducer = (
     }
     case EDIT_ACCEPTED_TEAM: {
       const { title, description, startDate, endDate, rest } = action.payload
-      const data = state.data.map(d =>
+      const data = state.data.map((d) =>
         d._id === action.payload._id
           ? {
               ...d,
@@ -123,7 +120,7 @@ export const acceptedTeamsReducer = (
       return { loading: false, error: null, data }
     }
     case ADD_TEAM_MEMBER: {
-      const data = state.data.map(d =>
+      const data = state.data.map((d) =>
         d._id === action.payload.teamId
           ? { ...d, members: [...d.members, action.payload.researcher] }
           : d
@@ -132,13 +129,11 @@ export const acceptedTeamsReducer = (
       return { loading: false, error: null, data }
     }
     case DELETE_TEAM_MEMBER: {
-      const data = state.data.map(d =>
+      const data = state.data.map((d) =>
         d._id === action.payload.teamId
           ? {
               ...d,
-              members: d.members.filter(
-                ({ _id }) => _id !== action.payload.userId
-              )
+              members: d.members.filter(({ _id }) => _id !== action.payload.userId)
             }
           : d
       )
