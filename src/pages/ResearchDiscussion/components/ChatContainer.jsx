@@ -1,19 +1,28 @@
-import { useEffect, useRef } from 'react'
+import axios from 'axios'
+import { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import ChatBubble from './ChatBubble'
 
-const user1 = {
-  _id: 1,
-  fullName: 'Dian Rahmaji'
-}
-
-const user2 = {
-  id: 2,
-  fullName: 'Dzakiy Harissalam'
-}
-
 const ChatContainer = () => {
+  const [allMessages, setAllMessages] = useState([])
   const endMessage = useRef(null)
+
+  const { chat: chatId } = useSelector(({ selectedTeamId, acceptedTeams }) => {
+    return acceptedTeams.data.find(({ _id }) => _id === selectedTeamId)
+  })
+
+  useEffect(() => {
+    async function fetchAllMessages() {
+      try {
+        const { data } = await axios.get(`/api/chat/${chatId}`)
+        console.log(data)
+        setAllMessages(data)
+      } catch (_) {}
+    }
+
+    fetchAllMessages()
+  }, [])
 
   useEffect(() => {
     endMessage.current?.scrollIntoView()
@@ -22,10 +31,9 @@ const ChatContainer = () => {
   return (
     <div className="h-7/8 mx-auto w-full overflow-y-scroll px-4 sm:px-6 md:px-14">
       <div className="flex flex-col">
-        {[...Array(110)].map((_, i) => (
-          <ChatBubble key={i} user={user2} />
+        {allMessages.map((m) => (
+          <ChatBubble key={m._id} message={m} />
         ))}
-        <ChatBubble user={user1} />
         <div ref={endMessage} />
       </div>
     </div>

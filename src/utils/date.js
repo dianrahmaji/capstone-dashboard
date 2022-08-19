@@ -16,3 +16,9 @@ export const toLocaleFormat = (date) =>
     month: 'long',
     day: 'numeric'
   }).format(new Date(date))
+
+export const toTimeOnlyFormat = (date) =>
+  new Intl.DateTimeFormat('id', {
+    hour: 'numeric',
+    minute: 'numeric'
+  }).format(new Date(date))

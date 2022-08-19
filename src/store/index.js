@@ -10,7 +10,7 @@ import { teamsReducer, acceptedTeamsReducer, selectedTeamIdReducer } from './red
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['user', 'selectedTeamId']
+  whitelist: ['user', 'selectedTeamId', 'acceptedTeams']
 }
 
 const reducer = combineReducers({
