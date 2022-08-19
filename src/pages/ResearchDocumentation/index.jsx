@@ -1,16 +1,16 @@
-import { ChevronRightIcon } from '@heroicons/react/solid'
+import { ChevronRightIcon } from "@heroicons/react/solid";
 
-import ActionContainer from './components/ActionContainer'
-import BaseBreadcrumbs from '~/components/generic/breadcrumbs/BaseBreadcrumbs'
-import DashboardLayout from '~/layouts/DashboardLayout'
-import DocumentContainer from './components/DocumentContainer'
+import ActionContainer from "./components/ActionContainer";
+import BaseBreadcrumbs from "~/components/generic/breadcrumbs/BaseBreadcrumbs";
+import DashboardLayout from "~/layouts/DashboardLayout";
+import DocumentContainer from "./components/DocumentContainer";
 
 const pages = [
-  { name: 'Capstone Projects', redirect: '#', current: false },
-  { name: 'C-251', redirect: '#', current: true }
-]
+  { name: "Capstone Projects", redirect: "#", current: false },
+  { name: "C-251", redirect: "#", current: true },
+];
 
-const ResearchDocumentation = () => {
+function ResearchDocumentation() {
   return (
     <DashboardLayout>
       <div className="py-6">
@@ -26,7 +26,7 @@ const ResearchDocumentation = () => {
         </div>
       </div>
     </DashboardLayout>
-  )
+  );
 }
 
-export default ResearchDocumentation
+export default ResearchDocumentation;

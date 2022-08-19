@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   ADD_TEAM_MEMBER,
   CREATE_TEAM,
@@ -11,8 +12,8 @@ import {
   ERROR_ACCEPTED_TEAM,
   SELECT_ACCEPTED_TEAM_ID,
   EDIT_ACCEPTED_TEAM,
-  DELETE_TEAM_MEMBER
-} from '../constants/teamConstants'
+  DELETE_TEAM_MEMBER,
+} from "../constants/teamConstants";
 
 /**
  * Cases
@@ -22,50 +23,53 @@ import {
  * 4. Update team
  * 5. Delete team
  */
-export const teamsReducer = (state = { loading: false, error: null, data: [] }, action) => {
+export const teamsReducer = (
+  state = { loading: false, error: null, data: [] },
+  action,
+) => {
   switch (action.type) {
     case LOADING_TEAM: {
-      return { loading: true, error: null, data: state.data }
+      return { loading: true, error: null, data: state.data };
     }
     case FETCH_TEAM: {
-      return { loading: false, error: null, data: action.payload }
+      return { loading: false, error: null, data: action.payload };
     }
     case CREATE_TEAM: {
       return {
         loading: false,
         error: null,
-        data: [...state.data, action.payload]
-      }
+        data: [...state.data, action.payload],
+      };
     }
     case EDIT_TEAM: {
       const data = state.data.map((r) =>
-        r._id === action.payload._id ? { ...r, ...action.payload } : r
-      )
+        r._id === action.payload._id ? { ...r, ...action.payload } : r,
+      );
 
       return {
         loading: false,
         error: null,
-        data
-      }
+        data,
+      };
     }
     case DELETE_TEAM: {
       return {
         loading: false,
         error: null,
-        data: state.data.filter((r) => r._id !== action.payload)
-      }
+        data: state.data.filter((r) => r._id !== action.payload),
+      };
     }
     case ERROR_TEAM: {
       return {
         loading: false,
         error: action.payload,
-        data: state.data
-      }
+        data: state.data,
+      };
     }
     default:
-      return state
+      return state;
   }
-}
+};
 
 /**
  * Cases:
@@ -80,27 +84,27 @@ export const acceptedTeamsReducer = (
   state = {
     loading: false,
     error: null,
-    data: []
+    data: [],
   },
-  action
+  action,
 ) => {
   switch (action.type) {
     case LOADING_ACCEPTED_TEAM: {
       return {
         loading: true,
         error: null,
-        data: state.data
-      }
+        data: state.data,
+      };
     }
     case FETCH_ACCEPTED_TEAM: {
       return {
         loading: false,
         error: null,
-        data: action.payload
-      }
+        data: action.payload,
+      };
     }
     case EDIT_ACCEPTED_TEAM: {
-      const { title, description, startDate, endDate, rest } = action.payload
+      const { title, description, startDate, endDate, rest } = action.payload;
       const data = state.data.map((d) =>
         d._id === action.payload._id
           ? {
@@ -111,58 +115,60 @@ export const acceptedTeamsReducer = (
                 title,
                 description,
                 startDate,
-                endDate
-              }
+                endDate,
+              },
             }
-          : d
-      )
+          : d,
+      );
 
-      return { loading: false, error: null, data }
+      return { loading: false, error: null, data };
     }
     case ADD_TEAM_MEMBER: {
       const data = state.data.map((d) =>
         d._id === action.payload.teamId
           ? { ...d, members: [...d.members, action.payload.researcher] }
-          : d
-      )
+          : d,
+      );
 
-      return { loading: false, error: null, data }
+      return { loading: false, error: null, data };
     }
     case DELETE_TEAM_MEMBER: {
       const data = state.data.map((d) =>
         d._id === action.payload.teamId
           ? {
               ...d,
-              members: d.members.filter(({ _id }) => _id !== action.payload.userId)
+              members: d.members.filter(
+                ({ _id }) => _id !== action.payload.userId,
+              ),
             }
-          : d
-      )
+          : d,
+      );
 
-      return { loading: false, error: null, data }
+      return { loading: false, error: null, data };
     }
     case ERROR_ACCEPTED_TEAM: {
       return {
         loading: false,
         error: action.payload,
-        data: state.data
-      }
+        data: state.data,
+      };
     }
     default:
-      return state
+      return state;
   }
-}
+};
 
 /**
  *
  * Cases:
  * 1. Select accepted team
  */
-export const selectedTeamIdReducer = (state = '', action) => {
+export const selectedTeamIdReducer = (state = "", action) => {
   switch (action.type) {
     case SELECT_ACCEPTED_TEAM_ID: {
-      return action.payload
+      return action.payload;
     }
     default:
-      return state
+      return state;
   }
-}
+};

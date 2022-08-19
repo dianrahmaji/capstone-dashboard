@@ -1,34 +1,34 @@
-import { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { LockClosedIcon } from '@heroicons/react/outline'
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { LockClosedIcon } from "@heroicons/react/outline";
 
-import { email, password } from '~/utils/validation'
-import { login } from '~/store/actions/userActions'
+import { email, password } from "~/utils/validation";
+import { login } from "~/store/actions/userActions";
 
-import BaseButton from '~/components/generic/button/BaseButton'
-import BaseCheckbox from '~/components/generic/form/BaseCheckbox'
-import BaseForm from '~/components/generic/form/BaseForm'
-import BaseInput from '~/components/generic/form/BaseInput'
+import BaseButton from "~/components/generic/button/BaseButton";
+import BaseCheckbox from "~/components/generic/form/BaseCheckbox";
+import BaseForm from "~/components/generic/form/BaseForm";
+import BaseInput from "~/components/generic/form/BaseInput";
 
-const Login = () => {
-  const initialValues = { email: '', password: '', remember: false }
+function Login() {
+  const initialValues = { email: "", password: "", remember: false };
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
-    data: { token }
-  } = useSelector((state) => state.user)
+    data: { token },
+  } = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (token) navigate('/', { replace: true })
-  }, [token, navigate])
+    if (token) navigate("/", { replace: true });
+  }, [token, navigate]);
 
   const handleSubmit = (values) => {
-    const { email, password } = values
-    dispatch(login(email, password))
-  }
+    const { email, password } = values;
+    dispatch(login(email, password));
+  };
 
   return (
     <div className="flex min-h-screen flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -52,7 +52,11 @@ const Login = () => {
             <div className="flex items-center justify-between">
               <BaseCheckbox label="Remember me" name="remember" />
               <div className="mt-3 text-sm">
-                <Link to="#" className="font-medium text-primary hover:text-accent">
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                <Link
+                  to="#"
+                  className="font-medium text-primary hover:text-accent"
+                >
                   Forgot your password?
                 </Link>
               </div>
@@ -63,8 +67,11 @@ const Login = () => {
           </BaseForm>
           <div className="mt-6">
             <p className="mt-2 text-center text-sm text-gray-600">
-              Don't have an account?{' '}
-              <Link to="/register" className="font-medium text-primary hover:text-accent">
+              Don&apos;t have an account?{" "}
+              <Link
+                to="/register"
+                className="font-medium text-primary hover:text-accent"
+              >
                 Register
               </Link>
             </p>
@@ -72,7 +79,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

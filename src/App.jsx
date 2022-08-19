@@ -1,18 +1,18 @@
-import { Route, Routes } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import createAxios from './config/axios'
-import dashboard from '~/config/dashboard'
+import createAxios from "./config/axios";
+import dashboard from "~/config/dashboard";
 
-import Login from '~/pages/Login'
-import Register from '~/pages/Register'
+import Login from "~/pages/Login";
+import Register from "~/pages/Register";
 
-const App = () => {
+function App() {
   const {
-    data: { token }
-  } = useSelector((state) => state.user)
+    data: { token },
+  } = useSelector((state) => state.user);
 
-  createAxios(token)
+  createAxios(token);
 
   return (
     <Routes>
@@ -22,7 +22,7 @@ const App = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
     </Routes>
-  )
+  );
 }
 
-export default App
+export default App;

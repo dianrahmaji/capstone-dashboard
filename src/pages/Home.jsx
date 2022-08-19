@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import DashboardLayout from '~/layouts/DashboardLayout'
-import ReactQuill from '~/components/ReactQuill'
+import { useState } from "react";
+import DashboardLayout from "~/layouts/DashboardLayout";
+import ReactQuill from "~/components/ReactQuill";
 
-const Home = () => {
-  const [value, setValue] = useState('')
+function Home() {
+  const [value, setValue] = useState("");
 
   return (
     <DashboardLayout>
@@ -19,7 +19,7 @@ const Home = () => {
       </div> */}
       <ReactQuill value={value} setValue={setValue} />
     </DashboardLayout>
-  )
+  );
 }
 
-export default Home
+export default Home;

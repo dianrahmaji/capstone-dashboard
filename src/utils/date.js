@@ -1,24 +1,24 @@
 export const toYupFormat = (date) =>
-  new Intl.DateTimeFormat('id', {
-    month: '2-digit',
-    day: '2-digit',
-    year: 'numeric'
+  new Intl.DateTimeFormat("id", {
+    month: "2-digit",
+    day: "2-digit",
+    year: "numeric",
   })
     .format(new Date(date))
-    .split('/')
+    .split("/")
     .reverse()
-    .join('-')
+    .join("-");
 
 export const toLocaleFormat = (date) =>
-  new Intl.DateTimeFormat('id', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  }).format(new Date(date))
+  new Intl.DateTimeFormat("id", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(new Date(date));
 
 export const toTimeOnlyFormat = (date) =>
-  new Intl.DateTimeFormat('id', {
-    hour: 'numeric',
-    minute: 'numeric'
-  }).format(new Date(date))
+  new Intl.DateTimeFormat("id", {
+    hour: "numeric",
+    minute: "numeric",
+  }).format(new Date(date));

@@ -1,42 +1,53 @@
-import { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { LockClosedIcon } from '@heroicons/react/outline'
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { LockClosedIcon } from "@heroicons/react/outline";
 
-import { fullName, email, userId, faculty, major, accountType, password } from '~/utils/validation'
-import { register } from '~/store/actions/userActions'
+import {
+  fullName,
+  email,
+  userId,
+  faculty,
+  major,
+  accountType,
+  password,
+} from "~/utils/validation";
+import { register } from "~/store/actions/userActions";
 
-import BaseButton from '~/components/generic/button/BaseButton'
-import BaseForm from '~/components/generic/form/BaseForm'
-import BaseInput from '~/components/generic/form/BaseInput'
-import BaseSelect from '~/components/generic/form/BaseSelect'
+import BaseButton from "~/components/generic/button/BaseButton";
+import BaseForm from "~/components/generic/form/BaseForm";
+import BaseInput from "~/components/generic/form/BaseInput";
+import BaseSelect from "~/components/generic/form/BaseSelect";
 
-const Register = () => {
+function Register() {
   const initialValues = {
-    fullName: '',
-    email: '',
-    userId: '',
-    faculty: '',
-    major: '',
-    accountType: '',
-    password: ''
-  }
+    fullName: "",
+    email: "",
+    userId: "",
+    faculty: "",
+    major: "",
+    accountType: "",
+    password: "",
+  };
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
-    data: { token }
-  } = useSelector((state) => state.user)
+    data: { token },
+  } = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (token) navigate('/', { replace: true })
-  }, [token, navigate])
+    if (token) navigate("/", { replace: true });
+  }, [token, navigate]);
 
   const handleSubmit = (values) => {
-    const { fullName, email, userId, faculty, major, accountType, password } = values
-    dispatch(register(fullName, email, userId, faculty, major, accountType, password))
-  }
+    const { fullName, email, userId, faculty, major, accountType, password } =
+      values;
+    dispatch(
+      register(fullName, email, userId, faculty, major, accountType, password),
+    );
+  };
 
   return (
     <div className="flex min-h-screen flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -59,7 +70,7 @@ const Register = () => {
               faculty,
               major,
               accountType,
-              password
+              password,
             }}
             handleSubmit={handleSubmit}
           >
@@ -82,8 +93,11 @@ const Register = () => {
           </BaseForm>
           <div className="mt-6">
             <p className="mt-2 text-center text-sm text-gray-600">
-              Already have an account?{' '}
-              <Link to="/login" className="font-medium text-primary hover:text-accent">
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="font-medium text-primary hover:text-accent"
+              >
                 Sign In
               </Link>
             </p>
@@ -91,7 +105,7 @@ const Register = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Register
+export default Register;

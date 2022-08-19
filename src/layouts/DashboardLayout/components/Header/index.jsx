@@ -1,14 +1,14 @@
-import { BellIcon, MenuAlt2Icon } from '@heroicons/react/outline'
+import { BellIcon, MenuAlt2Icon } from "@heroicons/react/outline";
 
-import HeaderProfileDropdown from './HeaderProfileDropdown'
+import HeaderProfileDropdown from "./HeaderProfileDropdown";
 
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' }
-]
+  { name: "Your Profile", href: "#" },
+  { name: "Settings", href: "#" },
+  { name: "Sign out", href: "#" },
+];
 
-const Header = ({ setSidebarOpen }) => {
+function Header({ setSidebarOpen }) {
   return (
     <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white shadow">
       <button
@@ -33,7 +33,7 @@ const Header = ({ setSidebarOpen }) => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Header
+export default Header;

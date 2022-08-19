@@ -1,24 +1,26 @@
-import { Fragment, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
-import BaseButton from '~/components/generic/button/BaseButton'
-import { toYupFormat, toLocaleFormat } from '~/utils/date'
-import RepositoryEditModal from './RepositoryEditModal'
+import BaseButton from "~/components/generic/button/BaseButton";
+import { toYupFormat, toLocaleFormat } from "~/utils/date";
+import RepositoryEditModal from "./RepositoryEditModal";
 
-const RepositoryDetails = () => {
-  const [openDialog, setOpenDialog] = useState(false)
+function RepositoryDetails() {
+  const [openDialog, setOpenDialog] = useState(false);
 
-  const detail = useSelector(({ selectedTeamId, acceptedTeams }) => {
-    return acceptedTeams.data.find(({ _id }) => _id === selectedTeamId)
-  })
+  const detail = useSelector(({ selectedTeamId, acceptedTeams }) =>
+    acceptedTeams.data.find(({ _id }) => _id === selectedTeamId),
+  );
 
-  const { repository, ...rest } = detail
+  const { repository, ...rest } = detail;
 
-  const { data } = useSelector((state) => state.user)
+  const { data } = useSelector((state) => state.user);
 
   return (
-    <Fragment>
-      <h1 className="mt-3 text-2xl font-semibold text-gray-900">{detail?.name}</h1>
+    <>
+      <h1 className="mt-3 text-2xl font-semibold text-gray-900">
+        {detail?.name}
+      </h1>
       <div className="my-6 ml-4 flex flex-col">
         <div className="text-lg font-medium">Topic</div>
         {/* TODO: Add this field to db */}
@@ -27,14 +29,16 @@ const RepositoryDetails = () => {
         <div>
           <time dateTime={detail?.repository?.startDate}>
             {toLocaleFormat(detail?.repository?.startDate)}
-          </time>{' '}
-          -{' '}
+          </time>{" "}
+          -{" "}
           <time dateTime={detail?.repository?.endDate}>
             {toLocaleFormat(detail?.repository?.endDate)}
           </time>
         </div>
         <div className="mt-5 text-lg  font-medium">Description</div>
-        <div dangerouslySetInnerHTML={{ __html: detail?.repository?.description }} />
+        <div
+          dangerouslySetInnerHTML={{ __html: detail?.repository?.description }}
+        />
         {data?._id === detail?.administrator?._id && (
           <BaseButton className="ml-auto" onClick={() => setOpenDialog(true)}>
             Edit
@@ -49,11 +53,11 @@ const RepositoryDetails = () => {
           ...repository,
           startDate: toYupFormat(repository?.startDate),
           endDate: toYupFormat(repository?.endDate),
-          ...rest
+          ...rest,
         }}
       />
-    </Fragment>
-  )
+    </>
+  );
 }
 
-export default RepositoryDetails
+export default RepositoryDetails;

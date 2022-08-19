@@ -1,48 +1,52 @@
-import { Fragment, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import clsx from 'clsx'
-import { PencilAltIcon, TrashIcon } from '@heroicons/react/outline'
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import clsx from "clsx";
+import { PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
 
-import { fetchTeams, updateTeam, deleteTeam } from '~/store/actions/teamActions'
+import {
+  fetchTeams,
+  updateTeam,
+  deleteTeam,
+} from "~/store/actions/teamActions";
 
-import BaseTable from '~/components/generic/table/BaseTable'
-import BaseTableItem from '~/components/generic/table/BaseTableItem'
-import ProposalModal from './ProposalModal'
+import BaseTable from "~/components/generic/table/BaseTable";
+import BaseTableItem from "~/components/generic/table/BaseTableItem";
+import ProposalModal from "./ProposalModal";
 
-const header = ['Title', 'Status', 'Actions']
+const header = ["Title", "Status", "Actions"];
 
-const ProposalTable = () => {
-  const [openDialog, setOpenDialog] = useState(false)
-  const [selectedProposal, setSelectedProposal] = useState(null)
+function ProposalTable() {
+  const [openDialog, setOpenDialog] = useState(false);
+  const [selectedProposal, setSelectedProposal] = useState(null);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const { data } = useSelector((state) => state.user)
-  const { data: teams, loading } = useSelector((state) => state.teams)
+  const { data } = useSelector((state) => state.user);
+  const { data: teams, loading } = useSelector((state) => state.teams);
 
   useEffect(() => {
-    dispatch(fetchTeams(data?._id))
-  }, [dispatch, data])
+    dispatch(fetchTeams(data?._id));
+  }, [dispatch, data]);
 
   const handleEdit = (p) => {
-    const { repository, ...rest } = p
-    repository.startDate = repository.startDate.slice(0, 10)
-    repository.endDate = repository.endDate.slice(0, 10)
-    setSelectedProposal({ ...repository, ...rest })
-    setOpenDialog(true)
-  }
+    const { repository, ...rest } = p;
+    repository.startDate = repository.startDate.slice(0, 10);
+    repository.endDate = repository.endDate.slice(0, 10);
+    setSelectedProposal({ ...repository, ...rest });
+    setOpenDialog(true);
+  };
 
   const handleDelete = (id) => {
-    dispatch(deleteTeam(id))
-  }
+    dispatch(deleteTeam(id));
+  };
 
   const handleSubmit = ({ status, ...rest }) => {
-    dispatch(updateTeam(rest))
-    setOpenDialog(false)
-  }
+    dispatch(updateTeam(rest));
+    setOpenDialog(false);
+  };
 
   return (
-    <Fragment>
+    <>
       <BaseTable header={header} loading={loading} empty={teams.length === 0}>
         {teams &&
           teams.map((p) => (
@@ -51,13 +55,13 @@ const ProposalTable = () => {
               <BaseTableItem>
                 <span
                   className={clsx(
-                    'inline-flex rounded-full  px-2 text-xs font-semibold leading-5 ',
+                    "inline-flex rounded-full  px-2 text-xs font-semibold leading-5 ",
                     {
-                      'bg-blue-100 text-blue-800': p.status === 'pending',
-                      'bg-yellow-100 text-yellow-800': p.status === 'updated',
-                      'bg-green-100 text-green-800': p.status === 'accepted',
-                      'bg-red-100 text-red-800': !p.status === 'rejected'
-                    }
+                      "bg-blue-100 text-blue-800": p.status === "pending",
+                      "bg-yellow-100 text-yellow-800": p.status === "updated",
+                      "bg-green-100 text-green-800": p.status === "accepted",
+                      "bg-red-100 text-red-800": !p.status === "rejected",
+                    },
                   )}
                 >
                   {p.status}
@@ -83,8 +87,8 @@ const ProposalTable = () => {
         initialValues={selectedProposal}
         handleSubmit={handleSubmit}
       />
-    </Fragment>
-  )
+    </>
+  );
 }
 
-export default ProposalTable
+export default ProposalTable;

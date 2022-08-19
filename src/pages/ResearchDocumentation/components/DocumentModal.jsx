@@ -1,11 +1,11 @@
-import BaseInput from '~/components/generic/form/BaseInput'
-import FormModal from '~/components/FormModal'
+import BaseInput from "~/components/generic/form/BaseInput";
+import FormModal from "~/components/FormModal";
 
-import { documentName } from '~/utils/validation'
+import { documentName } from "~/utils/validation";
 
-const DocumentModal = ({ action, type, ...props }) => {
-  const uppercaseAction = `${action[0].toUpperCase()}${action.slice(1)}`
-  const uppercaseType = `${type[0].toUpperCase()}${type.slice(1)}`
+function DocumentModal({ action, type, ...props }) {
+  const uppercaseAction = `${action[0].toUpperCase()}${action.slice(1)}`;
+  const uppercaseType = `${type[0].toUpperCase()}${type.slice(1)}`;
 
   return (
     <FormModal
@@ -14,9 +14,13 @@ const DocumentModal = ({ action, type, ...props }) => {
       handleSubmit={console.log}
       {...props}
     >
-      <BaseInput label={`${uppercaseType} Name`} name="documentName" type="text" />
+      <BaseInput
+        label={`${uppercaseType} Name`}
+        name="documentName"
+        type="text"
+      />
     </FormModal>
-  )
+  );
 }
 
-export default DocumentModal
+export default DocumentModal;

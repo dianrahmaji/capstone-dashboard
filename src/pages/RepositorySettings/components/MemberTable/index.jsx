@@ -1,49 +1,51 @@
-import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { PencilAltIcon, PlusSmIcon, TrashIcon } from '@heroicons/react/outline'
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { PencilAltIcon, PlusSmIcon, TrashIcon } from "@heroicons/react/outline";
 
-import { deleteTeamMember } from '~/store/actions/teamActions'
+import { deleteTeamMember } from "~/store/actions/teamActions";
 
-import BaseIconButton from '~/components/generic/button/BaseIconButton'
-import BaseTable from '~/components/generic/table/BaseTable'
-import BaseTableItem from '~/components/generic/table/BaseTableItem'
-import MemberAddModal from './MemberAddModal'
-import MemberEditModal from './MemberEditModal'
+import BaseIconButton from "~/components/generic/button/BaseIconButton";
+import BaseTable from "~/components/generic/table/BaseTable";
+import BaseTableItem from "~/components/generic/table/BaseTableItem";
+import MemberAddModal from "./MemberAddModal";
+import MemberEditModal from "./MemberEditModal";
 
-const header = ['Name', 'Faculty', 'Type', 'Role']
+const header = ["Name", "Faculty", "Type", "Role"];
 
-const MemberTable = () => {
-  const [openEditDialog, setOpenEditDialog] = useState(false)
-  const [openAddDialog, setOpenAddDialog] = useState(false)
-  const [selectedMember, setSelectedMember] = useState(null)
+function MemberTable() {
+  const [openEditDialog, setOpenEditDialog] = useState(false);
+  const [openAddDialog, setOpenAddDialog] = useState(false);
+  const [selectedMember] = useState(null);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const selectedTeamId = useSelector((state) => state.selectedTeamId)
+  const selectedTeamId = useSelector((state) => state.selectedTeamId);
   const {
     _id: teamId,
     members,
-    administrator
-  } = useSelector((state) => state.acceptedTeams.data.find(({ _id }) => _id === selectedTeamId))
+    administrator,
+  } = useSelector((state) =>
+    state.acceptedTeams.data.find(({ _id }) => _id === selectedTeamId),
+  );
 
-  const { data, loading } = useSelector((state) => state.user)
+  const { data, loading } = useSelector((state) => state.user);
 
-  const handleEdit = (m) => {
-    setSelectedMember(m)
-    setOpenEditDialog(true)
-  }
+  // const handleEdit = (m) => {
+  //   setSelectedMember(m);
+  //   setOpenEditDialog(true);
+  // };
 
   const handleDelete = (userId) => {
-    dispatch(deleteTeamMember({ userId, teamId }))
-  }
+    dispatch(deleteTeamMember({ userId, teamId }));
+  };
 
-  const setTeamDetail = () => {}
+  const setTeamDetail = () => {};
 
   return (
     <div>
       <h2 className="mt-3 text-xl font-medium">Research Member</h2>
       <BaseTable
-        header={[...header, data?._id === administrator?._id && 'Action']}
+        header={[...header, data?._id === administrator?._id && "Action"]}
         loading={loading}
       >
         <tr key={administrator?._id}>
@@ -92,7 +94,7 @@ const MemberTable = () => {
         initialValues={selectedMember}
       />
     </div>
-  )
+  );
 }
 
-export default MemberTable
+export default MemberTable;

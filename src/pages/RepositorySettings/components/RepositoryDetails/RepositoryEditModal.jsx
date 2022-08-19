@@ -1,23 +1,30 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
 
-import BaseInput from '~/components/generic/form/BaseInput'
-import FormModal from '~/components/FormModal'
-import TextEditorInput from '~/components/TextEditorInput'
+import BaseInput from "~/components/generic/form/BaseInput";
+import FormModal from "~/components/FormModal";
+import TextEditorInput from "~/components/TextEditorInput";
 
-import { name, title, description, date } from '~/utils/validation'
-import { updateAcceptedTeam } from '~/store/actions/teamActions'
+import { name, title, description, date } from "~/utils/validation";
+import { updateAcceptedTeam } from "~/store/actions/teamActions";
 
-const ProposalModal = (props) => {
-  const dispatch = useDispatch()
+function ProposalModal(props) {
+  const { setOpen } = props;
+  const dispatch = useDispatch();
 
   const handleSubmit = async (values) => {
-    dispatch(updateAcceptedTeam(values))
-    props.setOpen(false)
-  }
+    dispatch(updateAcceptedTeam(values));
+    setOpen(false);
+  };
 
   return (
     <FormModal
-      validation={{ name, title, description, startDate: date, endDate: date }}
+      validation={{
+        name,
+        title,
+        description,
+        startDate: date,
+        endDate: date,
+      }}
       handleSubmit={handleSubmit}
       {...props}
     >
@@ -29,7 +36,7 @@ const ProposalModal = (props) => {
       </div>
       <TextEditorInput label="Description" name="description" />
     </FormModal>
-  )
+  );
 }
 
-export default ProposalModal
+export default ProposalModal;

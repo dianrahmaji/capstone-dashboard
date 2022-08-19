@@ -1,8 +1,8 @@
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
-import { Combobox } from '@headlessui/react'
+import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { Combobox } from "@headlessui/react";
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function BaseCombobox({ filteredItem, setQuery, ...props }) {
@@ -29,22 +29,27 @@ export default function BaseCombobox({ filteredItem, setQuery, ...props }) {
                 value={item}
                 className={({ active }) =>
                   classNames(
-                    'relative cursor-default select-none py-2 pl-3 pr-9',
-                    active ? 'bg-primary text-secondary' : 'text-primary'
+                    "relative cursor-default select-none py-2 pl-3 pr-9",
+                    active ? "bg-primary text-secondary" : "text-primary",
                   )
                 }
               >
                 {({ active, selected }) => (
                   <>
-                    <span className={classNames('block truncate', selected && 'font-semibold')}>
+                    <span
+                      className={classNames(
+                        "block truncate",
+                        selected && "font-semibold",
+                      )}
+                    >
                       {item.name}
                     </span>
 
                     {selected && (
                       <span
                         className={classNames(
-                          'absolute inset-y-0 right-0 flex items-center pr-4',
-                          active ? 'text-white' : 'text-primary'
+                          "absolute inset-y-0 right-0 flex items-center pr-4",
+                          active ? "text-white" : "text-primary",
                         )}
                       >
                         <CheckIcon className="h-5 w-5" aria-hidden="true" />
@@ -58,5 +63,5 @@ export default function BaseCombobox({ filteredItem, setQuery, ...props }) {
         )}
       </div>
     </Combobox>
-  )
+  );
 }

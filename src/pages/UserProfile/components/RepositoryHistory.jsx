@@ -1,35 +1,37 @@
-import { useEffect, useState } from 'react'
-import clsx from 'clsx'
-import { useSelector } from 'react-redux'
+import { useEffect, useState } from "react";
+import clsx from "clsx";
+import { useSelector } from "react-redux";
 
-import BaseTable from '~/components/generic/table/BaseTable'
-import BaseTableItem from '~/components/generic/table/BaseTableItem'
-import axios from 'axios'
+import axios from "axios";
+import BaseTable from "~/components/generic/table/BaseTable";
+import BaseTableItem from "~/components/generic/table/BaseTableItem";
 
-const header = ['Name', 'Title', 'Time', 'Status', 'Year']
+const header = ["Name", "Title", "Time", "Status", "Year"];
 
-const RepositoryHistory = () => {
-  const [teams, setTeams] = useState([])
-  const [loading, setLoading] = useState(false)
+function RepositoryHistory() {
+  const [teams, setTeams] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const {
-    data: { _id }
-  } = useSelector((state) => state.user)
+    data: { _id },
+  } = useSelector((state) => state.user);
 
   useEffect(() => {
     async function fetchTeams() {
-      setLoading(true)
-      const { data } = await axios.get(`/api/user/${_id}/team?all=true`)
-      setTeams(data)
-      setLoading(false)
+      setLoading(true);
+      const { data } = await axios.get(`/api/user/${_id}/team?all=true`);
+      setTeams(data);
+      setLoading(false);
     }
 
-    fetchTeams()
-  }, [])
+    fetchTeams();
+  }, [_id]);
 
   return (
     <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 md:px-8">
-      <h1 className="text-2xl font-semibold text-gray-900">Repository Penelitian</h1>
+      <h1 className="text-2xl font-semibold text-gray-900">
+        Repository Penelitian
+      </h1>
       <BaseTable header={header} loading={loading} empty={teams.length === 0}>
         {teams &&
           teams.map((t) => (
@@ -41,24 +43,26 @@ const RepositoryHistory = () => {
               <BaseTableItem>
                 <span
                   className={clsx(
-                    'inline-flex rounded-full  px-2 text-xs font-semibold leading-5 ',
+                    "inline-flex rounded-full  px-2 text-xs font-semibold leading-5 ",
                     {
-                      'bg-blue-100 text-blue-800': t.status === 'pending',
-                      'bg-yellow-100 text-yellow-800': t.status === 'updated',
-                      'bg-green-100 text-green-800': t.status === 'accepted',
-                      'bg-red-100 text-red-800': !t.status === 'rejected'
-                    }
+                      "bg-blue-100 text-blue-800": t.status === "pending",
+                      "bg-yellow-100 text-yellow-800": t.status === "updated",
+                      "bg-green-100 text-green-800": t.status === "accepted",
+                      "bg-red-100 text-red-800": !t.status === "rejected",
+                    },
                   )}
                 >
                   {t.status}
                 </span>
               </BaseTableItem>
-              <BaseTableItem>{t.repository.startDate.slice(0, 4)}</BaseTableItem>
+              <BaseTableItem>
+                {t.repository.startDate.slice(0, 4)}
+              </BaseTableItem>
             </tr>
           ))}
       </BaseTable>
     </div>
-  )
+  );
 }
 
-export default RepositoryHistory
+export default RepositoryHistory;

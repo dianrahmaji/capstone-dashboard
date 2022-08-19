@@ -1,18 +1,18 @@
-import { Fragment, useState } from 'react'
-import DocumentItem from './DocumentItem'
-import DocumentModal from './DocumentModal'
+import { useState } from "react";
+import DocumentItem from "./DocumentItem";
+import DocumentModal from "./DocumentModal";
 
-const DocumentContainer = () => {
-  const [openDialog, setOpenDialog] = useState(false)
-  const [selectedDocument, setSelectedDocument] = useState(null)
+function DocumentContainer() {
+  const [openDialog, setOpenDialog] = useState(false);
+  const [selectedDocument, setSelectedDocument] = useState(null);
 
   const handleRename = (d) => {
-    setSelectedDocument(d)
-    setOpenDialog(true)
-  }
+    setSelectedDocument(d);
+    setOpenDialog(true);
+  };
 
   return (
-    <Fragment>
+    <>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
         <DocumentItem type="file" onRename={handleRename} />
         <DocumentItem onRename={handleRename} />
@@ -24,8 +24,8 @@ const DocumentContainer = () => {
         setOpen={setOpenDialog}
         initialValues={selectedDocument}
       />
-    </Fragment>
-  )
+    </>
+  );
 }
 
-export default DocumentContainer
+export default DocumentContainer;

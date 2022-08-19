@@ -1,10 +1,10 @@
-import BaseInput from '~/components/generic/form/BaseInput'
-import BaseSelect from '~/components/generic/form/BaseSelect'
-import FormModal from '~/components/FormModal'
+import BaseInput from "~/components/generic/form/BaseInput";
+import BaseSelect from "~/components/generic/form/BaseSelect";
+import FormModal from "~/components/FormModal";
 
-import { fullName, role } from '~/utils/validation'
+import { fullName, role } from "~/utils/validation";
 
-const MemberEditModal = (props) => {
+function MemberEditModal(props) {
   return (
     <FormModal
       title="Edit Member"
@@ -18,7 +18,7 @@ const MemberEditModal = (props) => {
         <option value="backend">Backend Engineer</option>
       </BaseSelect>
     </FormModal>
-  )
+  );
 }
 
-export default MemberEditModal
+export default MemberEditModal;

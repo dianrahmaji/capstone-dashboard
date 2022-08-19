@@ -1,23 +1,22 @@
-/* This example requires Tailwind CSS v2.0+ */
-import clsx from 'clsx'
-import { Fragment } from 'react'
-import { useSelector } from 'react-redux'
-import { Dialog, Menu, Transition } from '@headlessui/react'
-import { XIcon } from '@heroicons/react/outline'
+import clsx from "clsx";
+import { Fragment } from "react";
+import { useSelector } from "react-redux";
+import { Dialog, Transition } from "@headlessui/react";
+import { XIcon } from "@heroicons/react/outline";
 
-import { toLocaleFormat } from '~/utils/date'
+import { toLocaleFormat } from "~/utils/date";
 
 const getProfileFromFullName = (fullName) => {
-  const names = fullName.split(' ')
+  const names = fullName.split(" ");
 
-  if (names.length < 2) return fullName.slice(0, 2).toUpperCase()
-  return `${names[0][0]}${names[1][0]}`
-}
+  if (names.length < 2) return fullName.slice(0, 2).toUpperCase();
+  return `${names[0][0]}${names[1][0]}`;
+};
 
 export default function TeamInfo({ open, setOpen }) {
   const data = useSelector(({ selectedTeamId, acceptedTeams }) =>
-    acceptedTeams.data.find(({ _id }) => _id === selectedTeamId)
-  )
+    acceptedTeams.data.find(({ _id }) => _id === selectedTeamId),
+  );
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -42,8 +41,8 @@ export default function TeamInfo({ open, setOpen }) {
                       <div className="p-6">
                         <div className="flex items-start justify-between">
                           <Dialog.Title className="text-lg font-medium text-gray-900">
-                            {' '}
-                            Info{' '}
+                            {" "}
+                            Info{" "}
                           </Dialog.Title>
                           <div className="ml-3 flex h-7 items-center">
                             <button
@@ -80,12 +79,13 @@ export default function TeamInfo({ open, setOpen }) {
                                 Description
                               </dt>
                               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
+                                {/* eslint-disable react/no-danger */}
                                 <div
                                   className="prose"
                                   dangerouslySetInnerHTML={{
-                                    __html: data?.repository?.description
+                                    __html: data?.repository?.description,
                                   }}
-                                ></div>
+                                />
                               </dd>
                             </div>
                             <div>
@@ -111,8 +111,8 @@ export default function TeamInfo({ open, setOpen }) {
                               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
                                 <time dateTime={data?.repository?.startDate}>
                                   {toLocaleFormat(data?.repository?.startDate)}
-                                </time>{' '}
-                                -{' '}
+                                </time>{" "}
+                                -{" "}
                                 <time dateTime={data?.repository?.endDate}>
                                   {toLocaleFormat(data?.repository?.startDate)}
                                 </time>
@@ -125,57 +125,67 @@ export default function TeamInfo({ open, setOpen }) {
                         <div className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
                           Members
                         </div>
-                        <ul role="list" className="flex-1 divide-y divide-gray-200 overflow-y-auto">
+                        <ul className="flex-1 divide-y divide-gray-200 overflow-y-auto">
                           {data &&
-                            [...data.members, data.administrator].map((person) => (
-                              <li key={person._id}>
-                                <div className="group relative flex items-center py-6 px-5">
-                                  <a href="#" className="-m-1 block flex-1 p-1">
-                                    <div
-                                      className="absolute inset-0 group-hover:bg-gray-50"
-                                      aria-hidden="true"
-                                    />
-                                    <div className="relative flex min-w-0 flex-1 items-center">
-                                      <span className="relative inline-block flex-shrink-0">
-                                        {person.pictureUrl ? (
-                                          <img
-                                            className="h-10 w-10 rounded-full"
-                                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                            alt=""
-                                          />
-                                        ) : (
-                                          <div className="my-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
-                                            <div className=" text-sm text-primary">
-                                              {getProfileFromFullName(person.fullName)}
+                            [...data.members, data.administrator].map(
+                              (person) => (
+                                <li key={person._id}>
+                                  <div className="group relative flex items-center py-6 px-5">
+                                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                                    <a
+                                      href="#"
+                                      className="-m-1 block flex-1 p-1"
+                                    >
+                                      <div
+                                        className="absolute inset-0 group-hover:bg-gray-50"
+                                        aria-hidden="true"
+                                      />
+                                      <div className="relative flex min-w-0 flex-1 items-center">
+                                        <span className="relative inline-block flex-shrink-0">
+                                          {person.pictureUrl ? (
+                                            <img
+                                              className="h-10 w-10 rounded-full"
+                                              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                              alt=""
+                                            />
+                                          ) : (
+                                            <div className="my-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
+                                              <div className=" text-sm text-primary">
+                                                {getProfileFromFullName(
+                                                  person.fullName,
+                                                )}
+                                              </div>
                                             </div>
-                                          </div>
-                                        )}
-
-                                        <span
-                                          className={clsx(
-                                            {
-                                              'bg-green-400': person.status === 'online',
-                                              'bg-gray-300': person.status !== 'online'
-                                            },
-
-                                            'absolute top-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white'
                                           )}
-                                          aria-hidden="true"
-                                        />
-                                      </span>
-                                      <div className="ml-4 truncate">
-                                        <p className="truncate text-sm font-medium text-gray-900">
-                                          {person.fullName}
-                                        </p>
-                                        <p className="truncate text-sm text-gray-500">
-                                          {'@' + person.fullName}
-                                        </p>
+
+                                          <span
+                                            className={clsx(
+                                              {
+                                                "bg-green-400":
+                                                  person.status === "online",
+                                                "bg-gray-300":
+                                                  person.status !== "online",
+                                              },
+
+                                              "absolute top-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white",
+                                            )}
+                                            aria-hidden="true"
+                                          />
+                                        </span>
+                                        <div className="ml-4 truncate">
+                                          <p className="truncate text-sm font-medium text-gray-900">
+                                            {person.fullName}
+                                          </p>
+                                          <p className="truncate text-sm text-gray-500">
+                                            {`@${person.fullName}`}
+                                          </p>
+                                        </div>
                                       </div>
-                                    </div>
-                                  </a>
-                                </div>
-                              </li>
-                            ))}
+                                    </a>
+                                  </div>
+                                </li>
+                              ),
+                            )}
                         </ul>
                       </div>
                     </div>
@@ -187,5 +197,5 @@ export default function TeamInfo({ open, setOpen }) {
         </div>
       </Dialog>
     </Transition.Root>
-  )
+  );
 }

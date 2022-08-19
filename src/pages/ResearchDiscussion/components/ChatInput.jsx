@@ -1,34 +1,34 @@
-import { useState } from 'react'
-import axios from 'axios'
-import { useSelector } from 'react-redux'
-import { PaperClipIcon } from '@heroicons/react/outline'
-import { PaperAirplaneIcon } from '@heroicons/react/solid'
+import { useState } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { PaperClipIcon } from "@heroicons/react/outline";
+import { PaperAirplaneIcon } from "@heroicons/react/solid";
 
-import BaseIconButton from '~/components/generic/button/BaseIconButton'
+import BaseIconButton from "~/components/generic/button/BaseIconButton";
 
-const ChatInput = () => {
-  const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('')
+function ChatInput() {
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
   const {
-    data: { _id: sender }
-  } = useSelector((state) => state.user)
-  const { chat: chatId } = useSelector(({ selectedTeamId, acceptedTeams }) => {
-    return acceptedTeams.data.find(({ _id }) => _id === selectedTeamId)
-  })
+    data: { _id: sender },
+  } = useSelector((state) => state.user);
+  const { chat: chatId } = useSelector(({ selectedTeamId, acceptedTeams }) =>
+    acceptedTeams.data.find(({ _id }) => _id === selectedTeamId),
+  );
 
   const handleSubmit = async (e) => {
-    if (e.key && !(e.key === 'Enter')) {
-      return
+    if (e.key && !(e.key === "Enter")) {
+      return;
     }
-    setLoading(true)
+    setLoading(true);
     await axios.post(`/api/chat/${chatId}`, {
       sender,
-      text: message
-    })
-    setMessage('')
-    setLoading(false)
-  }
+      text: message,
+    });
+    setMessage("");
+    setLoading(false);
+  };
 
   return (
     <div className="w-full px-10 pb-10">
@@ -53,7 +53,7 @@ const ChatInput = () => {
         </BaseIconButton>
       </div>
     </div>
-  )
+  );
 }
 
-export default ChatInput
+export default ChatInput;

@@ -1,11 +1,11 @@
-import { Form, Formik } from 'formik'
-import * as Yup from 'yup'
+import { Form, Formik } from "formik";
+import * as Yup from "yup";
 
-const BaseForm = ({ initialValues, validation, handleSubmit, children }) => {
+function BaseForm({ initialValues, validation, handleSubmit, children }) {
   const onSubmit = (values, { setSubmitting }) => {
-    handleSubmit(values)
-    setSubmitting(false)
-  }
+    handleSubmit(values);
+    setSubmitting(false);
+  };
 
   return (
     <Formik
@@ -15,7 +15,7 @@ const BaseForm = ({ initialValues, validation, handleSubmit, children }) => {
     >
       <Form>{children}</Form>
     </Formik>
-  )
+  );
 }
 
-export default BaseForm
+export default BaseForm;

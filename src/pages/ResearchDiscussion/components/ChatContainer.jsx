@@ -1,32 +1,33 @@
-import axios from 'axios'
-import { useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
+import axios from "axios";
+import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 
-import ChatBubble from './ChatBubble'
+import ChatBubble from "./ChatBubble";
 
-const ChatContainer = () => {
-  const [allMessages, setAllMessages] = useState([])
-  const endMessage = useRef(null)
+function ChatContainer() {
+  const [allMessages, setAllMessages] = useState([]);
+  const endMessage = useRef(null);
 
-  const { chat: chatId } = useSelector(({ selectedTeamId, acceptedTeams }) => {
-    return acceptedTeams.data.find(({ _id }) => _id === selectedTeamId)
-  })
+  const { chat: chatId } = useSelector(({ selectedTeamId, acceptedTeams }) =>
+    acceptedTeams.data.find(({ _id }) => _id === selectedTeamId),
+  );
 
   useEffect(() => {
     async function fetchAllMessages() {
       try {
-        const { data } = await axios.get(`/api/chat/${chatId}`)
-        console.log(data)
-        setAllMessages(data)
+        const { data } = await axios.get(`/api/chat/${chatId}`);
+        console.log(data);
+        setAllMessages(data);
+        // eslint-disable-next-line no-empty
       } catch (_) {}
     }
 
-    fetchAllMessages()
-  }, [])
+    fetchAllMessages();
+  }, []);
 
   useEffect(() => {
-    endMessage.current?.scrollIntoView()
-  })
+    endMessage.current?.scrollIntoView();
+  });
 
   return (
     <div className="h-7/8 mx-auto w-full overflow-y-scroll px-4 sm:px-6 md:px-14">
@@ -37,7 +38,7 @@ const ChatContainer = () => {
         <div ref={endMessage} />
       </div>
     </div>
-  )
+  );
 }
 
-export default ChatContainer
+export default ChatContainer;

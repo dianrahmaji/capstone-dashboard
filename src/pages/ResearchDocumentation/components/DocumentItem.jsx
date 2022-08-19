@@ -1,9 +1,15 @@
-import { Link } from 'react-router-dom'
-import * as ContextMenu from '@radix-ui/react-context-menu'
-import { DocumentTextIcon, FolderIcon, PencilAltIcon, TrashIcon } from '@heroicons/react/outline'
+import { Link } from "react-router-dom";
+import * as ContextMenu from "@radix-ui/react-context-menu";
+import {
+  DocumentTextIcon,
+  FolderIcon,
+  PencilAltIcon,
+  TrashIcon,
+} from "@heroicons/react/outline";
 
-const DocumentItem = ({ type, onRename }) => {
+function DocumentItem({ type, onRename }) {
   return (
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <Link
       to="#"
       className="max-w-md rounded-md hover:ring-2 hover:ring-primary hover:ring-offset-2 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
@@ -11,7 +17,7 @@ const DocumentItem = ({ type, onRename }) => {
       <ContextMenu.Root>
         <ContextMenu.Trigger>
           <div className="flex flex-col items-center justify-center ">
-            {type === 'file' ? (
+            {type === "file" ? (
               <DocumentTextIcon className="h-24 w-24 stroke-1 text-primary" />
             ) : (
               <FolderIcon className="h-24 w-24 stroke-1 text-primary" />
@@ -25,7 +31,7 @@ const DocumentItem = ({ type, onRename }) => {
         >
           <ContextMenu.Item
             className="cursor-base flex h-8 w-full flex-shrink-0 items-center px-3 text-left text-sm focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-700"
-            onClick={() => onRename({ documentName: 'Dian Rahmaji Dokumen' })}
+            onClick={() => onRename({ documentName: "Dian Rahmaji Dokumen" })}
           >
             <PencilAltIcon className="mr-2 h-6 w-6" />
             <span className="mr-2 flex-1">Rename</span>
@@ -37,7 +43,7 @@ const DocumentItem = ({ type, onRename }) => {
         </ContextMenu.Content>
       </ContextMenu.Root>
     </Link>
-  )
+  );
 }
 
-export default DocumentItem
+export default DocumentItem;

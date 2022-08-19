@@ -1,14 +1,14 @@
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 
 const getProfileFromFullName = (fullName) => {
-  const names = fullName.split(' ')
+  const names = fullName.split(" ");
 
-  if (names.length < 2) return fullName.slice(0, 2).toUpperCase()
-  return `${names[0][0]}${names[1][0]}`
-}
+  if (names.length < 2) return fullName.slice(0, 2).toUpperCase();
+  return `${names[0][0]}${names[1][0]}`;
+};
 
-const DetailProfile = () => {
-  const { data: user } = useSelector((state) => state.user)
+function DetailProfile() {
+  const { data: user } = useSelector((state) => state.user);
 
   return (
     <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 md:px-8">
@@ -45,7 +45,7 @@ const DetailProfile = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default DetailProfile
+export default DetailProfile;
