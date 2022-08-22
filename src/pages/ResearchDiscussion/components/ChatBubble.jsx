@@ -6,7 +6,6 @@ function ChatBubble({ message }) {
   const {
     data: { _id: userId },
   } = useSelector((data) => data.user);
-  console.log(userId, message.sender._id);
 
   return (
     <div

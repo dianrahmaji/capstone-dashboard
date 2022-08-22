@@ -1,0 +1,5 @@
+export const LOADING_CHAT_LOG = "LOADING_CHAT_LOG";
+export const FETCH_CHAT_LOG = "FETCH_CHAT_LOG";
+export const UPDATE_CHAT_LOG = "UPDATE_CHAT_LOG";
+export const SET_CHAT_ROOM_ID = "SET_CHAT_ROOM_ID";
+export const ERROR_CHAT_ROOM = "ERROR_CHAT_ROOM";

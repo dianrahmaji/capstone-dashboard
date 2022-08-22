@@ -1,38 +1,30 @@
-import axios from "axios";
-import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { fetchChatLog } from "~/store/actions/chatActions";
 
 import ChatBubble from "./ChatBubble";
 
 function ChatContainer() {
-  const [allMessages, setAllMessages] = useState([]);
   const endMessage = useRef(null);
+  const dispatch = useDispatch();
 
-  const { chat: chatId } = useSelector(({ selectedTeamId, acceptedTeams }) =>
-    acceptedTeams.data.find(({ _id }) => _id === selectedTeamId),
-  );
+  const {
+    data: { roomId, log },
+  } = useSelector((state) => state.chat);
 
   useEffect(() => {
-    async function fetchAllMessages() {
-      try {
-        const { data } = await axios.get(`/api/chat/${chatId}`);
-        console.log(data);
-        setAllMessages(data);
-        // eslint-disable-next-line no-empty
-      } catch (_) {}
-    }
-
-    fetchAllMessages();
-  }, []);
+    dispatch(fetchChatLog(roomId));
+  }, [dispatch, roomId]);
 
   useEffect(() => {
     endMessage.current?.scrollIntoView();
   });
 
   return (
-    <div className="h-7/8 mx-auto w-full overflow-y-scroll px-4 sm:px-6 md:px-14">
+    <div className="mx-auto h-5/6 w-full overflow-y-scroll px-4 sm:px-6 md:px-14">
       <div className="flex flex-col">
-        {allMessages.map((m) => (
+        {log.map((m) => (
           <ChatBubble key={m._id} message={m} />
         ))}
         <div ref={endMessage} />

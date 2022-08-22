@@ -28,8 +28,8 @@ function NavigationBarDesktop() {
     setSelectedTeam(acceptedTeams.find(({ _id }) => _id === selectedTeamId));
   }, [selectedTeamId, acceptedTeams]);
 
-  const handleSelectTeam = ({ _id }) => {
-    dispatch(selectTeam(_id));
+  const handleSelectTeam = (team) => {
+    dispatch(selectTeam(team));
   };
 
   const handleLogout = () => {
@@ -38,8 +38,8 @@ function NavigationBarDesktop() {
 
   return (
     <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
-      <div className="flex flex-grow flex-col overflow-y-auto bg-primary pt-5">
-        <div className="flex flex-shrink-0 items-center px-4">
+      <div className="flex grow flex-col overflow-y-auto bg-primary pt-5">
+        <div className="flex shrink-0 items-center px-4">
           <img
             className="h-8 w-auto"
             src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"

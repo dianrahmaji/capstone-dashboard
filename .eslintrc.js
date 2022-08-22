@@ -30,7 +30,7 @@ module.exports = {
     "react/jsx-props-no-spreading": "off",
     // allow jsx syntax in js files (for next.js project)
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }], // should add ".ts" if typescript project
-    "react/prop-types": "warn",
+    "react/prop-types": "off",
     "no-shadow": "off",
     "no-underscore-dangle": "off",
     "import/no-unresolved": "off", // TODO: fix this

@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import { userReducer } from "./reducers/userReducers";
+import { chatReducer } from "./reducers/chatReducers";
 import {
   teamsReducer,
   acceptedTeamsReducer,
@@ -14,11 +15,12 @@ import {
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "selectedTeamId", "acceptedTeams"],
+  whitelist: ["user", "chat", "selectedTeamId", "acceptedTeams"],
 };
 
 const reducer = combineReducers({
   user: userReducer,
+  chat: chatReducer,
   teams: teamsReducer,
   acceptedTeams: acceptedTeamsReducer,
   selectedTeamId: selectedTeamIdReducer,
