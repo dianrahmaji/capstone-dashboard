@@ -1,12 +1,10 @@
-import { useSelector } from "react-redux";
 import { InformationCircleIcon } from "@heroicons/react/outline";
 
 import BaseIconButton from "~/components/generic/button/BaseIconButton";
+import useSelectedTeam from "~/hooks/useSelectedTeam";
 
 function DiscussionHeader({ setOpen }) {
-  const teamDetail = useSelector(({ selectedTeamId, acceptedTeams }) =>
-    acceptedTeams.data.find(({ _id }) => _id === selectedTeamId),
-  );
+  const teamDetail = useSelectedTeam();
 
   return (
     <div className="mx-auto w-full px-4 sm:px-6 md:px-8">

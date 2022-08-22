@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import { Fragment } from "react";
-import { useSelector } from "react-redux";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 
 import { toLocaleFormat } from "~/utils/date";
+import useSelectedTeam from "~/hooks/useSelectedTeam";
 
 const getProfileFromFullName = (fullName) => {
   const names = fullName.split(" ");
@@ -14,9 +14,7 @@ const getProfileFromFullName = (fullName) => {
 };
 
 export default function TeamInfo({ open, setOpen }) {
-  const data = useSelector(({ selectedTeamId, acceptedTeams }) =>
-    acceptedTeams.data.find(({ _id }) => _id === selectedTeamId),
-  );
+  const team = useSelectedTeam();
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -36,7 +34,7 @@ export default function TeamInfo({ open, setOpen }) {
                 leaveTo="translate-x-full"
               >
                 <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                  {data && (
+                  {team && (
                     <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                       <div className="p-6">
                         <div className="flex items-start justify-between">
@@ -64,7 +62,7 @@ export default function TeamInfo({ open, setOpen }) {
                                 <div>
                                   <div className="flex items-center">
                                     <h3 className="text-xl font-bold text-gray-900 sm:text-2xl">
-                                      {data.name}
+                                      {team.name}
                                     </h3>
                                   </div>
                                 </div>
@@ -72,10 +70,10 @@ export default function TeamInfo({ open, setOpen }) {
                             </div>
                           </div>
                         </div>
-                        <div className="px-4 pt-5 pb-5 sm:px-0 sm:pt-0">
+                        <div className="px-4 py-5 sm:px-0 sm:pt-0">
                           <dl className="space-y-8 px-4 sm:space-y-6 sm:px-6">
                             <div>
-                              <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                              <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
                                 Description
                               </dt>
                               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
@@ -83,21 +81,21 @@ export default function TeamInfo({ open, setOpen }) {
                                 <div
                                   className="prose"
                                   dangerouslySetInnerHTML={{
-                                    __html: data?.repository?.description,
+                                    __html: team?.repository?.description,
                                   }}
                                 />
                               </dd>
                             </div>
                             <div>
-                              <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                              <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
                                 Major
                               </dt>
                               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                {data?.administrator?.faculty}
+                                {team?.administrator?.faculty}
                               </dd>
                             </div>
                             <div>
-                              <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                              <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
                                 Topic
                               </dt>
                               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
@@ -105,16 +103,16 @@ export default function TeamInfo({ open, setOpen }) {
                               </dd>
                             </div>
                             <div>
-                              <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                              <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
                                 Date
                               </dt>
                               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                <time dateTime={data?.repository?.startDate}>
-                                  {toLocaleFormat(data?.repository?.startDate)}
+                                <time dateTime={team?.repository?.startDate}>
+                                  {toLocaleFormat(team?.repository?.startDate)}
                                 </time>{" "}
                                 -{" "}
-                                <time dateTime={data?.repository?.endDate}>
-                                  {toLocaleFormat(data?.repository?.startDate)}
+                                <time dateTime={team?.repository?.endDate}>
+                                  {toLocaleFormat(team?.repository?.startDate)}
                                 </time>
                               </dd>
                             </div>
@@ -122,12 +120,12 @@ export default function TeamInfo({ open, setOpen }) {
                         </div>
                       </div>
                       <div className="px-4 sm:px-6">
-                        <div className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                        <div className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
                           Members
                         </div>
                         <ul className="flex-1 divide-y divide-gray-200 overflow-y-auto">
-                          {data &&
-                            [...data.members, data.administrator].map(
+                          {team &&
+                            [...team.members, team.administrator].map(
                               (person) => (
                                 <li key={person._id}>
                                   <div className="group relative flex items-center py-6 px-5">
@@ -141,7 +139,7 @@ export default function TeamInfo({ open, setOpen }) {
                                         aria-hidden="true"
                                       />
                                       <div className="relative flex min-w-0 flex-1 items-center">
-                                        <span className="relative inline-block flex-shrink-0">
+                                        <span className="relative inline-block shrink-0">
                                           {person.pictureUrl ? (
                                             <img
                                               className="h-10 w-10 rounded-full"

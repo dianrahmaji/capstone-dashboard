@@ -2,24 +2,23 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import BaseButton from "~/components/generic/button/BaseButton";
+import useSelectedTeam from "~/hooks/useSelectedTeam";
 import { toYupFormat, toLocaleFormat } from "~/utils/date";
 import RepositoryEditModal from "./RepositoryEditModal";
 
 function RepositoryDetails() {
   const [openDialog, setOpenDialog] = useState(false);
 
-  const detail = useSelector(({ selectedTeamId, acceptedTeams }) =>
-    acceptedTeams.data.find(({ _id }) => _id === selectedTeamId),
-  );
+  const team = useSelectedTeam();
 
-  const { repository, ...rest } = detail;
+  const { repository, ...rest } = team;
 
   const { data } = useSelector((state) => state.user);
 
   return (
     <>
       <h1 className="mt-3 text-2xl font-semibold text-gray-900">
-        {detail?.name}
+        {team?.name}
       </h1>
       <div className="my-6 ml-4 flex flex-col">
         <div className="text-lg font-medium">Topic</div>
@@ -27,19 +26,19 @@ function RepositoryDetails() {
         <div>Information System, Web Development, Knowledge Management</div>
         <div className="mt-5 text-lg  font-medium">Time</div>
         <div>
-          <time dateTime={detail?.repository?.startDate}>
-            {toLocaleFormat(detail?.repository?.startDate)}
+          <time dateTime={team?.repository?.startDate}>
+            {toLocaleFormat(team?.repository?.startDate)}
           </time>{" "}
           -{" "}
-          <time dateTime={detail?.repository?.endDate}>
-            {toLocaleFormat(detail?.repository?.endDate)}
+          <time dateTime={team?.repository?.endDate}>
+            {toLocaleFormat(team?.repository?.endDate)}
           </time>
         </div>
         <div className="mt-5 text-lg  font-medium">Description</div>
         <div
-          dangerouslySetInnerHTML={{ __html: detail?.repository?.description }}
+          dangerouslySetInnerHTML={{ __html: team?.repository?.description }}
         />
-        {data?._id === detail?.administrator?._id && (
+        {data?._id === team?.administrator?._id && (
           <BaseButton className="ml-auto" onClick={() => setOpenDialog(true)}>
             Edit
           </BaseButton>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PencilAltIcon, PlusSmIcon, TrashIcon } from "@heroicons/react/outline";
 
+import useSelectedTeam from "~/hooks/useSelectedTeam";
 import { deleteTeamMember } from "~/store/actions/teamActions";
 
 import BaseIconButton from "~/components/generic/button/BaseIconButton";
@@ -19,15 +20,7 @@ function MemberTable() {
 
   const dispatch = useDispatch();
 
-  const selectedTeamId = useSelector((state) => state.selectedTeamId);
-  const {
-    _id: teamId,
-    members,
-    administrator,
-  } = useSelector((state) =>
-    state.acceptedTeams.data.find(({ _id }) => _id === selectedTeamId),
-  );
-
+  const { _id: teamId, members, administrator } = useSelectedTeam();
   const { data, loading } = useSelector((state) => state.user);
 
   // const handleEdit = (m) => {
