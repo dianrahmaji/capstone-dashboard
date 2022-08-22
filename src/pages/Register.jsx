@@ -53,7 +53,7 @@ function Register() {
     <div className="flex min-h-screen flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
-          <LockClosedIcon className="h-108 w-10 text-primary" />
+          <LockClosedIcon className="h-10 w-10 text-primary" />
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Sign in to your account

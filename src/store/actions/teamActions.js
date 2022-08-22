@@ -111,8 +111,10 @@ export const fetchAcceptedTeams = (id) => async (dispatch, getState) => {
 
 export const addTeamMember = (payload) => async (dispatch) => {
   try {
+    const { teamId, researcher, role } = payload;
+
     await axios.put(
-      `/api/team/${payload.teamId}/member/${payload.researcher._id}`,
+      `/api/team/${teamId}/member/${researcher._id}?role=${role}`,
     );
 
     dispatch({ type: ADD_TEAM_MEMBER, payload });

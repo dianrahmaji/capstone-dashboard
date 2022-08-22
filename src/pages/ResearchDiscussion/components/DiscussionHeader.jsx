@@ -4,7 +4,7 @@ import BaseIconButton from "~/components/generic/button/BaseIconButton";
 import useSelectedTeam from "~/hooks/useSelectedTeam";
 
 function DiscussionHeader({ setOpen }) {
-  const teamDetail = useSelectedTeam();
+  const team = useSelectedTeam();
 
   return (
     <div className="mx-auto w-full px-4 sm:px-6 md:px-8">
@@ -12,29 +12,28 @@ function DiscussionHeader({ setOpen }) {
         <div className="-ml-4 -mt-4 flex flex-wrap items-center justify-between sm:flex-nowrap">
           <div className="ml-4 mt-4">
             <div className="flex items-center">
-              {teamDetail && (
+              {team && (
                 <div className="ml-4">
                   <h3 className="text-lg font-medium leading-6 text-gray-900">
-                    {teamDetail.name}
+                    {team.name}
                   </h3>
+
                   <p className="mt-2 text-sm text-gray-500">
-                    {teamDetail.members.length
-                      ? [
-                          teamDetail.administrator,
-                          ...teamDetail.members,
-                        ].reduce(
-                          (prev, curr) =>
-                            `${prev?.fullName}, ${curr?.fullName}`,
-                        )
-                      : teamDetail.administrator.fullName}
+                    {team.members.reduce(
+                      (prev, curr) =>
+                        prev === undefined
+                          ? curr.fullName
+                          : `${prev} , ${curr.fullName}`,
+                      undefined,
+                    )}
                   </p>
                 </div>
               )}
             </div>
           </div>
-          <div className="ml-4 mt-4 flex flex-shrink-0">
+          <div className="ml-4 mt-4 flex shrink-0">
             <BaseIconButton secondary onClick={() => setOpen(true)}>
-              <InformationCircleIcon className="h6 w-6" />
+              <InformationCircleIcon className="h-6 w-6" />
             </BaseIconButton>
           </div>
         </div>

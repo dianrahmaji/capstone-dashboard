@@ -7,11 +7,12 @@ import debounce from "lodash.debounce";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { Combobox } from "@headlessui/react";
 
-import { researcher } from "~/utils/validation";
+import { researcher, role } from "~/utils/validation";
 
 import BaseButton from "~/components/generic/button/BaseButton";
 import BaseModal from "~/components/generic/modal/BaseModal";
 import { addTeamMember } from "~/store/actions/teamActions";
+import BaseSelect from "~/components/generic/form/BaseSelect";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -148,6 +149,7 @@ function MemberAddModal({ open, setOpen, members, teamId }) {
       addTeamMember({
         teamId,
         researcher: researchers.find(({ _id }) => _id === values.researcher),
+        role: values.role,
       }),
     );
 
@@ -158,9 +160,8 @@ function MemberAddModal({ open, setOpen, members, teamId }) {
   return (
     <BaseModal title="Add Member" open={open} setOpen={setOpen}>
       <Formik
-        initialValues={{ researcher: "" }}
-        validationSchema={Yup.object({ researcher: "" })}
-        validation={{ researcher }}
+        initialValues={{ researcher: "", role: "" }}
+        validationSchema={Yup.object({ researcher, role })}
         onSubmit={handleSubmit}
       >
         <Form>
@@ -174,6 +175,13 @@ function MemberAddModal({ open, setOpen, members, teamId }) {
             setQuery={handleQuery}
             members={members}
           />
+          <BaseSelect label="Role" name="role">
+            <option value="" disabled defaultValue>
+              Select role
+            </option>
+            <option value="administrator">Administrator</option>
+            <option value="researcher">Researcher</option>
+          </BaseSelect>
           <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
             <BaseButton
               type="submit"

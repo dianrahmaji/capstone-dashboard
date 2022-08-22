@@ -5,6 +5,8 @@ import { PencilAltIcon, PlusSmIcon, TrashIcon } from "@heroicons/react/outline";
 import useSelectedTeam from "~/hooks/useSelectedTeam";
 import { deleteTeamMember } from "~/store/actions/teamActions";
 
+import isAdmin from "~/utils/isAdmin";
+
 import BaseIconButton from "~/components/generic/button/BaseIconButton";
 import BaseTable from "~/components/generic/table/BaseTable";
 import BaseTableItem from "~/components/generic/table/BaseTableItem";
@@ -20,7 +22,7 @@ function MemberTable() {
 
   const dispatch = useDispatch();
 
-  const { _id: teamId, members, administrator } = useSelectedTeam();
+  const { _id: teamId, members, administrators } = useSelectedTeam();
   const { data, loading } = useSelector((state) => state.user);
 
   // const handleEdit = (m) => {
@@ -38,22 +40,20 @@ function MemberTable() {
     <div>
       <h2 className="mt-3 text-xl font-medium">Research Member</h2>
       <BaseTable
-        header={[...header, data?._id === administrator?._id && "Action"]}
+        header={[...header, isAdmin(data._id, administrators) && "Action"]}
         loading={loading}
       >
-        <tr key={administrator?._id}>
-          <BaseTableItem>{administrator?.fullName}</BaseTableItem>
-          <BaseTableItem>{administrator?.faculty}</BaseTableItem>
-          <BaseTableItem>{administrator?.accountType}</BaseTableItem>
-          <BaseTableItem>Administrator</BaseTableItem>
-        </tr>
         {members &&
           members.map((m) => (
             <tr key={m._id}>
               <BaseTableItem>{m.fullName}</BaseTableItem>
               <BaseTableItem>{m.faculty}</BaseTableItem>
               <BaseTableItem>{m.accountType}</BaseTableItem>
-              <BaseTableItem>Researcher</BaseTableItem>
+              <BaseTableItem>
+                {isAdmin(m._id, administrators)
+                  ? "Administrator"
+                  : "Researcher"}
+              </BaseTableItem>
               <BaseTableItem className="relative flex gap-2">
                 <PencilAltIcon
                   className="h-6 w-6 rounded-md text-gray-400 hover:cursor-pointer hover:text-blue-700"
@@ -67,7 +67,7 @@ function MemberTable() {
             </tr>
           ))}
       </BaseTable>
-      {data?._id === administrator?._id && (
+      {isAdmin(data._id, administrators) && (
         <div className="mt-3 flex justify-end px-8">
           <BaseIconButton onClick={() => setOpenAddDialog(true)}>
             <PlusSmIcon className="h-6 w-6" aria-hidden="true" />
@@ -77,7 +77,7 @@ function MemberTable() {
       <MemberAddModal
         open={openAddDialog}
         setOpen={setOpenAddDialog}
-        members={[...members, administrator].map((m) => m?._id)}
+        members={members.map((m) => m?._id)}
         teamId={teamId}
         setTeamDetail={setTeamDetail}
       />

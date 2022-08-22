@@ -5,6 +5,7 @@ import { XIcon } from "@heroicons/react/outline";
 
 import { toLocaleFormat } from "~/utils/date";
 import useSelectedTeam from "~/hooks/useSelectedTeam";
+import isAdmin from "~/utils/isAdmin";
 
 const getProfileFromFullName = (fullName) => {
   const names = fullName.split(" ");
@@ -15,6 +16,8 @@ const getProfileFromFullName = (fullName) => {
 
 export default function TeamInfo({ open, setOpen }) {
   const team = useSelectedTeam();
+
+  const { repository, members, administrators } = team;
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -81,17 +84,9 @@ export default function TeamInfo({ open, setOpen }) {
                                 <div
                                   className="prose"
                                   dangerouslySetInnerHTML={{
-                                    __html: team?.repository?.description,
+                                    __html: repository?.description,
                                   }}
                                 />
-                              </dd>
-                            </div>
-                            <div>
-                              <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-                                Major
-                              </dt>
-                              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                {team?.administrator?.faculty}
                               </dd>
                             </div>
                             <div>
@@ -107,12 +102,12 @@ export default function TeamInfo({ open, setOpen }) {
                                 Date
                               </dt>
                               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                <time dateTime={team?.repository?.startDate}>
-                                  {toLocaleFormat(team?.repository?.startDate)}
+                                <time dateTime={repository?.startDate}>
+                                  {toLocaleFormat(repository?.startDate)}
                                 </time>{" "}
                                 -{" "}
-                                <time dateTime={team?.repository?.endDate}>
-                                  {toLocaleFormat(team?.repository?.startDate)}
+                                <time dateTime={repository?.endDate}>
+                                  {toLocaleFormat(repository?.startDate)}
                                 </time>
                               </dd>
                             </div>
@@ -124,66 +119,62 @@ export default function TeamInfo({ open, setOpen }) {
                           Members
                         </div>
                         <ul className="flex-1 divide-y divide-gray-200 overflow-y-auto">
-                          {team &&
-                            [...team.members, team.administrator].map(
-                              (person) => (
-                                <li key={person._id}>
-                                  <div className="group relative flex items-center py-6 px-5">
-                                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                    <a
-                                      href="#"
-                                      className="-m-1 block flex-1 p-1"
-                                    >
-                                      <div
-                                        className="absolute inset-0 group-hover:bg-gray-50"
-                                        aria-hidden="true"
-                                      />
-                                      <div className="relative flex min-w-0 flex-1 items-center">
-                                        <span className="relative inline-block shrink-0">
-                                          {person.pictureUrl ? (
-                                            <img
-                                              className="h-10 w-10 rounded-full"
-                                              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                              alt=""
-                                            />
-                                          ) : (
-                                            <div className="my-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
-                                              <div className=" text-sm text-primary">
-                                                {getProfileFromFullName(
-                                                  person.fullName,
-                                                )}
-                                              </div>
-                                            </div>
-                                          )}
-
-                                          <span
-                                            className={clsx(
-                                              {
-                                                "bg-green-400":
-                                                  person.status === "online",
-                                                "bg-gray-300":
-                                                  person.status !== "online",
-                                              },
-
-                                              "absolute top-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white",
-                                            )}
-                                            aria-hidden="true"
+                          {members &&
+                            members.map((person) => (
+                              <li key={person._id}>
+                                <div className="group relative flex items-center py-6 px-5">
+                                  {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                                  <a href="#" className="-m-1 block flex-1 p-1">
+                                    <div
+                                      className="absolute inset-0 group-hover:bg-gray-50"
+                                      aria-hidden="true"
+                                    />
+                                    <div className="relative flex min-w-0 flex-1 items-center">
+                                      <span className="relative inline-block shrink-0">
+                                        {person.pictureUrl ? (
+                                          <img
+                                            className="h-10 w-10 rounded-full"
+                                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                            alt=""
                                           />
-                                        </span>
-                                        <div className="ml-4 truncate">
-                                          <p className="truncate text-sm font-medium text-gray-900">
-                                            {person.fullName}
-                                          </p>
-                                          <p className="truncate text-sm text-gray-500">
-                                            {`@${person.fullName}`}
-                                          </p>
-                                        </div>
+                                        ) : (
+                                          <div className="my-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
+                                            <div className=" text-sm text-primary">
+                                              {getProfileFromFullName(
+                                                person.fullName,
+                                              )}
+                                            </div>
+                                          </div>
+                                        )}
+
+                                        <span
+                                          className={clsx(
+                                            {
+                                              "bg-green-400":
+                                                person.status === "online",
+                                              "bg-gray-300":
+                                                person.status !== "online",
+                                            },
+
+                                            "absolute top-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white",
+                                          )}
+                                          aria-hidden="true"
+                                        />
+                                      </span>
+                                      <div className="ml-4 truncate">
+                                        <p className="truncate text-sm font-medium text-gray-900">
+                                          {person.fullName}{" "}
+                                          {isAdmin(person._id, administrators)}
+                                        </p>
+                                        <p className="truncate text-sm text-gray-500">
+                                          {`${person.email}`}
+                                        </p>
                                       </div>
-                                    </a>
-                                  </div>
-                                </li>
-                              ),
-                            )}
+                                    </div>
+                                  </a>
+                                </div>
+                              </li>
+                            ))}
                         </ul>
                       </div>
                     </div>
