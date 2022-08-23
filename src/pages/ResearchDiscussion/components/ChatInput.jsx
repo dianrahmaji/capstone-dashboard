@@ -2,13 +2,13 @@ import { useState } from "react";
 import { PaperClipIcon } from "@heroicons/react/outline";
 import { PaperAirplaneIcon } from "@heroicons/react/solid";
 
-import useWebSocket from "~/hooks/useWebSocket";
+import useChat from "~/hooks/useChat";
 import BaseIconButton from "~/components/generic/button/BaseIconButton";
 
 function ChatInput() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const { sendMessage } = useWebSocket();
+  const { sendMessage } = useChat();
 
   const handleSubmit = async (e) => {
     if (e.key && !(e.key === "Enter")) {

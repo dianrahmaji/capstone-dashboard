@@ -5,9 +5,9 @@ import io from "socket.io-client";
 
 import { updateChatLog } from "~/store/actions/chatActions";
 
-export const WebSocketContext = createContext(undefined);
+export const ChatContext = createContext(undefined);
 
-export default function WebSocketProvider({ children }) {
+export default function ChatProvider({ children }) {
   const socketRef = useRef(undefined);
   const dispatch = useDispatch();
   const {
@@ -38,25 +38,23 @@ export default function WebSocketProvider({ children }) {
       socketRef.current = io(import.meta.env.VITE_BASE_URL);
     }
 
-    return () => socketRef.current.disconnect();
+    return () => socketRef.current?.disconnect();
   }, [_id]);
 
   useEffect(() => {
-    socketRef.current.emit("join_room", roomId);
+    if (_id) {
+      socketRef.current.emit("join_room", roomId);
 
-    socketRef.current.on("receive_message", (message) => {
-      dispatch(updateChatLog(message));
-    });
-  }, [dispatch, roomId]);
+      socketRef.current.on("receive_message", (message) => {
+        dispatch(updateChatLog(message));
+      });
+    }
+  }, [dispatch, roomId, _id]);
 
   const value = {
     socket: socketRef.current,
     sendMessage,
   };
 
-  return (
-    <WebSocketContext.Provider value={value}>
-      {children}
-    </WebSocketContext.Provider>
-  );
+  return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
 }
