@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { resetNotification } from "~/store/actions/notificationActions";
 import { fetchChatLog } from "~/store/actions/chatActions";
 
 import ChatBubble from "./ChatBubble";
@@ -10,16 +11,20 @@ function ChatContainer() {
   const dispatch = useDispatch();
 
   const {
+    data: { _id: userId },
+  } = useSelector((state) => state.user);
+  const {
     data: { roomId, log },
   } = useSelector((state) => state.chat);
 
   useEffect(() => {
     dispatch(fetchChatLog(roomId));
-  }, [dispatch, roomId]);
+    dispatch(resetNotification(userId, roomId));
+  }, [dispatch, userId, roomId]);
 
   useEffect(() => {
     endMessage.current?.scrollIntoView();
-  });
+  }, []);
 
   return (
     <div className="mx-auto h-5/6 w-full overflow-y-scroll px-4 sm:px-6 md:px-14">

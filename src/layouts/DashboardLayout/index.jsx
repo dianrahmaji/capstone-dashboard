@@ -6,6 +6,7 @@ import NavigationBar from "./components/NavigationBar";
 
 function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const navigate = useNavigate();
 
   const {

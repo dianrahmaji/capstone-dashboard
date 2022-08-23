@@ -1,5 +1,4 @@
 /* eslint-disable import/prefer-default-export, default-param-last */
-
 import {
   ERROR_CHAT_ROOM,
   FETCH_CHAT_LOG,

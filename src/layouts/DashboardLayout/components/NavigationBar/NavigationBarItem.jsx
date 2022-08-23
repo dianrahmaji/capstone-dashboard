@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
 
-function NavigationBarItem({ name, path, icon: NavIcon }) {
+function NavigationBarItem({ name, path, icon: NavIcon, notification = 0 }) {
   const { pathname } = useLocation();
 
   return (
@@ -9,15 +9,22 @@ function NavigationBarItem({ name, path, icon: NavIcon }) {
       key={name}
       to={path}
       className={clsx(
-        "group flex items-center rounded-md px-2 py-2 text-base font-medium text-white hover:text-secondary",
+        "flex items-center justify-between rounded-md p-2 text-base font-medium text-white hover:text-secondary",
         {
           "bg-primary hover:bg-accent": pathname !== path,
           "bg-accent font-bold": pathname === path,
         },
       )}
     >
-      <NavIcon className="mr-4 h-6 w-6 flex-shrink-0 " aria-hidden="true" />
-      {name}
+      <div className="flex items-center">
+        <NavIcon className="mr-4 h-6 w-6 shrink-0 " aria-hidden="true" />
+        {name}
+      </div>
+      {notification !== 0 && (
+        <span className="rounded-full bg-red-400 px-2 !text-white">
+          {notification}
+        </span>
+      )}
     </Link>
   );
 }

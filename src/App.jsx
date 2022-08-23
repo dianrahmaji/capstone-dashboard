@@ -1,18 +1,33 @@
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import createAxios from "./config/axios";
 import dashboard from "~/config/dashboard";
+
+import { fetchNotifications } from "~/store/actions/notificationActions";
 
 import Login from "~/pages/Login";
 import Register from "~/pages/Register";
 
 function App() {
+  const dispatch = useDispatch();
+
   const {
-    data: { token },
+    data: { _id: memberId, token },
   } = useSelector((state) => state.user);
 
+  const {
+    data: { roomId },
+  } = useSelector((state) => state.chat);
+
   createAxios(token);
+
+  useEffect(() => {
+    if (token) {
+      dispatch(fetchNotifications(memberId, roomId));
+    }
+  });
 
   return (
     <Routes>

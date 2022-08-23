@@ -16,6 +16,7 @@ function NavigationBarDesktop() {
 
   const { data: acceptedTeams } = useSelector((state) => state.acceptedTeams);
   const selectedTeamId = useSelector((state) => state.selectedTeamId);
+  const { data: notification } = useSelector((state) => state.notification);
 
   const filteredTeams =
     query === ""
@@ -55,9 +56,17 @@ function NavigationBarDesktop() {
               filteredItem={filteredTeams}
               setQuery={setQuery}
             />
-            {dashboard.map(({ navigation }) => (
-              <NavigationBarItem {...navigation} key={navigation.name} />
-            ))}
+            {dashboard.map(({ navigation }) => {
+              return navigation.path === "/discussion" ? (
+                <NavigationBarItem
+                  {...navigation}
+                  key={navigation.name}
+                  notification={notification}
+                />
+              ) : (
+                <NavigationBarItem {...navigation} key={navigation.name} />
+              );
+            })}
             <div className="pt-3">
               <NavigationBarItem
                 name="Keluar"
