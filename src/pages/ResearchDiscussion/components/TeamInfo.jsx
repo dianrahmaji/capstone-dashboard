@@ -5,7 +5,6 @@ import { XIcon } from "@heroicons/react/outline";
 
 import { toLocaleFormat } from "~/utils/date";
 import useSelectedTeam from "~/hooks/useSelectedTeam";
-import isAdmin from "~/utils/isAdmin";
 
 const getProfileFromFullName = (fullName) => {
   const names = fullName.split(" ");
@@ -17,7 +16,7 @@ const getProfileFromFullName = (fullName) => {
 export default function TeamInfo({ open, setOpen }) {
   const team = useSelectedTeam();
 
-  const { repository, members, administrators } = team;
+  const { repository, members } = team;
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -162,10 +161,17 @@ export default function TeamInfo({ open, setOpen }) {
                                         />
                                       </span>
                                       <div className="ml-4 truncate">
-                                        <p className="truncate text-sm font-medium text-gray-900">
-                                          {person.fullName}{" "}
-                                          {isAdmin(person._id, administrators)}
-                                        </p>
+                                        <div className="flex shrink-0 justify-between truncate text-sm">
+                                          <span className="font-medium">
+                                            {person.fullName}
+                                          </span>
+                                          &nbsp;
+                                          {person.isAdmin && (
+                                            <span className="text-gray-700">
+                                              (Administrator)
+                                            </span>
+                                          )}
+                                        </div>
                                         <p className="truncate text-sm text-gray-500">
                                           {`${person.email}`}
                                         </p>

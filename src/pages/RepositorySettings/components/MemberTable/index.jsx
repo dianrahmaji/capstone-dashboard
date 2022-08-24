@@ -50,9 +50,7 @@ function MemberTable() {
               <BaseTableItem>{m.faculty}</BaseTableItem>
               <BaseTableItem>{m.accountType}</BaseTableItem>
               <BaseTableItem>
-                {isAdmin(m._id, administrators)
-                  ? "Administrator"
-                  : "Researcher"}
+                {m.isAdmin ? "Administrator" : "Researcher"}
               </BaseTableItem>
               <BaseTableItem className="relative flex gap-2">
                 <PencilAltIcon
