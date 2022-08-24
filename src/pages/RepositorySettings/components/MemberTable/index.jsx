@@ -5,8 +5,6 @@ import { PencilAltIcon, PlusSmIcon, TrashIcon } from "@heroicons/react/outline";
 import useSelectedTeam from "~/hooks/useSelectedTeam";
 import { deleteTeamMember } from "~/store/actions/teamActions";
 
-import isAdmin from "~/utils/isAdmin";
-
 import BaseIconButton from "~/components/generic/button/BaseIconButton";
 import BaseTable from "~/components/generic/table/BaseTable";
 import BaseTableItem from "~/components/generic/table/BaseTableItem";
@@ -22,8 +20,8 @@ function MemberTable() {
 
   const dispatch = useDispatch();
 
-  const { _id: teamId, members, administrators } = useSelectedTeam();
-  const { data, loading } = useSelector((state) => state.user);
+  const { _id: teamId, members, isAdmin } = useSelectedTeam();
+  const { loading } = useSelector((state) => state.user);
 
   // const handleEdit = (m) => {
   //   setSelectedMember(m);
@@ -39,10 +37,7 @@ function MemberTable() {
   return (
     <div>
       <h2 className="mt-3 text-xl font-medium">Research Member</h2>
-      <BaseTable
-        header={[...header, isAdmin(data._id, administrators) && "Action"]}
-        loading={loading}
-      >
+      <BaseTable header={[...header, isAdmin && "Action"]} loading={loading}>
         {members &&
           members.map((m) => (
             <tr key={m._id}>
@@ -65,7 +60,7 @@ function MemberTable() {
             </tr>
           ))}
       </BaseTable>
-      {isAdmin(data._id, administrators) && (
+      {isAdmin && (
         <div className="mt-3 flex justify-end px-8">
           <BaseIconButton onClick={() => setOpenAddDialog(true)}>
             <PlusSmIcon className="h-6 w-6" aria-hidden="true" />
