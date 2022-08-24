@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { Form, Formik, useField } from "formik";
 import * as Yup from "yup";
@@ -7,6 +6,7 @@ import debounce from "lodash.debounce";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { Combobox } from "@headlessui/react";
 
+import { userApi } from "~/api";
 import { researcher, role } from "~/utils/validation";
 
 import BaseButton from "~/components/generic/button/BaseButton";
@@ -127,7 +127,7 @@ function MemberAddModal({ open, setOpen, members, teamId }) {
   const dispatch = useDispatch();
 
   const fetchResearchers = async (query) => {
-    const { data } = await axios.get(`/api/user/search?param=${query}`);
+    const { data } = await userApi.searchResearchers(query);
     setResearchers(data);
   };
 

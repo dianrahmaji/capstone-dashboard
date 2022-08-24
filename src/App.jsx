@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import createAxios from "./config/axios";
+import { createAxios } from "~/api";
 import dashboard from "~/config/dashboard";
 
 import { fetchNotifications } from "~/store/actions/notificationActions";

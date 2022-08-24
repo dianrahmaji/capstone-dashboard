@@ -1,4 +1,4 @@
-import axios from "axios";
+import { userApi } from "~/api";
 import MySwal from "~/utils/sweetalert";
 import {
   ERROR_USER,
@@ -12,7 +12,7 @@ export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: LOADING_USER });
 
-    const { data } = await axios.post("/api/user/login", { email, password });
+    const { data } = await userApi.login({ email, password });
 
     dispatch({ type: USER_LOGIN, payload: data });
   } catch (error) {
@@ -37,7 +37,7 @@ export const register =
     try {
       dispatch({ type: LOADING_USER });
 
-      const { data } = await axios.post("/api/user", {
+      const { data } = await userApi.register({
         fullName,
         email,
         userId,

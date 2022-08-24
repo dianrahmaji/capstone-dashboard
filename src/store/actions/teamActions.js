@@ -1,6 +1,5 @@
-import axios from "axios";
+import { teamApi, userApi } from "~/api";
 import { SET_CHAT_ROOM_ID } from "../constants/chatConstants";
-
 import {
   ADD_TEAM_MEMBER,
   CREATE_TEAM,
@@ -21,7 +20,7 @@ export const fetchTeams = (id) => async (dispatch) => {
   try {
     dispatch({ type: LOADING_TEAM });
 
-    const { data } = await axios.get(`/api/user/${id}/team`);
+    const { data } = await userApi.fetchTeams({ id });
 
     dispatch({ type: FETCH_TEAM, payload: data });
   } catch (error) {
@@ -37,7 +36,7 @@ export const fetchTeams = (id) => async (dispatch) => {
 
 export const createTeam = (payload) => async (dispatch) => {
   try {
-    const { data } = await axios.post("/api/team", payload);
+    const { data } = await teamApi.createTeam(payload);
 
     dispatch({
       type: CREATE_TEAM,
@@ -56,7 +55,7 @@ export const createTeam = (payload) => async (dispatch) => {
 
 export const updateTeam = (payload) => async (dispatch) => {
   try {
-    await axios.put(`/api/team/${payload._id}`, payload);
+    await teamApi.updateTeam({ teamId: payload._id }, payload);
 
     dispatch({ type: EDIT_TEAM, payload });
   } catch (error) {
@@ -70,11 +69,11 @@ export const updateTeam = (payload) => async (dispatch) => {
   }
 };
 
-export const deleteTeam = (id) => async (dispatch) => {
+export const deleteTeam = (teamId) => async (dispatch) => {
   try {
-    await axios.delete(`/api/team/${id}`);
+    await teamApi.deleteTeam({ teamId });
 
-    dispatch({ type: DELETE_TEAM, payload: id });
+    dispatch({ type: DELETE_TEAM, payload: teamId });
   } catch (error) {
     dispatch({
       type: ERROR_TEAM,
@@ -90,7 +89,7 @@ export const fetchAcceptedTeams = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: LOADING_ACCEPTED_TEAM });
 
-    const { data } = await axios.get(`/api/user/${id}/team?accepted=true`);
+    const { data } = await userApi.fetchAcceptedTeams({ id });
 
     dispatch({ type: FETCH_ACCEPTED_TEAM, payload: data });
 
@@ -113,9 +112,7 @@ export const addTeamMember = (payload) => async (dispatch) => {
   try {
     const { teamId, researcher, role } = payload;
 
-    await axios.put(
-      `/api/team/${teamId}/member/${researcher._id}?role=${role}`,
-    );
+    await teamApi.addTeamMember({ teamId, researcherId: researcher._id, role });
 
     dispatch({ type: ADD_TEAM_MEMBER, payload });
   } catch (error) {
@@ -133,7 +130,7 @@ export const deleteTeamMember =
   ({ teamId, userId }) =>
   async (dispatch) => {
     try {
-      await axios.delete(`/api/team/${teamId}/member/${userId}`);
+      await teamApi.deleteTeamMember({ teamId, userId });
 
       dispatch({ type: DELETE_TEAM_MEMBER, payload: { userId, teamId } });
     } catch (error) {
@@ -149,7 +146,7 @@ export const deleteTeamMember =
 
 export const updateAcceptedTeam = (payload) => async (dispatch) => {
   try {
-    await axios.put(`/api/team/${payload._id}`, payload);
+    await teamApi.updateAcceptedTeam({ teamId: payload._id }, payload);
 
     dispatch({ type: EDIT_ACCEPTED_TEAM, payload });
   } catch (error) {

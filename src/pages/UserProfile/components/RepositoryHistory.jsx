@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 
-import axios from "axios";
+import { userApi } from "~/api";
+
 import BaseTable from "~/components/generic/table/BaseTable";
 import BaseTableItem from "~/components/generic/table/BaseTableItem";
 
@@ -19,7 +20,7 @@ function RepositoryHistory() {
   useEffect(() => {
     async function fetchTeams() {
       setLoading(true);
-      const { data } = await axios.get(`/api/user/${_id}/team?all=true`);
+      const { data } = await userApi.fetchAllTeams({ id: _id });
       setTeams(data);
       setLoading(false);
     }

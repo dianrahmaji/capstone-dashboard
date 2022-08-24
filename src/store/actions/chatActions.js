@@ -1,4 +1,4 @@
-import axios from "axios";
+import { chatApi } from "~/api";
 import {
   ERROR_CHAT_ROOM,
   FETCH_CHAT_LOG,
@@ -11,7 +11,7 @@ export const fetchChatLog = (roomId) => async (dispatch) => {
   try {
     dispatch({ type: LOADING_CHAT_LOG });
 
-    const { data } = await axios.get(`/api/chat/${roomId}`);
+    const { data } = await chatApi.fetchMessages({ roomId });
 
     dispatch({ type: FETCH_CHAT_LOG, payload: { roomId, log: data } });
   } catch (error) {

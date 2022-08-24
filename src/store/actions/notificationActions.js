@@ -1,5 +1,4 @@
-import axios from "axios";
-
+import { notificationApi } from "~/api";
 import { notification } from "~/utils/soundEffect";
 import {
   LOADING_NOTIFICATION,
@@ -13,9 +12,10 @@ export const fetchNotifications = (memberId, roomId) => async (dispatch) => {
   try {
     dispatch({ type: LOADING_NOTIFICATION });
 
-    const { data } = await axios.get(
-      `/api/notification/${roomId}/member/${memberId}`,
-    );
+    const { data } = await notificationApi.fetchNotifications({
+      roomId,
+      memberId,
+    });
 
     dispatch({ type: FETCH_NOTIFICATION, payload: data.unread_messages });
 
@@ -40,7 +40,7 @@ export const updateNotification = () => (dispatch) => {
 
 export const resetNotification = (memberId, roomId) => async (dispatch) => {
   try {
-    await axios.put(`/api/notification/${roomId}/member/${memberId}`);
+    await notificationApi.resetNotificatons({ roomId, memberId });
 
     dispatch({ type: RESET_NOTIFICATION });
   } catch (error) {
