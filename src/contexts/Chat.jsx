@@ -17,6 +17,7 @@ export default function ChatProvider({ children }) {
   const {
     data: { _id, fullName },
   } = useSelector((state) => state.user);
+  const { data: acceptedTeams } = useSelector((state) => state.acceptedTeams);
 
   const sendMessage = (message) => {
     socketRef.current.emit("send_message", roomId, {
@@ -44,7 +45,7 @@ export default function ChatProvider({ children }) {
   }, [_id]);
 
   useEffect(() => {
-    if (_id) {
+    if (_id && acceptedTeams.length > 0) {
       socketRef.current.emit("join_room", roomId);
 
       socketRef.current.on("receive_message", (message) => {
@@ -52,7 +53,7 @@ export default function ChatProvider({ children }) {
         dispatch(updateNotification());
       });
     }
-  }, [dispatch, roomId, _id]);
+  }, [dispatch, roomId, _id, acceptedTeams]);
 
   const value = {
     socket: socketRef.current,

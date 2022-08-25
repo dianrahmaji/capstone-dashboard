@@ -5,11 +5,16 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function BaseCombobox({ filteredItem, setQuery, ...props }) {
+export default function BaseCombobox({
+  filteredItem,
+  setQuery,
+  label,
+  ...props
+}) {
   return (
     <Combobox as="div" {...props}>
       <Combobox.Label className="block text-sm font-medium text-gray-700">
-        Assigned to
+        {label}
       </Combobox.Label>
       <div className="relative mt-1">
         <Combobox.Input

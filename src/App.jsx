@@ -31,8 +31,8 @@ function App() {
 
   return (
     <Routes>
-      {dashboard.map(({ route, navigation }) => (
-        <Route {...route} key={navigation.name} />
+      {Object.entries(dashboard).map(([key, route]) => (
+        <Route {...route} key={key} />
       ))}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />

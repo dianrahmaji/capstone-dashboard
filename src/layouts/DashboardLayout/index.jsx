@@ -12,10 +12,12 @@ function DashboardLayout({ children }) {
   const {
     data: { token },
   } = useSelector((state) => state.user);
+  const { data: acceptedTeams } = useSelector((state) => state.acceptedTeams);
 
   useEffect(() => {
     if (!token) navigate("/login");
-  }, [token, navigate]);
+    if (token && acceptedTeams.length === 0) navigate("/proposal");
+  }, [token, navigate, acceptedTeams]);
 
   return (
     <div className="min-h-screen">

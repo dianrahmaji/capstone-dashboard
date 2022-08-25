@@ -1,29 +1,10 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { XIcon, LogoutIcon } from "@heroicons/react/outline";
+import { XIcon } from "@heroicons/react/outline";
 
-import dashboard from "~/config/dashboard";
-
-import BaseCombobox from "~/components/generic/form/BaseCombobox";
-import NavigationBarItem from "./NavigationBarItem";
-
-const people = [
-  { id: 1, name: "Leslie Alexander" },
-
-  // More users...
-];
+import NavigationList from "./NavigationList";
 
 function NavigationBarMobile({ sidebarOpen, setSidebarOpen }) {
-  const [query, setQuery] = useState("");
-  const [selectedPerson, setSelectedPerson] = useState();
-
-  const filteredPeople =
-    query === ""
-      ? people
-      : people.filter((person) =>
-          person.name.toLowerCase().includes(query.toLowerCase()),
-        );
-
   return (
     <Transition.Root show={sidebarOpen} as={Fragment}>
       <Dialog
@@ -72,7 +53,7 @@ function NavigationBarMobile({ sidebarOpen, setSidebarOpen }) {
                 </button>
               </div>
             </Transition.Child>
-            <div className="flex flex-shrink-0 items-center px-4">
+            <div className="flex shrink-0 items-center px-4">
               <img
                 className="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
@@ -80,25 +61,11 @@ function NavigationBarMobile({ sidebarOpen, setSidebarOpen }) {
               />
             </div>
             <div className="mt-5 h-0 flex-1 overflow-y-auto">
-              <nav className="space-y-1 px-2">
-                <BaseCombobox
-                  className="mb-4"
-                  value={selectedPerson}
-                  onChange={setSelectedPerson}
-                  filteredPeople={filteredPeople}
-                  setQuery={setQuery}
-                />
-                {dashboard.map(({ navigation }) => (
-                  <NavigationBarItem {...navigation} key={navigation.name} />
-                ))}
-                <div className="pt-3">
-                  <NavigationBarItem name="Keluar" path="#" icon={LogoutIcon} />
-                </div>
-              </nav>
+              <NavigationList />
             </div>
           </div>
         </Transition.Child>
-        <div className="w-14 flex-shrink-0" aria-hidden="true" />
+        <div className="w-14 shrink-0" aria-hidden="true" />
       </Dialog>
     </Transition.Root>
   );

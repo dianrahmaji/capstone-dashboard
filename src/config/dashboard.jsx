@@ -14,47 +14,43 @@ import RepositorySettings from "~/pages/RepositorySettings";
 import RepositoryProposal from "~/pages/RepositoryProposal";
 import UserProfile from "~/pages/UserProfile";
 
-const dashboard = [
-  {
-    route: { path: "/", element: <Home /> },
-    navigation: { name: "Beranda", path: "/", icon: HomeIcon },
+const dashboard = {
+  root: {
+    path: "/",
+    name: "Beranda",
+    icon: HomeIcon,
+    element: <Home />,
   },
-  {
-    route: { path: "/documentation", element: <ResearchDocumentation /> },
-    navigation: {
-      name: "Dokumentasi Penelitian",
-      path: "/documentation",
-      icon: FolderIcon,
-    },
+  documentation: {
+    path: "/documentation",
+    name: "Dokumentasi Penelitian",
+    icon: FolderIcon,
+    element: <ResearchDocumentation />,
   },
-  {
-    route: { path: "/discussion", element: <ResearchDiscussion /> },
-    navigation: {
-      name: "Diskusi",
-      path: "/discussion",
-      icon: ChatAlt2Icon,
-    },
+  discussion: {
+    path: "/discussion",
+    name: "Diskusi",
+    icon: ChatAlt2Icon,
+    element: <ResearchDiscussion />,
   },
-  {
-    route: { path: "/settings", element: <RepositorySettings /> },
-    navigation: {
-      name: "Pengaturan Repository",
-      path: "/settings",
-      icon: CogIcon,
-    },
+  settings: {
+    path: "/settings",
+    name: "Pengaturan Repository",
+    icon: CogIcon,
+    element: <RepositorySettings />,
   },
-  {
-    route: { path: "/proposal", element: <RepositoryProposal /> },
-    navigation: {
-      name: "Ajukan Repository",
-      path: "/proposal",
-      icon: PlusIcon,
-    },
+  proposal: {
+    path: "/proposal",
+    name: "Ajukan Repository",
+    icon: PlusIcon,
+    element: <RepositoryProposal />,
   },
-  {
-    route: { path: "/profile", element: <UserProfile /> },
-    navigation: { name: "Profil", path: "/profile", icon: UserIcon },
+  profile: {
+    path: "/profile",
+    name: "Profil",
+    icon: UserIcon,
+    element: <UserProfile />,
   },
-];
+};
 
 export default dashboard;
