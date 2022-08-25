@@ -16,15 +16,15 @@ function App() {
   const {
     data: { _id: memberId, token },
   } = useSelector((state) => state.user);
-
   const {
     data: { roomId },
   } = useSelector((state) => state.chat);
+  const { data: acceptedTeams } = useSelector((state) => state.acceptedTeams);
 
   createAxios(token);
 
   useEffect(() => {
-    if (token) {
+    if (token && acceptedTeams.length > 0) {
       dispatch(fetchNotifications(memberId, roomId));
     }
   });

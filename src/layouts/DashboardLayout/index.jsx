@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import NavigationBar from "./components/NavigationBar";
+
+const whitelist = ["/", "/proposal", "/profile"];
 
 function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const {
     data: { token },
@@ -16,8 +19,9 @@ function DashboardLayout({ children }) {
 
   useEffect(() => {
     if (!token) navigate("/login");
-    if (token && acceptedTeams.length === 0) navigate("/proposal");
-  }, [token, navigate, acceptedTeams]);
+    if (token && acceptedTeams.length === 0 && !whitelist.includes(pathname))
+      navigate("/");
+  }, [token, navigate, pathname, acceptedTeams]);
 
   return (
     <div className="min-h-screen">

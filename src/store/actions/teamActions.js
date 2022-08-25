@@ -111,10 +111,17 @@ export const fetchAcceptedTeams = (id) => async (dispatch, getState) => {
 export const addTeamMember = (payload) => async (dispatch) => {
   try {
     const { teamId, researcher, role } = payload;
+    const isAdmin = role === "administrator";
 
     await teamApi.addTeamMember({ teamId, researcherId: researcher._id, role });
 
-    dispatch({ type: ADD_TEAM_MEMBER, payload });
+    dispatch({
+      type: ADD_TEAM_MEMBER,
+      payload: {
+        teamId,
+        researcher: { ...researcher, isAdmin },
+      },
+    });
   } catch (error) {
     dispatch({
       type: ERROR_ACCEPTED_TEAM,

@@ -124,16 +124,12 @@ export const acceptedTeamsReducer = (
       return { loading: false, error: null, data };
     }
     case ADD_TEAM_MEMBER: {
-      const { teamId, researcher, role } = action.payload;
+      const { teamId, researcher } = action.payload;
 
       const data = state.data.map((d) =>
         d._id === teamId
           ? {
               ...d,
-              administrators:
-                role === "administrator"
-                  ? [...d.administrators, researcher._id]
-                  : d.administrators,
               members: [...d.members, researcher],
             }
           : d,

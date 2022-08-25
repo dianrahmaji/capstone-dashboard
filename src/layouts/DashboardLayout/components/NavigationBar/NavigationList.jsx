@@ -59,7 +59,11 @@ export default function NavigationList() {
           );
         })
       ) : (
-        <NavigationBarItem {...dashboard.proposal} />
+        <>
+          <NavigationBarItem {...dashboard.root} />
+          <NavigationBarItem {...dashboard.proposal} />
+          <NavigationBarItem {...dashboard.profile} />
+        </>
       )}
       <div className="pt-3">
         <NavigationBarItem
