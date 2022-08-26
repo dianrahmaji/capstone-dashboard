@@ -133,6 +133,35 @@ export const addTeamMember = (payload) => async (dispatch) => {
   }
 };
 
+export const updateTeamMember = (payload) => async (dispatch) => {
+  try {
+    const { teamId, researcher, role } = payload;
+    const isAdmin = role === "administrator";
+
+    await teamApi.updateTeamMember({
+      teamId,
+      researcherId: researcher._id,
+      role,
+    });
+
+    dispatch({
+      type: ADD_TEAM_MEMBER,
+      payload: {
+        teamId,
+        researcher: { ...researcher, isAdmin },
+      },
+    });
+  } catch (error) {
+    dispatch({
+      type: ERROR_ACCEPTED_TEAM,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
 export const deleteTeamMember =
   ({ teamId, userId }) =>
   async (dispatch) => {

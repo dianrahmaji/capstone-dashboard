@@ -16,17 +16,21 @@ const header = ["Name", "Faculty", "Type", "Role"];
 function MemberTable() {
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openAddDialog, setOpenAddDialog] = useState(false);
-  const [selectedMember] = useState(null);
+  const [selectedMember, setSelectedMember] = useState(null);
 
   const dispatch = useDispatch();
 
   const { _id: teamId, members, isAdmin } = useSelectedTeam();
-  const { loading } = useSelector((state) => state.user);
+  const {
+    data: { _id: userId },
+    loading,
+  } = useSelector((state) => state.user);
 
-  // const handleEdit = (m) => {
-  //   setSelectedMember(m);
-  //   setOpenEditDialog(true);
-  // };
+  const handleEdit = (m) => {
+    const role = m.isAdmin ? "administrator" : "researcher";
+    setSelectedMember({ ...m, role });
+    setOpenEditDialog(true);
+  };
 
   const handleDelete = (userId) => {
     dispatch(deleteTeamMember({ userId, teamId }));
@@ -47,16 +51,18 @@ function MemberTable() {
               <BaseTableItem>
                 {m.isAdmin ? "Administrator" : "Researcher"}
               </BaseTableItem>
-              <BaseTableItem className="relative flex gap-2">
-                <PencilAltIcon
-                  className="h-6 w-6 rounded-md text-gray-400 hover:cursor-pointer hover:text-blue-700"
-                  onClick={() => {}}
-                />
-                <TrashIcon
-                  className="h-6 w-6 rounded-md text-gray-400 hover:cursor-pointer hover:text-red-700"
-                  onClick={() => handleDelete(m._id)}
-                />
-              </BaseTableItem>
+              {isAdmin && userId !== m._id && (
+                <BaseTableItem className="relative flex gap-2">
+                  <PencilAltIcon
+                    className="h-6 w-6 rounded-md text-gray-400 hover:cursor-pointer hover:text-blue-700"
+                    onClick={() => handleEdit(m)}
+                  />
+                  <TrashIcon
+                    className="h-6 w-6 rounded-md text-gray-400 hover:cursor-pointer hover:text-red-700"
+                    onClick={() => handleDelete(m._id)}
+                  />
+                </BaseTableItem>
+              )}
             </tr>
           ))}
       </BaseTable>
@@ -77,6 +83,7 @@ function MemberTable() {
       <MemberEditModal
         open={openEditDialog}
         setOpen={setOpenEditDialog}
+        teamId={teamId}
         initialValues={selectedMember}
       />
     </div>

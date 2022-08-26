@@ -8,6 +8,7 @@ import {
   LOADING_TEAM,
   LOADING_ACCEPTED_TEAM,
   DELETE_TEAM,
+  EDIT_TEAM_MEMBER,
   ERROR_TEAM,
   ERROR_ACCEPTED_TEAM,
   SELECT_ACCEPTED_TEAM_ID,
@@ -77,8 +78,9 @@ export const teamsReducer = (
  * 2. Fetch accepted teams
  * 3. Edit accepted team
  * 4. Add team member
- * 5. Delete team member
- * 6. Error accepted teams
+ * 5. Edit team member
+ * 6. Delete team member
+ * 7. Error accepted teams
  */
 export const acceptedTeamsReducer = (
   state = {
@@ -133,6 +135,15 @@ export const acceptedTeamsReducer = (
               members: [...d.members, researcher],
             }
           : d,
+      );
+
+      return { loading: false, error: null, data };
+    }
+    case EDIT_TEAM_MEMBER: {
+      const { teamId, researcher } = action.payload;
+
+      const data = state.data.map((d) =>
+        d._id === teamId ? { ...d, members: [...d.members, researcher] } : d,
       );
 
       return { loading: false, error: null, data };
