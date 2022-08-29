@@ -83,7 +83,7 @@ export default function TeamInfo({ open, setOpen }) {
                                 <div
                                   className="prose"
                                   dangerouslySetInnerHTML={{
-                                    __html: repository?.description,
+                                    __html: team.description,
                                   }}
                                 />
                               </dd>
@@ -93,7 +93,10 @@ export default function TeamInfo({ open, setOpen }) {
                                 Topic
                               </dt>
                               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                Frontend Engineering, Web Development
+                                {team.length > 0 &&
+                                  team.topics.reduce(
+                                    (prev, curr) => `${prev}, ${curr}`,
+                                  )}
                               </dd>
                             </div>
                             <div>

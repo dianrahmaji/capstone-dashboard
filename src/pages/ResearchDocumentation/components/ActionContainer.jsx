@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { DocumentAddIcon, FolderAddIcon } from "@heroicons/react/outline";
 
-import DocumentModal from "./DocumentModal";
+import DocumentModal from "./document/DocumentModal";
+import FolderModal from "./folder/FolderModal";
 
 function ActionContainer() {
-  const [openDialog, setOpenDialog] = useState(false);
-  const [fileType, setFileType] = useState("file");
+  const [openDocumentDialog, setOpenDocumentDialog] = useState(false);
+  const [openFolderDialog, setOpenFolderDialog] = useState(false);
 
   const handleCreate = (type) => {
-    setFileType(type);
-    setOpenDialog(true);
+    if (type === "folder") {
+      setOpenFolderDialog(true);
+    } else {
+      setOpenDocumentDialog(true);
+    }
   };
 
   return (
@@ -30,12 +34,17 @@ function ActionContainer() {
           <DocumentAddIcon className="h-6 w-6" /> New Document
         </button>
       </div>
+      <FolderModal
+        title="Add Folder"
+        open={openFolderDialog}
+        setOpen={setOpenFolderDialog}
+        initialValues={{ title: "", note: "" }}
+      />
       <DocumentModal
-        type={fileType}
-        action="create"
-        open={openDialog}
-        setOpen={setOpenDialog}
-        initialValues="Document Name"
+        title="Add Document"
+        open={openDocumentDialog}
+        setOpen={setOpenDocumentDialog}
+        initialValues={{ title: "", note: "", files: [] }}
       />
     </>
   );

@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
 import * as ContextMenu from "@radix-ui/react-context-menu";
-import {
-  DocumentTextIcon,
-  FolderIcon,
-  PencilAltIcon,
-  TrashIcon,
-} from "@heroicons/react/outline";
+import { FolderIcon, PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
 
-function DocumentItem({ type, onRename }) {
+function FolderItem() {
+  const handleRename = () => {};
+  const handleDelete = () => {};
+
   return (
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <Link
@@ -17,11 +15,7 @@ function DocumentItem({ type, onRename }) {
       <ContextMenu.Root>
         <ContextMenu.Trigger>
           <div className="flex flex-col items-center justify-center ">
-            {type === "file" ? (
-              <DocumentTextIcon className="h-24 w-24 stroke-1 text-primary" />
-            ) : (
-              <FolderIcon className="h-24 w-24 stroke-1 text-primary" />
-            )}
+            <FolderIcon className="h-24 w-24 stroke-1 text-primary" />
           </div>
           <div className="text-center">Dian Rahmaji Dokumen</div>
         </ContextMenu.Trigger>
@@ -30,14 +24,16 @@ function DocumentItem({ type, onRename }) {
           alignOffset={-5}
         >
           <ContextMenu.Item
-            className="cursor-base flex h-8 w-full flex-shrink-0 items-center px-3 text-left text-sm focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-700"
-            onClick={() => onRename({ documentName: "Dian Rahmaji Dokumen" })}
+            className="flex h-8 w-full shrink-0 cursor-pointer items-center px-3 text-left text-sm focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-700"
+            onClick={() =>
+              handleRename({ documentName: "Dian Rahmaji Dokumen" })
+            }
           >
             <PencilAltIcon className="mr-2 h-6 w-6" />
             <span className="mr-2 flex-1">Rename</span>
           </ContextMenu.Item>
-          <ContextMenu.Item className="cursor-base flex h-8 w-full flex-shrink-0 items-center px-3 text-left text-sm focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-700">
-            <TrashIcon className="mr-2 h-6 w-6" />
+          <ContextMenu.Item className="flex h-8 w-full shrink-0 cursor-pointer items-center px-3 text-left text-sm focus:bg-neutral-100 focus:outline-none dark:focus:bg-neutral-700">
+            <TrashIcon className="mr-2 h-6 w-6" onClick={handleDelete()} />
             <span className="mr-2 flex-1">Delete</span>
           </ContextMenu.Item>
         </ContextMenu.Content>
@@ -46,4 +42,4 @@ function DocumentItem({ type, onRename }) {
   );
 }
 
-export default DocumentItem;
+export default FolderItem;

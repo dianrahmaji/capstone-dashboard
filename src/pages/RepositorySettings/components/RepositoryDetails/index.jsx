@@ -20,24 +20,46 @@ function RepositoryDetails() {
       <h1 className="mt-3 text-2xl font-semibold text-gray-900">
         {team?.name}
       </h1>
-      <div className="my-6 ml-4 flex flex-col">
-        <div className="text-lg font-medium">Topic</div>
-        {/* TODO: Add this field to db */}
-        <div>Information System, Web Development, Knowledge Management</div>
-        <div className="mt-5 text-lg  font-medium">Time</div>
+      <div className="my-6 ml-4 flex flex-col space-y-2">
         <div>
-          <time dateTime={team?.repository?.startDate}>
-            {toLocaleFormat(team?.repository?.startDate)}
-          </time>{" "}
-          -{" "}
-          <time dateTime={team?.repository?.endDate}>
-            {toLocaleFormat(team?.repository?.endDate)}
-          </time>
+          <dt className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
+            Topic
+          </dt>
+          <dd className="mt-1 text-base text-gray-900 sm:col-span-2">
+            {team.length > 0 &&
+              team.topics.reduce((prev, curr) => `${prev}, ${curr}`)}
+          </dd>
         </div>
-        <div className="mt-5 text-lg  font-medium">Description</div>
-        <div
-          dangerouslySetInnerHTML={{ __html: team?.repository?.description }}
-        />
+        <div>
+          <dt className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
+            Date
+          </dt>
+          <dd className="mt-1 text-base text-gray-900 sm:col-span-2">
+            <time dateTime={repository?.startDate}>
+              {toLocaleFormat(repository?.startDate)}
+            </time>{" "}
+            -{" "}
+            <time dateTime={repository?.endDate}>
+              {toLocaleFormat(repository?.startDate)}
+            </time>
+          </dd>
+        </div>
+        <div>
+          <dt className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
+            Description
+          </dt>
+          {/* TODO: Add this field to db */}
+          <dd className="mt-1 text-base text-gray-900 sm:col-span-2">
+            {/* eslint-disable react/no-danger */}
+            <div
+              className="prose"
+              dangerouslySetInnerHTML={{
+                __html: team.description,
+              }}
+            />
+          </dd>
+        </div>
+
         {data?._id === team?.administrator?._id && (
           <BaseButton className="ml-auto" onClick={() => setOpenDialog(true)}>
             Edit

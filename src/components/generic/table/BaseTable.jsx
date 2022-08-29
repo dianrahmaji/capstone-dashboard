@@ -12,7 +12,7 @@ function TableRow({ colSpan, type = "empty" }) {
         ) : (
           <div className="flex items-center justify-center">
             <svg
-              className="... ml-3 mr-3 h-5 w-5 animate-spin"
+              className="mx-3 h-5 w-5 animate-spin"
               viewBox="0 0 24 24"
               fill="white"
             >

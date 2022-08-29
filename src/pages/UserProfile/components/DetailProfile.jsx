@@ -29,19 +29,29 @@ function DetailProfile() {
           </div>
         )}
         <div className="grid grid-cols-[1fr_2fr]">
-          <div className="font-medium">Name</div>
-          <div>{user.fullName}</div>
-          <div className="font-medium">Email</div>
-          <div>{user.email}</div>
-          <div className="font-medium">Faculty</div>
-          <div>{user.faculty}</div>
-          <div className="font-medium">Major</div>
-          <div>{user.major}</div>
-          <div className="font-medium">Speciality</div>
-          <div>
-            {/* TODO: Add speciality */}
-            Frontend Engineering, Web Development
-          </div>
+          <dd className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
+            Name
+          </dd>
+          <dt className="text-base text-gray-900">{user.fullName}</dt>
+          <dd className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
+            Email
+          </dd>
+          <dt className="text-base text-gray-900">{user.email}</dt>
+          <dd className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
+            Faculty
+          </dd>
+          <dt className="text-base text-gray-900">{user.faculty}</dt>
+          <dd className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
+            Major
+          </dd>
+          <dt className="text-base text-gray-900">{user.major}</dt>
+          <dd className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
+            Speciality
+          </dd>
+          <dt className="text-base text-gray-900">
+            {user.specialities.length > 0 &&
+              user.specialities.reduce((prev, curr) => `${prev}, ${curr}`)}
+          </dt>
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ function RepositoryProlosal() {
   const { data } = useSelector((state) => state.user);
 
   const handleSubmit = (values) => {
-    dispatch(createTeam({ administrator: data?._id, ...values }));
+    dispatch(createTeam({ creator: data?._id, ...values }));
     setOpenDialog(false);
   };
 

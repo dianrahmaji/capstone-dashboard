@@ -40,7 +40,7 @@ export const createTeam = (payload) => async (dispatch) => {
 
     dispatch({
       type: CREATE_TEAM,
-      payload: { ...payload, _id: data._id, status: "pending" },
+      payload: data,
     });
   } catch (error) {
     dispatch({
