@@ -9,6 +9,7 @@ import {
   userId,
   faculty,
   major,
+  specialities,
   accountType,
   password,
 } from "~/utils/validation";
@@ -17,6 +18,7 @@ import { register } from "~/store/actions/userActions";
 import BaseButton from "~/components/generic/button/BaseButton";
 import BaseForm from "~/components/generic/form/BaseForm";
 import BaseInput from "~/components/generic/form/BaseInput";
+import BaseMultipleInput from "~/components/generic/form/BaseMultipleInput";
 import BaseSelect from "~/components/generic/form/BaseSelect";
 
 function Register() {
@@ -26,6 +28,7 @@ function Register() {
     userId: "",
     faculty: "",
     major: "",
+    specialities: [],
     accountType: "",
     password: "",
   };
@@ -42,10 +45,28 @@ function Register() {
   }, [token, navigate]);
 
   const handleSubmit = (values) => {
-    const { fullName, email, userId, faculty, major, accountType, password } =
-      values;
+    const {
+      fullName,
+      email,
+      userId,
+      faculty,
+      major,
+      accountType,
+      specialities,
+      password,
+    } = values;
+
     dispatch(
-      register(fullName, email, userId, faculty, major, accountType, password),
+      register(
+        fullName,
+        email,
+        userId,
+        faculty,
+        major,
+        accountType,
+        specialities,
+        password,
+      ),
     );
   };
 
@@ -69,6 +90,7 @@ function Register() {
               userId,
               faculty,
               major,
+              specialities,
               accountType,
               password,
             }}
@@ -79,6 +101,7 @@ function Register() {
             <BaseInput label="NIM / NIP" name="userId" type="text" />
             <BaseInput label="Faculty" name="faculty" type="text" />
             <BaseInput label="Major" name="major" type="text" />
+            <BaseMultipleInput label="Specialities" name="specialities" />
             <BaseSelect label="Account Type" name="accountType">
               <option value="" disabled defaultValue>
                 Select account type

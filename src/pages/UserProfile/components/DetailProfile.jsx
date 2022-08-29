@@ -46,7 +46,7 @@ function DetailProfile() {
           </dd>
           <dt className="text-base text-gray-900">{user.major}</dt>
           <dd className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
-            Speciality
+            Specialities
           </dd>
           <dt className="text-base text-gray-900">
             {user.specialities.length > 0 &&

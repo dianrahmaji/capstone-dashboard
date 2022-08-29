@@ -40,8 +40,8 @@ function ProposalTable() {
     dispatch(deleteTeam(id));
   };
 
-  const handleSubmit = ({ status, ...rest }) => {
-    dispatch(updateTeam(rest));
+  const handleSubmit = (values) => {
+    dispatch(updateTeam({ ...values, status: "updated" }));
     setOpenDialog(false);
   };
 
@@ -60,7 +60,7 @@ function ProposalTable() {
                       "bg-blue-100 text-blue-800": p.status === "pending",
                       "bg-yellow-100 text-yellow-800": p.status === "updated",
                       "bg-green-100 text-green-800": p.status === "accepted",
-                      "bg-red-100 text-red-800": !p.status === "rejected",
+                      "bg-red-100 text-red-800": p.status === "rejected",
                     },
                   )}
                 >

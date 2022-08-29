@@ -49,7 +49,7 @@ function RepositoryHistory() {
                       "bg-blue-100 text-blue-800": t.status === "pending",
                       "bg-yellow-100 text-yellow-800": t.status === "updated",
                       "bg-green-100 text-green-800": t.status === "accepted",
-                      "bg-red-100 text-red-800": !t.status === "rejected",
+                      "bg-red-100 text-red-800": t.status === "rejected",
                     },
                   )}
                 >

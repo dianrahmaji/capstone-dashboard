@@ -90,10 +90,10 @@ export default function TeamInfo({ open, setOpen }) {
                             </div>
                             <div>
                               <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-                                Topic
+                                Topics
                               </dt>
                               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                {team.length > 0 &&
+                                {team.topics.length > 0 &&
                                   team.topics.reduce(
                                     (prev, curr) => `${prev}, ${curr}`,
                                   )}

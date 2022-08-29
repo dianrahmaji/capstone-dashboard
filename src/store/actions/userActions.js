@@ -32,7 +32,16 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 export const register =
-  (fullName, email, userId, faculty, major, accountType, password) =>
+  (
+    fullName,
+    email,
+    userId,
+    faculty,
+    major,
+    accountType,
+    specialities,
+    password,
+  ) =>
   async (dispatch) => {
     try {
       dispatch({ type: LOADING_USER });
@@ -43,6 +52,7 @@ export const register =
         userId,
         faculty,
         major,
+        specialities,
         accountType,
         password,
       });
