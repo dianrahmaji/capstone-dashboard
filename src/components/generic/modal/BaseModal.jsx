@@ -5,7 +5,7 @@ import { XIcon } from "@heroicons/react/outline";
 function Modal({ title, open, setOpen, children }) {
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setOpen}>
+      <Dialog as="div" className="relative z-10" static onClose={() => null}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
