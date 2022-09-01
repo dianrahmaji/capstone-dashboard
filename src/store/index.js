@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import { chatReducer } from "./reducers/chatReducers";
+import { folderReducer } from "./reducers/folderReducers";
 import { notificationReducer } from "./reducers/notificationReducers";
 import { userReducer } from "./reducers/userReducers";
 import {
@@ -21,6 +22,7 @@ const persistConfig = {
 
 const reducer = combineReducers({
   chat: chatReducer,
+  folder: folderReducer,
   notification: notificationReducer,
   user: userReducer,
   teams: teamsReducer,

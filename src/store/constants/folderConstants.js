@@ -1,0 +1,6 @@
+export const LOADING_FOLDER = "LOADING_FOLDER";
+export const FETCH_FOLDER = "FETCH_FOLDER";
+export const CREATE_FOLDER = "CREATE_FOLDER";
+export const UPDATE_FOLDER = "UPDATE_FOLDER";
+export const DELETE_FOLDER = "DELETE_FOLDER";
+export const ERROR_FOLDER = "ERROR_FOLDER";
