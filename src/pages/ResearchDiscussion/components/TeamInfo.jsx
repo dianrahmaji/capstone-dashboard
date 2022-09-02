@@ -39,11 +39,7 @@ export default function TeamInfo({ open, setOpen }) {
                   {team && (
                     <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                       <div className="p-6">
-                        <div className="flex items-start justify-between">
-                          <Dialog.Title className="text-lg font-medium text-gray-900">
-                            {" "}
-                            Info{" "}
-                          </Dialog.Title>
+                        <div className="flex items-start justify-end">
                           <div className="ml-3 flex h-7 items-center">
                             <button
                               type="button"

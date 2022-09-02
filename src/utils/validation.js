@@ -2,6 +2,7 @@ import * as Yup from "yup";
 
 export const _id = Yup.string().required("_id is required");
 export const accountType = Yup.string().required("Account type is required");
+export const craftingTime = Yup.number().required("Crafting time is required");
 export const date = Yup.date().required("Date is required");
 export const description = Yup.string().required("Description is required");
 export const documentName = Yup.string().required("Document name is required");
@@ -16,6 +17,7 @@ export const password = Yup.string().required("Password is required");
 export const researcher = Yup.string().required("Researcher is required");
 export const role = Yup.string().required("Role is required");
 export const specialities = Yup.array().min(1, "Specialities are required");
+export const status = Yup.string("Status is required!");
 export const topics = Yup.array().min(1, "Topics are required");
 export const title = Yup.string().required("Title is required");
 export const userId = Yup.string().required("User ID is required");
