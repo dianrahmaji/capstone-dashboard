@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   InformationCircleIcon,
   PencilAltIcon,
@@ -25,12 +26,12 @@ function FolderCard({ folder }) {
       <li key={folder.name} className="col-span-1 flex rounded-md shadow-sm">
         <div className="flex flex-1 items-center justify-between rounded-md border-2 border-gray-200 bg-white py-3">
           <div className="flex-1 truncate px-4 py-2 text-base">
-            <a
-              href={folder.href}
-              className="font-medium text-gray-900 hover:text-gray-600"
+            <Link
+              to={`/documentation/${folder._id}`}
+              className="font-medium text-gray-900 hover:text-gray-600 hover:underline"
             >
               {folder.name}
-            </a>
+            </Link>
           </div>
 
           <div className="shrink-0 pr-2">
@@ -73,14 +74,15 @@ function FolderCard({ folder }) {
 export default function FolderCardList() {
   const { folders } = useSelector((state) => state.folder.data);
   return (
-    <div className="mt-3 px-4 sm:px-6 md:px-8">
-      <h2 className="text-sm font-medium text-gray-500">Folders</h2>
-      <ul className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-        {folders &&
-          folders.map((folder) => (
+    folders.length > 0 && (
+      <div className="mt-3 px-4 sm:px-6 md:px-8">
+        <h2 className="text-sm font-medium text-gray-500">Folders</h2>
+        <ul className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+          {folders.map((folder) => (
             <FolderCard folder={folder} key={folder.name} />
           ))}
-      </ul>
-    </div>
+        </ul>
+      </div>
+    )
   );
 }

@@ -1,9 +1,12 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { ChevronRightIcon } from "@heroicons/react/solid";
 
-import useSelectedTeam from "~/hooks/useSelectedTeam";
-import { fetchFolderById } from "~/store/actions/folderActions";
+import {
+  fetchFolderById,
+  setActiveFolderId,
+} from "~/store/actions/folderActions";
 
 import ActionContainer from "./components/ActionContainer";
 import BaseBreadcrumbs from "~/components/generic/breadcrumbs/BaseBreadcrumbs";
@@ -15,15 +18,15 @@ import FolderCardList from "./components/folder/FolderCardList";
 function ResearchDocumentation() {
   const dispatch = useDispatch();
 
-  const {
-    repository: { title, root: folderId },
-  } = useSelectedTeam();
+  const { folderId } = useParams();
+  const { name } = useSelector((state) => state.folder.data);
 
   useEffect(() => {
     dispatch(fetchFolderById(folderId));
+    dispatch(setActiveFolderId(folderId));
   }, [dispatch, folderId]);
 
-  const pages = [{ name: title, redirect: "#", current: true }];
+  const pages = [{ name, redirect: "#", current: true }];
 
   return (
     <DashboardLayout>

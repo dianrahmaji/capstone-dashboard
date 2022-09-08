@@ -4,3 +4,5 @@ export const CREATE_FOLDER = "CREATE_FOLDER";
 export const UPDATE_FOLDER = "UPDATE_FOLDER";
 export const DELETE_FOLDER = "DELETE_FOLDER";
 export const ERROR_FOLDER = "ERROR_FOLDER";
+
+export const SET_ACTIVE_FOLDER_ID = "SET_ACTIVE_FOLDER_ID";

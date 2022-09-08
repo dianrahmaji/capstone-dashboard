@@ -4,6 +4,7 @@ import {
   ERROR_FOLDER,
   FETCH_FOLDER,
   LOADING_FOLDER,
+  SET_ACTIVE_FOLDER_ID,
 } from "../constants/folderConstants";
 
 export const fetchFolderById = (folderId) => async (dispatch) => {
@@ -40,4 +41,8 @@ export const createFolder = (payload) => async (dispatch) => {
           : error.message,
     });
   }
+};
+
+export const setActiveFolderId = (payload) => async (dispatch) => {
+  dispatch({ type: SET_ACTIVE_FOLDER_ID, payload });
 };

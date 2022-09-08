@@ -22,7 +22,7 @@ const dashboard = {
     element: <Home />,
   },
   documentation: {
-    path: "/documentation",
+    path: "/documentation/:folderId",
     name: "Dokumentasi Penelitian",
     icon: FolderIcon,
     element: <ResearchDocumentation />,

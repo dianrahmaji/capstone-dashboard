@@ -176,7 +176,6 @@ export const acceptedTeamsReducer = (
 };
 
 /**
- *
  * Cases:
  * 1. Select accepted team
  */

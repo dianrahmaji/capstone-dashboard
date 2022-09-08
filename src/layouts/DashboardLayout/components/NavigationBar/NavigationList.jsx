@@ -17,6 +17,7 @@ export default function NavigationList() {
   const selectedTeamId = useSelector((state) => state.selectedTeamId);
   const { data: acceptedTeams } = useSelector((state) => state.acceptedTeams);
   const { data: notification } = useSelector((state) => state.notification);
+  const activeFolderId = useSelector((state) => state.activeFolderId);
 
   useEffect(() => {
     setSelectedTeam(acceptedTeams.find(({ _id }) => _id === selectedTeamId));
@@ -48,11 +49,18 @@ export default function NavigationList() {
       )}
       {acceptedTeams.length > 0 ? (
         Object.values(dashboard).map((navigation) => {
+          // eslint-disable-next-line no-nested-ternary
           return navigation.path === "/discussion" ? (
             <NavigationBarItem
               {...navigation}
               key={navigation.name}
               notification={notification}
+            />
+          ) : navigation.path === "/documentation/:folderId" ? (
+            <NavigationBarItem
+              {...navigation}
+              path={`/documentation/${activeFolderId}`}
+              key={navigation.name}
             />
           ) : (
             <NavigationBarItem {...navigation} key={navigation.name} />

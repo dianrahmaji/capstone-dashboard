@@ -5,7 +5,10 @@ import storage from "redux-persist/lib/storage";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import { chatReducer } from "./reducers/chatReducers";
-import { folderReducer } from "./reducers/folderReducers";
+import {
+  folderReducer,
+  activeFolderIdReducer,
+} from "./reducers/folderReducers";
 import { notificationReducer } from "./reducers/notificationReducers";
 import { userReducer } from "./reducers/userReducers";
 import {
@@ -17,12 +20,20 @@ import {
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "chat", "selectedTeamId", "acceptedTeams"],
+  whitelist: [
+    "user",
+    "chat",
+    "folder",
+    "activeFolderId",
+    "selectedTeamId",
+    "acceptedTeams",
+  ],
 };
 
 const reducer = combineReducers({
   chat: chatReducer,
   folder: folderReducer,
+  activeFolderId: activeFolderIdReducer,
   notification: notificationReducer,
   user: userReducer,
   teams: teamsReducer,

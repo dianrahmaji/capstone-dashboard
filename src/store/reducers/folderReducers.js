@@ -1,10 +1,11 @@
-/* eslint-disable import/prefer-default-export, default-param-last */
+/* eslint-disable default-param-last */
 import {
   CREATE_FOLDER,
   DELETE_FOLDER,
   ERROR_FOLDER,
   FETCH_FOLDER,
   LOADING_FOLDER,
+  SET_ACTIVE_FOLDER_ID,
   UPDATE_FOLDER,
 } from "../constants/folderConstants";
 
@@ -34,6 +35,20 @@ export const folderReducer = (
     }
     case ERROR_FOLDER: {
       return { ...state, loading: false, error: action.payload };
+    }
+    default:
+      return state;
+  }
+};
+
+/**
+ * Cases:
+ * 1. Select folder
+ */
+export const activeFolderIdReducer = (state = "", action) => {
+  switch (action.type) {
+    case SET_ACTIVE_FOLDER_ID: {
+      return action.payload;
     }
     default:
       return state;

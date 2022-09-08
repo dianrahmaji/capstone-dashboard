@@ -45,7 +45,7 @@ function ActionContainer() {
         title="Add Folder"
         open={openFolderDialog}
         setOpen={setOpenFolderDialog}
-        initialValues={{ title: "", description: "" }}
+        initialValues={{ name: "", description: "" }}
       />
       <DocumentModal
         title="Add Document"

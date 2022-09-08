@@ -6,7 +6,6 @@ function NavigationBarItem({ name, path, icon: NavIcon, notification = 0 }) {
 
   return (
     <Link
-      key={name}
       to={path}
       className={clsx(
         "flex items-center justify-between rounded-md p-2 text-base font-medium text-white hover:text-secondary",
