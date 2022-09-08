@@ -1,19 +1,27 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { ChevronRightIcon } from "@heroicons/react/solid";
 
 import useSelectedTeam from "~/hooks/useSelectedTeam";
+import { fetchFolderById } from "~/store/actions/folderActions";
 
 import ActionContainer from "./components/ActionContainer";
 import BaseBreadcrumbs from "~/components/generic/breadcrumbs/BaseBreadcrumbs";
 import DashboardLayout from "~/layouts/DashboardLayout";
 import FolderNote from "./components/folder/FolderNote";
-
 import DocumentCardList from "./components/document/DocumentCardList";
 import FolderCardList from "./components/folder/FolderCardList";
 
 function ResearchDocumentation() {
+  const dispatch = useDispatch();
+
   const {
-    repository: { title },
+    repository: { title, root: folderId },
   } = useSelectedTeam();
+
+  useEffect(() => {
+    dispatch(fetchFolderById(folderId));
+  }, [dispatch, folderId]);
 
   const pages = [{ name: title, redirect: "#", current: true }];
 

@@ -10,12 +10,6 @@ export default function DocumentEditModal(props) {
     <FormModal
       title="Edit Document"
       validation={{ craftingTime, description, name, status }}
-      initialValues={{
-        craftingTime: 0,
-        description: "",
-        name: "",
-        status: "ongoing",
-      }}
       {...props}
     >
       <BaseInput label="Name" name="name" type="text" />

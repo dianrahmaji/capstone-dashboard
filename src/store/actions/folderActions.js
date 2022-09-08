@@ -2,10 +2,28 @@ import { folderApi } from "~/api";
 import {
   CREATE_FOLDER,
   ERROR_FOLDER,
+  FETCH_FOLDER,
   LOADING_FOLDER,
 } from "../constants/folderConstants";
 
-// eslint-disable-next-line import/prefer-default-export
+export const fetchFolderById = (folderId) => async (dispatch) => {
+  try {
+    dispatch({ type: LOADING_FOLDER });
+
+    const { data } = await folderApi.fetchFolderById({ folderId });
+
+    dispatch({ type: FETCH_FOLDER, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ERROR_FOLDER,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
 export const createFolder = (payload) => async (dispatch) => {
   try {
     dispatch({ type: LOADING_FOLDER });

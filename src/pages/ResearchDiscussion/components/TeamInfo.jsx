@@ -4,14 +4,8 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 
 import { toLocaleFormat } from "~/utils/date";
+import { getProfileFromFullName } from "~/utils/text";
 import useSelectedTeam from "~/hooks/useSelectedTeam";
-
-const getProfileFromFullName = (fullName) => {
-  const names = fullName.split(" ");
-
-  if (names.length < 2) return fullName.slice(0, 2).toUpperCase();
-  return `${names[0][0]}${names[1][0]}`;
-};
 
 export default function TeamInfo({ open, setOpen }) {
   const team = useSelectedTeam();

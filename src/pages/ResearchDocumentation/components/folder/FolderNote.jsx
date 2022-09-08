@@ -1,5 +1,6 @@
 /* eslint-disable react/no-danger */
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { PencilAltIcon } from "@heroicons/react/solid";
 
 import ReactQuill from "~/components/ReactQuill";
@@ -7,10 +8,20 @@ import ReactQuill from "~/components/ReactQuill";
 import BaseButton from "~/components/generic/button/BaseButton";
 
 export default function FolderNote() {
-  const [content, setContent] = useState(
-    "<h1>Details Here...</h1><p>Click the edit note to edit note</p>",
-  );
+  const [content, setContent] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+
+  const { note } = useSelector((state) => state.folder.data);
+
+  useEffect(() => {
+    setContent(note);
+  }, [note]);
+
+  const handleSubmit = () => {
+    // eslint-disable-next-line no-console
+    console.log(content);
+    setIsEditing(false);
+  };
 
   return (
     <div className="my-20">
@@ -20,7 +31,7 @@ export default function FolderNote() {
           <div className="mt-3 flex justify-end px-8">
             <BaseButton
               className="mt-3 flex items-center gap-3"
-              onClick={() => setIsEditing(false)}
+              onClick={handleSubmit}
             >
               <PencilAltIcon className="h-5 w-5" />
               Save Note

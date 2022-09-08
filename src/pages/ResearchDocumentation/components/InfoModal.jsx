@@ -1,21 +1,13 @@
 import clsx from "clsx";
 
-import useSelectedTeam from "~/hooks/useSelectedTeam";
+import { toLocaleFormat } from "~/utils/date";
+import { capitalizeFirstLetter, getProfileFromFullName } from "~/utils/text";
 
 import BaseButton from "~/components/generic/button/BaseButton";
 import BaseModal from "~/components/generic/modal/BaseModal";
 
-const getProfileFromFullName = (fullName) => {
-  const names = fullName.split(" ");
-
-  if (names.length < 2) return fullName.slice(0, 2).toUpperCase();
-  return `${names[0][0]}${names[1][0]}`;
-};
-
-function DocumentEditModal({ onOpenEditModal, ...props }) {
-  const team = useSelectedTeam();
-
-  const { members } = team;
+export default function InfoModal({ item, onOpenEditModal, ...props }) {
+  const { createdAt, description, status, updatedAt, authors } = item;
 
   return (
     <BaseModal title="IMG_4985.HEIC" {...props}>
@@ -26,7 +18,7 @@ function DocumentEditModal({ onOpenEditModal, ...props }) {
               Created At
             </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-              Senin, 24 Agustus 1998
+              {toLocaleFormat(createdAt)}
             </dd>
           </div>
           <div>
@@ -34,7 +26,7 @@ function DocumentEditModal({ onOpenEditModal, ...props }) {
               Last Modified
             </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-              Senin, 24 Agustus 1999
+              {toLocaleFormat(updatedAt)}
             </dd>
           </div>
           <div>
@@ -42,7 +34,7 @@ function DocumentEditModal({ onOpenEditModal, ...props }) {
               Description
             </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-              This is the best description. Use text area to fill this field!
+              {description}
             </dd>
           </div>
           <div>
@@ -50,14 +42,14 @@ function DocumentEditModal({ onOpenEditModal, ...props }) {
               Status
             </dt>
             <dd className="mt-1 flex items-center gap-1 text-sm text-gray-900 sm:col-span-2">
-              Ongoing{" "}
+              {capitalizeFirstLetter(status)}{" "}
               <span
                 className={clsx(
                   {
-                    "bg-blue-400": true, // Ongoing
-                    "bg-green-400": false, // Done
-                    "bg-yellow-400": false, // Draft
-                    "bg-red-400": false, // Abandoned / Critical
+                    "bg-blue-400": status === "ongoing", // Ongoing
+                    "bg-green-400": status === "done", // Done
+                    "bg-yellow-400": status === "draft", // Draft
+                    "bg-red-400": status === "critical", // Abandoned / Critical
                   },
 
                   "  mt-0.5 h-2.5 w-2.5 rounded-full",
@@ -73,9 +65,9 @@ function DocumentEditModal({ onOpenEditModal, ...props }) {
             </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
               <ul className="flex-1 divide-y divide-gray-200 overflow-y-auto">
-                {members &&
-                  members.map((person) => (
-                    <li key={person._id}>
+                {authors &&
+                  authors.map((author) => (
+                    <li key={author._id}>
                       <div className="group relative flex items-center py-3 px-1">
                         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                         <a href="#" className="-m-1 block flex-1 p-1">
@@ -85,7 +77,7 @@ function DocumentEditModal({ onOpenEditModal, ...props }) {
                           />
                           <div className="relative flex min-w-0 flex-1 items-center">
                             <span className="relative inline-block shrink-0">
-                              {person.pictureUrl ? (
+                              {author.pictureUrl ? (
                                 <img
                                   className="h-10 w-10 rounded-full"
                                   src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -94,7 +86,7 @@ function DocumentEditModal({ onOpenEditModal, ...props }) {
                               ) : (
                                 <div className="my-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
                                   <div className=" text-sm text-primary">
-                                    {getProfileFromFullName(person.fullName)}
+                                    {getProfileFromFullName(author.fullName)}
                                   </div>
                                 </div>
                               )}
@@ -102,11 +94,11 @@ function DocumentEditModal({ onOpenEditModal, ...props }) {
                             <div className="ml-4 truncate">
                               <div className="flex shrink-0 justify-between truncate text-sm">
                                 <span className="font-medium">
-                                  {person.fullName}
+                                  {author.fullName}
                                 </span>
                               </div>
                               <p className="truncate text-sm text-gray-500">
-                                {`${person.email}`}
+                                {`${author.email}`}
                               </p>
                             </div>
                           </div>
@@ -128,5 +120,3 @@ function DocumentEditModal({ onOpenEditModal, ...props }) {
     </BaseModal>
   );
 }
-
-export default DocumentEditModal;

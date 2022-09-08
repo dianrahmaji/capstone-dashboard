@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import {
   DownloadIcon,
   InformationCircleIcon,
@@ -7,19 +8,12 @@ import {
 } from "@heroicons/react/outline";
 
 import { BaseMenu, BaseMenuItem } from "~/components/generic/menu/BaseMenu";
-import DocumentInfoModal from "./DocumentInfoModal";
 import DocumentEditModal from "./DocumentEditModal";
+import InfoModal from "../InfoModal";
 
-const files = [
-  {
-    title: "IMG_4985.HEIC",
-    size: "3.9 MB",
-  },
-];
-
-function DocumentCard({ file }) {
-  const [openInfoModal, setOpenInfoModal] = useState(false);
+function DocumentCard({ document }) {
   const [openEditModal, setOpenEditModal] = useState(false);
+  const [openInfoModal, setOpenInfoModal] = useState(false);
 
   const handleDownload = () => {};
   const handleDelete = () => {};
@@ -33,16 +27,16 @@ function DocumentCard({ file }) {
       <li className="relative rounded-lg border">
         <div className="group aspect-w-10 aspect-h-7 block overflow-hidden rounded-lg bg-gray-100 focus-within:ring-offset-2 focus-within:ring-offset-gray-100">
           <button type="button" className="absolute inset-0 focus:outline-none">
-            <span className="sr-only">View details for {file.title}</span>
+            <span className="sr-only">View details for {document.name}</span>
           </button>
         </div>
         <div className="mt-2 flex items-start justify-between p-2">
           <div>
             <p className="pointer-events-none block truncate text-sm font-medium text-gray-900">
-              {file.title}
+              {document.name}
             </p>
             <p className="pointer-events-none block text-sm font-medium text-gray-500">
-              {file.size}
+              {document.size}
             </p>
           </div>
           <BaseMenu>
@@ -70,24 +64,32 @@ function DocumentCard({ file }) {
         </div>
       </li>
       {/* TODO: Move this to DocumentCardList */}
-      <DocumentInfoModal
+      <InfoModal
+        item={document}
         open={openInfoModal}
         setOpen={setOpenInfoModal}
         onOpenEditModal={handleOpenEditModal}
       />
-      <DocumentEditModal open={openEditModal} setOpen={setOpenEditModal} />
+      <DocumentEditModal
+        initialValues={document}
+        open={openEditModal}
+        setOpen={setOpenEditModal}
+      />
     </>
   );
 }
 
 function DocumentCardList() {
+  const { documents } = useSelector((state) => state.folder.data);
+
   return (
     <div className="px-4 sm:px-6 md:px-8">
       <h2 className="text-sm font-medium text-gray-500">Documents</h2>
       <ul className="mx-auto mt-3 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-5 xl:gap-x-8">
-        {files.map((file) => (
-          <DocumentCard file={file} key={file.title} />
-        ))}
+        {documents &&
+          documents.map((document) => (
+            <DocumentCard document={document} key={document._id} />
+          ))}
       </ul>
     </div>
   );

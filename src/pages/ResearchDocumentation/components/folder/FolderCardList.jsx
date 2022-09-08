@@ -1,43 +1,24 @@
 import { useState } from "react";
-import { PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
+import { useSelector } from "react-redux";
+import {
+  InformationCircleIcon,
+  PencilAltIcon,
+  TrashIcon,
+} from "@heroicons/react/outline";
 
 import { BaseMenu, BaseMenuItem } from "~/components/generic/menu/BaseMenu";
-import FolderInfoModal from "./FolderInfoModal";
-
-const folders = [
-  {
-    name: "Graph API",
-    initials: "GA",
-    href: "#",
-    members: 16,
-    bgColor: "bg-pink-600",
-  },
-  {
-    name: "Component Design",
-    initials: "CD",
-    href: "#",
-    members: 12,
-    bgColor: "bg-purple-600",
-  },
-  {
-    name: "Templates",
-    initials: "T",
-    href: "#",
-    members: 16,
-    bgColor: "bg-yellow-500",
-  },
-  {
-    name: "React Components",
-    initials: "RC",
-    href: "#",
-    members: 8,
-    bgColor: "bg-green-500",
-  },
-];
+import FolderEditModal from "./FolderEditModal";
+import InfoModal from "../InfoModal";
 
 function FolderCard({ folder }) {
-  const [openEditFolderDialog, setOpenFolderDialog] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [openInfoModal, setOpenInfoModal] = useState(false);
+
   const handleDelete = () => {};
+  const handleOpenEditModal = () => {
+    setOpenInfoModal(false);
+    setOpenEditModal(true);
+  };
 
   return (
     <>
@@ -55,9 +36,14 @@ function FolderCard({ folder }) {
           <div className="shrink-0 pr-2">
             <BaseMenu>
               <BaseMenuItem
+                icon={InformationCircleIcon}
+                name="Details"
+                onClick={() => setOpenInfoModal(true)}
+              />
+              <BaseMenuItem
                 icon={PencilAltIcon}
                 name="Edit"
-                onClick={() => setOpenFolderDialog(true)}
+                onClick={() => setOpenEditModal(true)}
               />
               <BaseMenuItem
                 icon={TrashIcon}
@@ -68,22 +54,32 @@ function FolderCard({ folder }) {
           </div>
         </div>
       </li>
-      <FolderInfoModal
-        open={openEditFolderDialog}
-        setOpen={setOpenFolderDialog}
+
+      <FolderEditModal
+        open={openEditModal}
+        setOpen={setOpenEditModal}
+        initialValues={folder}
+      />
+      <InfoModal
+        item={folder}
+        open={openInfoModal}
+        setOpen={setOpenInfoModal}
+        onOpenEditModal={handleOpenEditModal}
       />
     </>
   );
 }
 
 export default function FolderCardList() {
+  const { folders } = useSelector((state) => state.folder.data);
   return (
     <div className="mt-3 px-4 sm:px-6 md:px-8">
       <h2 className="text-sm font-medium text-gray-500">Folders</h2>
       <ul className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-        {folders.map((folder) => (
-          <FolderCard folder={folder} key={folder.name} />
-        ))}
+        {folders &&
+          folders.map((folder) => (
+            <FolderCard folder={folder} key={folder.name} />
+          ))}
       </ul>
     </div>
   );
