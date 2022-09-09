@@ -38,11 +38,15 @@ export const folderReducer = (
       const folders = state.data.folders.map((f) =>
         f._id === action.payload._id ? { ...f, ...action.payload } : f,
       );
+
       return { ...state, data: { ...state.data, folders } };
     }
-    // TODO:
     case DELETE_FOLDER: {
-      return { ...state, data: action.payload };
+      const folders = state.data.folders.filter(
+        (f) => f._id !== action.payload.folderId,
+      );
+
+      return { ...state, data: { ...state.data, folders } };
     }
     case ERROR_FOLDER: {
       return { ...state, loading: false, error: action.payload };

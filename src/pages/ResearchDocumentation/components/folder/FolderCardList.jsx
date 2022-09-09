@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   InformationCircleIcon,
@@ -10,12 +10,17 @@ import {
 import { BaseMenu, BaseMenuItem } from "~/components/generic/menu/BaseMenu";
 import FolderEditModal from "./FolderEditModal";
 import InfoModal from "../InfoModal";
+import { deleteFolder } from "~/store/actions/folderActions";
 
 function FolderCard({ folder }) {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openInfoModal, setOpenInfoModal] = useState(false);
 
-  const handleDelete = () => {};
+  const dispatch = useDispatch();
+
+  const handleDelete = (folderId) => {
+    dispatch(deleteFolder(folderId));
+  };
   const handleOpenEditModal = () => {
     setOpenInfoModal(false);
     setOpenEditModal(true);
@@ -49,7 +54,7 @@ function FolderCard({ folder }) {
               <BaseMenuItem
                 icon={TrashIcon}
                 name="Delete"
-                onClick={handleDelete}
+                onClick={() => handleDelete(folder._id)}
               />
             </BaseMenu>
           </div>

@@ -1,6 +1,7 @@
 import { folderApi } from "~/api";
 import {
   CREATE_FOLDER,
+  DELETE_FOLDER,
   ERROR_FOLDER,
   FETCH_FOLDER,
   LOADING_FOLDER,
@@ -80,6 +81,22 @@ export const updateFolderNote = (payload) => async (dispatch) => {
     const { data } = await folderApi.updateFolderNote({ folderId }, rest);
 
     dispatch({ type: UPDATE_PARENT_FOLDER, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ERROR_FOLDER,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deleteFolder = (folderId) => async (dispatch) => {
+  try {
+    await folderApi.deleteFolder({ folderId });
+
+    dispatch({ type: DELETE_FOLDER, payload: { folderId } });
   } catch (error) {
     dispatch({
       type: ERROR_FOLDER,
