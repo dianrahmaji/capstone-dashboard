@@ -15,7 +15,9 @@ function DocumentCard({ document }) {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openInfoModal, setOpenInfoModal] = useState(false);
 
-  const handleDownload = () => {};
+  const handleDownload = (link) => {
+    window.open(link);
+  };
   const handleDelete = () => {};
   const handleOpenEditModal = () => {
     setOpenInfoModal(false);
@@ -43,7 +45,7 @@ function DocumentCard({ document }) {
             <BaseMenuItem
               icon={DownloadIcon}
               name="Download"
-              onClick={handleDownload}
+              onClick={() => handleDownload(document.link)}
             />
             <BaseMenuItem
               icon={InformationCircleIcon}
