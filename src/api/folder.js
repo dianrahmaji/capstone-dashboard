@@ -3,4 +3,6 @@ export default (client) => ({
   updateFolder: ({ folderId }, data) =>
     client.put(`/api/folder/${folderId}`, data),
   fetchFolderById: ({ folderId }) => client.get(`/api/folder/${folderId}`),
+  updateFolderNote: ({ folderId }, data) =>
+    client.put(`/api/folder/${folderId}/note`, data),
 });

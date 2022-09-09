@@ -46,8 +46,9 @@ export const createFolder = (payload) => async (dispatch) => {
 };
 
 export const updateFolder = (payload) => async (dispatch) => {
-  const { folderId, type, ...rest } = payload;
   try {
+    const { folderId, type, ...rest } = payload;
+
     await folderApi.updateFolder({ folderId }, rest);
 
     if (type === "parent") {
@@ -61,6 +62,24 @@ export const updateFolder = (payload) => async (dispatch) => {
         payload: { _id: folderId, ...rest },
       });
     }
+  } catch (error) {
+    dispatch({
+      type: ERROR_FOLDER,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateFolderNote = (payload) => async (dispatch) => {
+  try {
+    const { folderId, ...rest } = payload;
+
+    const { data } = await folderApi.updateFolderNote({ folderId }, rest);
+
+    dispatch({ type: UPDATE_PARENT_FOLDER, payload: data });
   } catch (error) {
     dispatch({
       type: ERROR_FOLDER,

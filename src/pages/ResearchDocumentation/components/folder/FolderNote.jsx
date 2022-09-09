@@ -1,25 +1,28 @@
 /* eslint-disable react/no-danger */
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { PencilAltIcon } from "@heroicons/react/solid";
 
-import ReactQuill from "~/components/ReactQuill";
+import { updateFolderNote } from "~/store/actions/folderActions";
 
+import ReactQuill from "~/components/ReactQuill";
 import BaseButton from "~/components/generic/button/BaseButton";
 
 export default function FolderNote() {
   const [content, setContent] = useState("");
   const [isEditing, setIsEditing] = useState(false);
 
-  const { note } = useSelector((state) => state.folder.data);
+  const dispatch = useDispatch();
+
+  const { _id: folderId, note } = useSelector((state) => state.folder.data);
+  const { _id: authorId } = useSelector((state) => state.user.data);
 
   useEffect(() => {
     setContent(note);
   }, [note]);
 
   const handleSubmit = () => {
-    // eslint-disable-next-line no-console
-    console.log(content);
+    dispatch(updateFolderNote({ folderId, content, authorId }));
     setIsEditing(false);
   };
 
