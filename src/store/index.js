@@ -23,7 +23,6 @@ const persistConfig = {
   whitelist: [
     "user",
     "chat",
-    "folder",
     "activeFolderId",
     "selectedTeamId",
     "acceptedTeams",

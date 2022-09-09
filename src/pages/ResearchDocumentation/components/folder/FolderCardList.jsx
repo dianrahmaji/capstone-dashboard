@@ -57,6 +57,7 @@ function FolderCard({ folder }) {
       </li>
 
       <FolderEditModal
+        type="child"
         open={openEditModal}
         setOpen={setOpenEditModal}
         initialValues={folder}
@@ -74,7 +75,7 @@ function FolderCard({ folder }) {
 export default function FolderCardList() {
   const { folders } = useSelector((state) => state.folder.data);
   return (
-    folders.length > 0 && (
+    folders?.length > 0 && (
       <div className="mt-3 px-4 sm:px-6 md:px-8">
         <h2 className="text-sm font-medium text-gray-500">Folders</h2>
         <ul className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">

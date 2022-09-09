@@ -10,7 +10,7 @@ export default function InfoModal({ item, onOpenEditModal, ...props }) {
   const { createdAt, description, status, updatedAt, authors } = item;
 
   return (
-    <BaseModal title="IMG_4985.HEIC" {...props}>
+    <BaseModal title={item.name} {...props}>
       <div className="px-4 py-5 sm:px-0 sm:pt-0">
         <dl className="space-y-8 px-4 sm:space-y-6 sm:px-6">
           <div>

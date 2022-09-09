@@ -13,7 +13,7 @@ import { toLocaleFormat } from "~/utils/date";
 export default function FolderInfo({ open, setOpen }) {
   const [openEditInfo, setOpenEditInfo] = useState(false);
 
-  const { authors, createdAt, description, name, status, updatedAt } =
+  const { _id, authors, createdAt, description, name, status, updatedAt } =
     useSelector((state) => state.folder.data);
 
   return (
@@ -200,7 +200,12 @@ export default function FolderInfo({ open, setOpen }) {
           </div>
         </Dialog>
       </Transition.Root>
-      <FolderInfoModal open={openEditInfo} setOpen={setOpenEditInfo} />
+      <FolderInfoModal
+        type="parent"
+        open={openEditInfo}
+        setOpen={setOpenEditInfo}
+        initialValues={{ _id, name, description, status }}
+      />
     </>
   );
 }
