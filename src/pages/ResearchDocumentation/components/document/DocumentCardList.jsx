@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import prettyBytes from "pretty-bytes";
 import {
   DownloadIcon,
@@ -7,6 +7,8 @@ import {
   PencilAltIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
+
+import { deleteDocument } from "~/store/actions/documentActions";
 
 import { BaseMenu, BaseMenuItem } from "~/components/generic/menu/BaseMenu";
 import DocumentEditModal from "./DocumentEditModal";
@@ -16,10 +18,15 @@ function DocumentCard({ document }) {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openInfoModal, setOpenInfoModal] = useState(false);
 
+  const dispatch = useDispatch();
+
   const handleDownload = (link) => {
     window.open(link);
   };
-  const handleDelete = () => {};
+  const handleDelete = (document) => {
+    const { _id: documentId, storageDir } = document;
+    dispatch(deleteDocument({ documentId, storageDir }));
+  };
   const handleOpenEditModal = () => {
     setOpenInfoModal(false);
     setOpenEditModal(true);
@@ -34,8 +41,8 @@ function DocumentCard({ document }) {
           </button>
         </div>
         <div className="mt-2 flex items-start justify-between p-2">
-          <div>
-            <p className="pointer-events-none block truncate text-sm font-medium text-gray-900">
+          <div className="flex flex-col truncate">
+            <p className="pointer-events-none truncate text-sm font-medium text-gray-900">
               {document.name}
             </p>
             <p className="pointer-events-none block text-sm font-medium text-gray-500">
@@ -61,7 +68,7 @@ function DocumentCard({ document }) {
             <BaseMenuItem
               icon={TrashIcon}
               name="Delete"
-              onClick={handleDelete}
+              onClick={() => handleDelete(document)}
             />
           </BaseMenu>
         </div>

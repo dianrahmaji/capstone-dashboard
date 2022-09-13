@@ -14,8 +14,8 @@ import useSelectedTeam from "~/hooks/useSelectedTeam";
 // https://alexsidorenko.com/blog/react-list-rerender/
 function FileItem({ file, onSuccessUpload, onDelete }) {
   const [percentage, setPercentage] = useState(0);
-  const [storageDir, setStorageDir] = useState("");
   const sizeRef = useRef(0);
+  const storageDirRef = useRef("");
 
   const {
     repository: { _id: repositoryId },
@@ -24,11 +24,10 @@ function FileItem({ file, onSuccessUpload, onDelete }) {
   useEffect(() => {
     const uploadFile = () => {
       // TODO: Implement nested structure based on mongoDB
-      const _storageDir = `/${repositoryId}/${timestamp.now().toMillis()}_${
+      storageDirRef.current = `/${repositoryId}/${timestamp.now().toMillis()}_${
         file.name
       }`;
-      const storageRef = ref(storage, _storageDir);
-      setStorageDir(_storageDir);
+      const storageRef = ref(storage, storageDirRef.current);
 
       const upload = uploadBytesResumable(storageRef, file);
 
@@ -53,6 +52,7 @@ function FileItem({ file, onSuccessUpload, onDelete }) {
               name: file.name,
               size: sizeRef.current,
               url,
+              storageDir: storageDirRef.current,
             });
           }),
       );
@@ -62,7 +62,7 @@ function FileItem({ file, onSuccessUpload, onDelete }) {
 
   const handleDelete = async () => {
     try {
-      const storageRef = ref(storage, storageDir);
+      const storageRef = ref(storage, storageDirRef.current);
 
       await deleteObject(storageRef);
 
