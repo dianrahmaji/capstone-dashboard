@@ -51,7 +51,6 @@ function ActionContainer() {
         title="Add Document"
         open={openDocumentDialog}
         setOpen={setOpenDocumentDialog}
-        initialValues={{ title: "", note: "", files: [] }}
       />
       <FolderInfo open={openFoderInfo} setOpen={setOpenFolderInfo} />
     </>
