@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useField } from "formik";
 import {
   deleteObject,
@@ -15,6 +15,7 @@ import useSelectedTeam from "~/hooks/useSelectedTeam";
 function FileItem({ file, onSuccessUpload, onDelete }) {
   const [percentage, setPercentage] = useState(0);
   const [storageDir, setStorageDir] = useState("");
+  const sizeRef = useRef(0);
 
   const {
     repository: { _id: repositoryId },
@@ -34,6 +35,7 @@ function FileItem({ file, onSuccessUpload, onDelete }) {
       upload.on(
         "state_changed",
         (snapshot) => {
+          sizeRef.current = snapshot.totalBytes;
           const percent = Math.round(
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
           );
@@ -43,8 +45,13 @@ function FileItem({ file, onSuccessUpload, onDelete }) {
         (err) => console.log(err),
         () =>
           getDownloadURL(upload.snapshot.ref).then((url) => {
+            const splittedFileName = file.name.split(".");
+            const extension = splittedFileName[splittedFileName.length - 1];
+
             onSuccessUpload({
+              extension,
               name: file.name,
+              size: sizeRef.current,
               url,
             });
           }),
@@ -142,26 +149,25 @@ function BaseFileUpload({ label, multiple, ...props }) {
         {label}{" "}
         <span className="font-normal italic">(*Accepted file type TBD)</span>
       </div>
-      {(files.length === 0 && !multiple) ||
-        (multiple && (
-          <label
-            htmlFor={props.id || props.name}
-            className="mt-1 block w-32 cursor-pointer text-sm font-medium text-gray-700"
-          >
-            <div className="flex items-center gap-2 rounded-md bg-primary p-2 pl-3 text-white hover:bg-accent hover:text-secondary">
-              <div>{multiple ? "Choose Files" : "Choose File"}</div>{" "}
-              <UploadIcon className="inline h-4 w-4" />
-            </div>
-            <input
-              className="hidden"
-              type="file"
-              multiple={multiple}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              {...props}
-            />
-          </label>
-        ))}
+      {((files.length === 0 && !multiple) || multiple) && (
+        <label
+          htmlFor={props.id || props.name}
+          className="mt-1 block w-32 cursor-pointer text-sm font-medium text-gray-700"
+        >
+          <div className="flex items-center gap-2 rounded-md bg-primary p-2 pl-3 text-white hover:bg-accent hover:text-secondary">
+            <div>{multiple ? "Choose Files" : "Choose File"}</div>{" "}
+            <UploadIcon className="inline h-4 w-4" />
+          </div>
+          <input
+            className="hidden"
+            type="file"
+            multiple={multiple}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            {...props}
+          />
+        </label>
+      )}
       <div className="mt-2 text-sm text-gray-500" id="list">
         {files.map((file, index) => (
           <FileItem

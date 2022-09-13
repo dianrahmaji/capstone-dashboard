@@ -1,5 +1,12 @@
 /* eslint-disable default-param-last */
 import {
+  ADD_DOCUMENT,
+  DELETE_DOCUMENT,
+  ERROR_DOCUMENT,
+  LOADING_DOCUMENT,
+  UPDATE_DOCUMENT,
+} from "../constants/documentConstants";
+import {
   CREATE_FOLDER,
   DELETE_FOLDER,
   ERROR_FOLDER,
@@ -15,6 +22,7 @@ export const folderReducer = (
   action,
 ) => {
   switch (action.type) {
+    /** Folder cases */
     case LOADING_FOLDER: {
       return { ...state, loading: true };
     }
@@ -49,6 +57,38 @@ export const folderReducer = (
       return { ...state, data: { ...state.data, folders } };
     }
     case ERROR_FOLDER: {
+      return { ...state, loading: false, error: action.payload };
+    }
+    /** Document cases */
+    // TODO:
+    case LOADING_DOCUMENT: {
+      return { ...state, loading: true };
+    }
+    case ADD_DOCUMENT: {
+      return {
+        ...state,
+        loading: false,
+        data: {
+          ...state.data,
+          documents: [...state.data.documents, action.payload],
+        },
+      };
+    }
+    case UPDATE_DOCUMENT: {
+      const documents = state.data.documents.map((d) =>
+        d._id === action.payload._id ? { ...d, ...action.payload } : d,
+      );
+
+      return { ...state, loading: false, data: { ...state.data, documents } };
+    }
+    case DELETE_DOCUMENT: {
+      const documents = state.data.documents.filter(
+        ({ _id }) => _id !== action.payload,
+      );
+
+      return { ...state, loading: false, data: { ...state.data, documents } };
+    }
+    case ERROR_DOCUMENT: {
       return { ...state, loading: false, error: action.payload };
     }
     default:

@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 
@@ -16,11 +17,24 @@ import BaseFileUpload from "~/components/generic/form/BaseFileUpload";
 import BaseSelect from "~/components/generic/form/BaseSelect";
 import BaseTextArea from "~/components/generic/form/BaseTextArea";
 import BaseButton from "~/components/generic/button/BaseButton";
+import { addDocument } from "~/store/actions/documentActions";
 
 function DocumentModal({ open, setOpen, title }) {
+  const dispatch = useDispatch();
+
+  const folderId = useSelector((state) => state.activeFolderId);
+
   const handleSubmit = async (values, { setSubmitting }) => {
-    // eslint-disable-next-line no-console
-    console.log(values);
+    const { files, authors, ...rest } = values;
+
+    const payload = {
+      folderId,
+      authors: authors.map(({ _id }) => _id),
+      ...files[0],
+      ...rest,
+    };
+
+    dispatch(addDocument(payload));
     setSubmitting(false);
     setOpen(false);
   };

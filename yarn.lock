@@ -6375,6 +6375,7 @@ __metadata:
     postcss: ^8.4.14
     prettier: ^2.7.1
     prettier-plugin-tailwindcss: ^0.1.13
+    pretty-bytes: ^6.0.0
     react: ^18.0.0
     react-dom: ^18.0.0
     react-quill: 2.0.0-beta.2
@@ -7419,6 +7420,13 @@ __metadata:
   bin:
     prettier: bin-prettier.js
   checksum: 55a4409182260866ab31284d929b3cb961e5fdb91fe0d2e099dac92eaecec890f36e524b4c19e6ceae839c99c6d7195817579cdffc8e2c80da0cb794463a748b
+  languageName: node
+  linkType: hard
+
+"pretty-bytes@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "pretty-bytes@npm:6.0.0"
+  checksum: 0bb9f95e617236404b29a8392c6efd82d65805f622f5e809ecd70068102be857d4e3276c86d2a32fa2ef851cc29472e380945dab7bec83ec79bd57a19a10faf7
   languageName: node
   linkType: hard
 

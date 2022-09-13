@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import chat from "./chat";
+import document from "./document";
 import folder from "./folder";
 import user from "./user";
 import team from "./team";
@@ -16,9 +17,18 @@ function createAxios(token) {
 }
 
 const chatApi = chat(axios);
+const documentApi = document(axios);
 const folderApi = folder(axios);
 const userApi = user(axios);
 const teamApi = team(axios);
 const notificationApi = notification(axios);
 
-export { createAxios, chatApi, folderApi, userApi, teamApi, notificationApi };
+export {
+  createAxios,
+  chatApi,
+  documentApi,
+  folderApi,
+  userApi,
+  teamApi,
+  notificationApi,
+};

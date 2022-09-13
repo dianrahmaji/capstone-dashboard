@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import prettyBytes from "pretty-bytes";
 import {
   DownloadIcon,
   InformationCircleIcon,
@@ -38,7 +39,7 @@ function DocumentCard({ document }) {
               {document.name}
             </p>
             <p className="pointer-events-none block text-sm font-medium text-gray-500">
-              {document.size}
+              {prettyBytes(document.size)}
             </p>
           </div>
           <BaseMenu>
