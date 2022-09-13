@@ -53,7 +53,7 @@ function DocumentCard({ document }) {
             <BaseMenuItem
               icon={DownloadIcon}
               name="Download"
-              onClick={() => handleDownload(document.link)}
+              onClick={() => handleDownload(document.url)}
             />
             <BaseMenuItem
               icon={InformationCircleIcon}

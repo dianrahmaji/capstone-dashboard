@@ -31,12 +31,14 @@ export const addDocument = (payload) => async (dispatch) => {
 export const deleteDocument = (payload) => async (dispatch) => {
   const { storageDir, documentId } = payload;
   try {
-    const storageRef = ref(storage, storageDir);
+    const isSample = storageDir.split("/")[1] === "sample";
 
-    await Promise.all([
-      deleteObject(storageRef),
-      documentApi.deleteDocument({ documentId }),
-    ]);
+    if (!isSample) {
+      const storageRef = ref(storage, storageDir);
+      await deleteObject(storageRef);
+    }
+
+    await documentApi.deleteDocument({ documentId });
 
     dispatch({ type: DELETE_DOCUMENT, payload: documentId });
   } catch (error) {
