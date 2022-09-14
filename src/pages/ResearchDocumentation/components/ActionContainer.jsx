@@ -7,7 +7,7 @@ import {
 
 import BaseButton from "~/components/generic/button/BaseButton";
 import BaseIconButton from "~/components/generic/button/BaseIconButton";
-import DocumentModal from "./document/DocumentModal";
+import DocumentAddModal from "./document/DocumentAddModal";
 import FolderInfo from "./folder/FolderInfo";
 import FolderModal from "./folder/FolderModal";
 
@@ -47,7 +47,7 @@ function ActionContainer() {
         setOpen={setOpenFolderDialog}
         initialValues={{ name: "", description: "" }}
       />
-      <DocumentModal
+      <DocumentAddModal
         title="Add Document"
         open={openDocumentDialog}
         setOpen={setOpenDocumentDialog}

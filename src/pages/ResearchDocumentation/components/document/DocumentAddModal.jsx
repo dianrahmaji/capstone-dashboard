@@ -19,7 +19,7 @@ import BaseTextArea from "~/components/generic/form/BaseTextArea";
 import BaseButton from "~/components/generic/button/BaseButton";
 import { addDocument } from "~/store/actions/documentActions";
 
-function DocumentModal({ open, setOpen, title }) {
+export default function DocumentAddModal({ open, setOpen, title }) {
   const dispatch = useDispatch();
 
   const folderId = useSelector((state) => state.activeFolderId);
@@ -96,5 +96,3 @@ function DocumentModal({ open, setOpen, title }) {
     </BaseModal>
   );
 }
-
-export default DocumentModal;

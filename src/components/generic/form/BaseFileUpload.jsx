@@ -45,14 +45,17 @@ function FileItem({ file, onSuccessUpload, onDelete }) {
         () =>
           getDownloadURL(upload.snapshot.ref).then((url) => {
             const splittedFileName = file.name.split(".");
+            const name = splittedFileName
+              .slice(0, splittedFileName.length - 1)
+              .join(".");
             const extension = splittedFileName[splittedFileName.length - 1];
 
             onSuccessUpload({
               extension,
-              name: file.name,
+              name,
               size: sizeRef.current,
-              url,
               storageDir: storageDirRef.current,
+              url,
             });
           }),
       );

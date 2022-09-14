@@ -60,7 +60,6 @@ export const folderReducer = (
       return { ...state, loading: false, error: action.payload };
     }
     /** Document cases */
-    // TODO:
     case LOADING_DOCUMENT: {
       return { ...state, loading: true };
     }

@@ -42,8 +42,8 @@ function DocumentCard({ document }) {
         </div>
         <div className="mt-2 flex items-start justify-between p-2">
           <div className="flex flex-col truncate">
-            <p className="pointer-events-none truncate text-sm font-medium text-gray-900">
-              {document.name}
+            <p className="pointer-events-none text-sm font-medium text-gray-900">
+              {document.name}.{document.extension}
             </p>
             <p className="pointer-events-none block text-sm font-medium text-gray-500">
               {prettyBytes(document.size)}
@@ -73,7 +73,6 @@ function DocumentCard({ document }) {
           </BaseMenu>
         </div>
       </li>
-      {/* TODO: Move this to DocumentCardList */}
       <InfoModal
         item={document}
         open={openInfoModal}

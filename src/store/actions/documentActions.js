@@ -8,6 +8,7 @@ import {
   DELETE_DOCUMENT,
   ERROR_DOCUMENT,
   LOADING_DOCUMENT,
+  UPDATE_DOCUMENT,
 } from "../constants/documentConstants";
 
 export const addDocument = (payload) => async (dispatch) => {
@@ -17,6 +18,24 @@ export const addDocument = (payload) => async (dispatch) => {
     const { data } = await documentApi.addDocument(payload);
 
     dispatch({ type: ADD_DOCUMENT, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ERROR_DOCUMENT,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateDocument = (payload) => async (dispatch) => {
+  try {
+    const { _id: documentId, ...rest } = payload;
+
+    const { data } = await documentApi.updateDocument({ documentId }, rest);
+
+    dispatch({ type: UPDATE_DOCUMENT, payload: data });
   } catch (error) {
     dispatch({
       type: ERROR_DOCUMENT,
