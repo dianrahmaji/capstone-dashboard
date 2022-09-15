@@ -5,7 +5,6 @@ function BaseBreadcrumbs({ pages, separator: SeparatorIcon }) {
   return (
     <nav className="flex" aria-label="Breadcrumb">
       <ol className="flex items-center">
-        {/* FIXME: update null checking */}
         {pages.map(
           (p, i) =>
             p.name && (
@@ -20,7 +19,8 @@ function BaseBreadcrumbs({ pages, separator: SeparatorIcon }) {
                   <Link
                     to={p.redirect}
                     className={clsx("text-base font-medium ", {
-                      "text-gray-500 hover:text-gray-700": !p.current,
+                      "text-gray-500 hover:text-gray-700 hover:underline":
+                        !p.current,
                       "text-gray-900": p.current,
                     })}
                     aria-current={p.current ? "page" : undefined}

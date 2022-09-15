@@ -19,20 +19,32 @@ function ResearchDocumentation() {
   const dispatch = useDispatch();
 
   const { folderId } = useParams();
-  const { name } = useSelector((state) => state.folder.data);
+  const { name, parents } = useSelector((state) => state.folder.data);
 
   useEffect(() => {
     dispatch(fetchFolderById(folderId));
     dispatch(setActiveFolderId(folderId));
   }, [dispatch, folderId]);
 
-  const pages = [{ name, redirect: "#", current: true }];
-
   return (
     <DashboardLayout>
       <div className="pt-6 pb-40">
         <div className="mx-auto px-4 sm:px-6 md:px-8">
-          <BaseBreadcrumbs pages={pages} separator={ChevronRightIcon} />
+          {parents && (
+            <BaseBreadcrumbs
+              pages={[
+                ...parents
+                  .sort((a, b) => b.level - a.level)
+                  .map(({ _id, name }) => ({
+                    name,
+                    redirect: `/documentation/${_id}`,
+                    current: false,
+                  })),
+                { name, redirect: "#", current: true },
+              ]}
+              separator={ChevronRightIcon}
+            />
+          )}
         </div>
         <div className="mt-4 flex items-center" aria-hidden="true">
           <div className="w-full border-t border-gray-300" />
