@@ -2,6 +2,7 @@
 import { createContext, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
+import { v4 as uuidv4 } from "uuid";
 
 import { updateChatLog } from "~/store/actions/chatActions";
 import { updateNotification } from "~/store/actions/notificationActions";
@@ -27,8 +28,7 @@ export default function ChatProvider({ children }) {
 
     dispatch(
       updateChatLog({
-        // TODO: use uuid instead
-        _id: Math.floor(Math.random() * 1_000_000),
+        _id: uuidv4(),
         text: message,
         createdAt: new Date(),
         sender: { _id, fullName },
@@ -49,10 +49,17 @@ export default function ChatProvider({ children }) {
       socketRef.current.emit("join_room", roomId);
 
       socketRef.current.on("receive_message", (message) => {
-        dispatch(updateChatLog(message));
-        dispatch(updateNotification());
+        if (message.sender !== _id) {
+          dispatch(updateChatLog(message));
+          dispatch(updateNotification());
+        }
       });
     }
+
+    return () => {
+      socketRef.current.off("receive_message");
+      socketRef.current.emit("leave_room", roomId);
+    };
   }, [dispatch, roomId, _id, acceptedTeams]);
 
   const value = {

@@ -48,6 +48,7 @@
     "socket.io-client": "^4.5.1",
     "sweetalert2": "^11.4.17",
     "sweetalert2-react-content": "^5.0.0",
+    "uuid": "^9.0.0",
     "vitest": "^0.14.2",
     "yup": "^0.32.11"
   },

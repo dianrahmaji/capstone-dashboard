@@ -23,8 +23,9 @@ function ChatContainer() {
   }, [dispatch, userId, roomId]);
 
   useEffect(() => {
+    dispatch(resetNotification(userId, roomId));
     endMessage.current?.scrollIntoView();
-  }, []);
+  }, [log, dispatch, userId, roomId]);
 
   return (
     <div className="mx-auto h-5/6 w-full overflow-y-scroll px-4 sm:px-6 md:px-14">
