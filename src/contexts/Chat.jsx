@@ -57,8 +57,8 @@ export default function ChatProvider({ children }) {
     }
 
     return () => {
-      socketRef.current.off("receive_message");
-      socketRef.current.emit("leave_room", roomId);
+      socketRef.current?.off("receive_message");
+      socketRef.current?.emit("leave_room", roomId);
     };
   }, [dispatch, roomId, _id, acceptedTeams]);
 

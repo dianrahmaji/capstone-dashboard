@@ -1,15 +1,11 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-    jest: true,
-  },
   extends: [
     "react-app",
     "react-app/jest",
     "airbnb",
     "plugin:react/recommended",
     "plugin:tailwindcss/recommended",
+    "plugin:cypress/recommended",
     "plugin:prettier/recommended",
   ],
   overrides: [],
@@ -21,7 +17,13 @@ module.exports = {
     sourceType: "module",
     project: "./jsconfig.json",
   },
-  plugins: ["react", "tailwindcss", "prettier"],
+  plugins: ["react", "tailwindcss", "cypress", "prettier"],
+  env: {
+    browser: true,
+    es2021: true,
+    jest: true,
+    "cypress/globals": true,
+  },
   rules: {
     quotes: ["error", "double", { avoidEscape: true }],
     "react/jsx-uses-react": "off",
