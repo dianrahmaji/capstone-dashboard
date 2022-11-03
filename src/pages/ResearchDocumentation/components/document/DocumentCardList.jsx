@@ -36,9 +36,9 @@ function DocumentCard({ document }) {
     <>
       <li className="relative rounded-lg border">
         <div className="group aspect-w-10 aspect-h-7 block overflow-hidden rounded-lg bg-gray-100 focus-within:ring-offset-2 focus-within:ring-offset-gray-100">
-          <button type="button" className="absolute inset-0 focus:outline-none">
+          <div type="button" className="absolute inset-0 focus:outline-none">
             <span className="sr-only">View details for {document.name}</span>
-          </button>
+          </div>
         </div>
         <div className="mt-2 flex items-start justify-between p-2">
           <div className="flex flex-col truncate">

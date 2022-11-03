@@ -4,7 +4,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import { chatReducer } from "./reducers/chatReducers";
+import { attachmentReducer, chatReducer } from "./reducers/chatReducers";
 import {
   folderReducer,
   activeFolderIdReducer,
@@ -31,6 +31,7 @@ const persistConfig = {
 
 const reducer = combineReducers({
   chat: chatReducer,
+  attachments: attachmentReducer,
   folder: folderReducer,
   activeFolderId: activeFolderIdReducer,
   notification: notificationReducer,

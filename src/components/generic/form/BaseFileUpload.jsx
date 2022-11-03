@@ -10,6 +10,7 @@ import { UploadIcon } from "@heroicons/react/solid";
 
 import { storage, timestamp } from "~/config/firebase";
 import useSelectedTeam from "~/hooks/useSelectedTeam";
+import { splitNameAndExtension } from "~/utils/file";
 
 // https://alexsidorenko.com/blog/react-list-rerender/
 function FileItem({ file, onSuccessUpload, onDelete }) {
@@ -44,15 +45,8 @@ function FileItem({ file, onSuccessUpload, onDelete }) {
         (err) => console.log(err),
         () =>
           getDownloadURL(upload.snapshot.ref).then((url) => {
-            const splittedFileName = file.name.split(".");
-            const name = splittedFileName
-              .slice(0, splittedFileName.length - 1)
-              .join(".");
-            const extension = splittedFileName[splittedFileName.length - 1];
-
             onSuccessUpload({
-              extension,
-              name,
+              ...splitNameAndExtension(file.name),
               size: sizeRef.current,
               storageDir: storageDirRef.current,
               url,
@@ -119,7 +113,7 @@ function BaseFileUpload({ label, multiple, ...props }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue]);
 
-  const handdleSuccessUpload = useCallback((newFile) => {
+  const handleSuccessUpload = useCallback((newFile) => {
     setInputValue((prevState) => [...prevState, newFile]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -176,7 +170,7 @@ function BaseFileUpload({ label, multiple, ...props }) {
           <FileItem
             file={file}
             key={file.name}
-            onSuccessUpload={handdleSuccessUpload}
+            onSuccessUpload={handleSuccessUpload}
             onDelete={() => handleDelete(index)}
           />
         ))}

@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { PaperClipIcon } from "@heroicons/react/outline";
 import { PaperAirplaneIcon } from "@heroicons/react/solid";
 
 import useChat from "~/hooks/useChat";
+
+import AttachmentButton from "./AttachmentButton";
+import Attachments from "./Attachments";
 import BaseIconButton from "~/components/generic/button/BaseIconButton";
 
 function ChatInput() {
@@ -10,8 +12,8 @@ function ChatInput() {
   const [message, setMessage] = useState("");
   const { sendMessage } = useChat();
 
-  const handleSubmit = async (e) => {
-    if (e.key && !(e.key === "Enter")) {
+  const handleSubmit = (e) => {
+    if ((e.key && !(e.key === "Enter")) || message.length === 0) {
       return;
     }
     sendMessage(message);
@@ -22,6 +24,7 @@ function ChatInput() {
 
   return (
     <div className="w-full px-10 pb-10">
+      <Attachments />
       <div className="flex items-center justify-end gap-2">
         <div className="mt-1 grow">
           <input
@@ -35,9 +38,7 @@ function ChatInput() {
             onKeyDown={handleSubmit}
           />
         </div>
-        <BaseIconButton secondary>
-          <PaperClipIcon className="h-6 w-6" aria-hidden="true" />
-        </BaseIconButton>
+        <AttachmentButton />
         <BaseIconButton secondary loading={loading} onClick={handleSubmit}>
           <PaperAirplaneIcon className="h-6 w-6 rotate-90" aria-hidden="true" />
         </BaseIconButton>

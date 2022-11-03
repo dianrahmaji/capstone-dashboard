@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import { createContext, useEffect, useRef } from "react";
+import { createContext, useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
 import { v4 as uuidv4 } from "uuid";
@@ -20,21 +20,31 @@ export default function ChatProvider({ children }) {
   } = useSelector((state) => state.user);
   const { data: acceptedTeams } = useSelector((state) => state.acceptedTeams);
 
-  const sendMessage = (message) => {
-    socketRef.current.emit("send_message", roomId, {
-      sender: _id,
-      text: message,
-    });
+  const sendMessage = useCallback(
+    (message, type = "text", url = "") => {
+      socketRef.current.emit("send_message", roomId, {
+        body: message,
+        sender: _id,
+        type,
+        url,
+      });
 
-    dispatch(
-      updateChatLog({
-        _id: uuidv4(),
-        text: message,
-        createdAt: new Date(),
-        sender: { _id, fullName },
-      }),
-    );
-  };
+      if (type === "text")
+        dispatch(
+          updateChatLog([
+            {
+              _id: uuidv4(),
+              body: message,
+              createdAt: new Date(),
+              sender: { _id, fullName },
+              type,
+              url,
+            },
+          ]),
+        );
+    },
+    [_id, dispatch, fullName, roomId],
+  );
 
   useEffect(() => {
     if (!socketRef.current && _id) {
