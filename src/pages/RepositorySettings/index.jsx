@@ -1,6 +1,7 @@
 import useSelectedTeam from "~/hooks/useSelectedTeam";
 
 import DashboardLayout from "~/layouts/DashboardLayout";
+import Contributions from "./components/Contributions";
 import MemberTable from "./components/MemberTable";
 import RepositoryDetails from "./components/RepositoryDetails";
 
@@ -19,6 +20,7 @@ function RepositorySettings() {
             <>
               <RepositoryDetails />
               <MemberTable />
+              <Contributions />
             </>
           )}
         </div>
