@@ -9,6 +9,8 @@ import {
   files,
   status,
 } from "~/utils/validation";
+import { addDocument } from "~/store/actions/documentActions";
+import useSelectedTeam from "~/hooks/useSelectedTeam";
 
 import AuthorInput from "./AuthorInput";
 import BaseModal from "~/components/generic/modal/BaseModal";
@@ -17,12 +19,15 @@ import BaseFileUpload from "~/components/generic/form/BaseFileUpload";
 import BaseSelect from "~/components/generic/form/BaseSelect";
 import BaseTextArea from "~/components/generic/form/BaseTextArea";
 import BaseButton from "~/components/generic/button/BaseButton";
-import { addDocument } from "~/store/actions/documentActions";
 
 export default function DocumentAddModal({ open, setOpen, title }) {
   const dispatch = useDispatch();
 
   const folderId = useSelector((state) => state.activeFolderId);
+
+  const {
+    repository: { _id: repositoryId },
+  } = useSelectedTeam();
 
   const handleSubmit = async (values, { setSubmitting }) => {
     const { files, authors, ...rest } = values;
@@ -31,6 +36,7 @@ export default function DocumentAddModal({ open, setOpen, title }) {
       folderId,
       authors: authors.map(({ _id }) => _id),
       ...files[0],
+      repositoryId,
       ...rest,
     };
 
@@ -38,6 +44,7 @@ export default function DocumentAddModal({ open, setOpen, title }) {
     setSubmitting(false);
     setOpen(false);
   };
+
   return (
     <BaseModal title={title} open={open} setOpen={setOpen}>
       <Formik
