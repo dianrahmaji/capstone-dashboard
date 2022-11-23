@@ -3,7 +3,7 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 
 import {
-  authors,
+  contributions,
   craftingTime,
   description,
   files,
@@ -30,11 +30,14 @@ export default function DocumentAddModal({ open, setOpen, title }) {
   } = useSelectedTeam();
 
   const handleSubmit = async (values, { setSubmitting }) => {
-    const { files, authors, ...rest } = values;
+    const { files, contributions, ...rest } = values;
 
     const payload = {
       folderId,
-      authors: authors.map(({ _id }) => _id),
+      contributions: contributions.map(({ author, contribution }) => ({
+        author: author._id,
+        contribution,
+      })),
       ...files[0],
       repositoryId,
       ...rest,
@@ -50,13 +53,13 @@ export default function DocumentAddModal({ open, setOpen, title }) {
       <Formik
         initialValues={{
           description: "",
-          authors: [],
+          contributions: [],
           status: "",
           files: [],
           craftingTime: 0,
         }}
         validationSchema={Yup.object({
-          authors,
+          contributions,
           craftingTime,
           description,
           files,
@@ -81,7 +84,7 @@ export default function DocumentAddModal({ open, setOpen, title }) {
             type="number"
           />
           <BaseTextArea label="Description" name="description" />
-          <AuthorInput label="authors" name="authors" />
+          <AuthorInput label="contributions" name="contributions" />
           <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
             <BaseButton
               type="submit"

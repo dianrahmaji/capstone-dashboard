@@ -1,14 +1,14 @@
 import { useField } from "formik";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 import {
   craftingTime,
   description,
   name,
   status,
-  authors,
+  contributions,
 } from "~/utils/validation";
-import { updateDocument } from "~/store/actions/documentActions";
+// import { updateDocument } from "~/store/actions/documentActions";
 
 import AuthorInput from "./AuthorInput";
 import BaseInput from "~/components/generic/form/BaseInput";
@@ -52,26 +52,27 @@ export default function DocumentEditModal(props) {
     setOpen,
   } = props;
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
-    const { _id, authors, description, name, status } = values;
-    const payload = {
-      authors: authors.map(({ _id }) => _id),
-      description,
-      _id,
-      name,
-      status,
-    };
+    // const { _id, contributions, description, name, status } = values;
+    // const payload = {
+    //   description,
+    //   _id,
+    //   name,
+    //   status,
+    // };
 
-    dispatch(updateDocument(payload));
+    console.log(values);
+
+    // dispatch(updateDocument(payload));
     setOpen(false);
   };
 
   return (
     <FormModal
       title="Edit Document"
-      validation={{ craftingTime, description, name, status, authors }}
+      validation={{ craftingTime, description, name, status, contributions }}
       handleSubmit={handleSubmit}
       {...props}
     >
@@ -96,7 +97,7 @@ export default function DocumentEditModal(props) {
         <option value="critical">Critical</option>
       </BaseSelect>
       <BaseTextArea label="Description" name="description" />
-      <AuthorInput label="authors" name="authors" />
+      <AuthorInput label="contributions" name="contributions" />
     </FormModal>
   );
 }

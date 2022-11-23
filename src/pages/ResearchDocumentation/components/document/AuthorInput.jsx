@@ -4,18 +4,18 @@ import { PlusIcon, XIcon } from "@heroicons/react/solid";
 
 import { getProfileFromFullName } from "~/utils/text";
 
-import BaseButton from "~/components/generic/button/BaseButton";
 import AuthorAddModal from "./AuthorAddModal";
+import BaseButton from "~/components/generic/button/BaseButton";
 
-function Authors({ authors, onDelete }) {
+function Authors({ authors, onUpdateContribution, onDelete }) {
   return (
     <div className="mt-3 text-sm text-gray-900 sm:col-span-2">
       <ul className="flex-1 divide-y divide-gray-200 overflow-y-auto">
         {authors &&
-          authors.map((author, index) => (
+          authors.map(({ author, contribution }, index) => (
             <li key={author._id}>
               <div className="group relative flex items-center py-3 px-1">
-                <div className="-m-1 block flex-1 p-1">
+                <div className="block flex-1 p-1">
                   <div className="relative flex min-w-0 flex-1 items-center">
                     <span className="relative inline-block shrink-0">
                       {author.pictureUrl ? (
@@ -42,10 +42,22 @@ function Authors({ authors, onDelete }) {
                     </div>
                   </div>
                 </div>
-                <XIcon
-                  className="h-5 w-5 rounded-md text-gray-400 hover:cursor-pointer hover:text-blue-700"
-                  onClick={() => onDelete(index)}
-                />
+                <div className="flex items-center gap-2">
+                  <input
+                    className="block w-16 appearance-none rounded-md border px-3 py-2 text-right shadow-sm placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-primary disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none sm:text-sm"
+                    type="number"
+                    min={0}
+                    value={contribution}
+                    onChange={(e) =>
+                      onUpdateContribution(author._id, e.target.value)
+                    }
+                  />
+                  Hour(s)
+                  <XIcon
+                    className="h-5 w-5 rounded-md text-gray-400 hover:cursor-pointer hover:text-blue-700"
+                    onClick={() => onDelete(index)}
+                  />
+                </div>
               </div>
             </li>
           ))}
@@ -71,6 +83,14 @@ export default function AuthorInput({ label, ...props }) {
     setValue([...value, newValue]);
   };
 
+  const handleUpdateContribution = (authorId, contribution) => {
+    setValue(
+      value.map((v) =>
+        v.author._id === authorId ? { ...v, contribution } : v,
+      ),
+    );
+  };
+
   const handleDelete = (index) => {
     const newValue = [...value];
     newValue.splice(index, 1);
@@ -84,10 +104,14 @@ export default function AuthorInput({ label, ...props }) {
         htmlFor={props.id || props.name}
         className="block text-sm font-medium text-gray-700"
       >
-        Author(s)
+        Contribution(s)
       </label>
       <div onBlur={handleBlur}>
-        <Authors authors={value} onDelete={handleDelete} />
+        <Authors
+          authors={value}
+          onUpdateContribution={handleUpdateContribution}
+          onDelete={handleDelete}
+        />
         <BaseButton
           type="button"
           className="ml-auto mt-2 flex"

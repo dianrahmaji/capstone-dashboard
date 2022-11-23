@@ -7,7 +7,7 @@ import BaseButton from "~/components/generic/button/BaseButton";
 import BaseModal from "~/components/generic/modal/BaseModal";
 
 export default function InfoModal({ item, onOpenEditModal, ...props }) {
-  const { createdAt, description, status, updatedAt, authors } = item;
+  const { createdAt, description, status, updatedAt, contributions } = item;
 
   return (
     <BaseModal title={item.name} {...props}>
@@ -61,18 +61,18 @@ export default function InfoModal({ item, onOpenEditModal, ...props }) {
 
           <div>
             <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-              Author(s)
+              Contribution(s)
             </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
               <ul className="flex-1 divide-y divide-gray-200 overflow-y-auto">
-                {authors &&
-                  authors.map((author) => (
+                {contributions &&
+                  contributions.map(({ author, contribution }) => (
                     <li key={author._id}>
                       <div className="group relative flex items-center py-3 px-1">
                         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                        <a href="#" className="-m-1 block flex-1 p-1">
+                        <div href="#" className="-m-1 block flex-1 p-1">
                           <div
-                            className="absolute inset-0 group-hover:bg-gray-50"
+                            className="absolute inset-0"
                             aria-hidden="true"
                           />
                           <div className="relative flex min-w-0 flex-1 items-center">
@@ -102,7 +102,8 @@ export default function InfoModal({ item, onOpenEditModal, ...props }) {
                               </p>
                             </div>
                           </div>
-                        </a>
+                        </div>
+                        <div>{contribution} Hour(s)</div>
                       </div>
                     </li>
                   ))}

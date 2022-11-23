@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 
-import { author } from "~/utils/validation";
+import { author, contribution } from "~/utils/validation";
 import useSelectedTeam from "~/hooks/useSelectedTeam";
 
 import AuthorCombobox from "./AuthorCombobox";
 import BaseButton from "~/components/generic/button/BaseButton";
 import BaseModal from "~/components/generic/modal/BaseModal";
+import BaseInput from "~/components/generic/form/BaseInput";
 
 export default function AuthorAddModal({
   open,
@@ -29,13 +30,16 @@ export default function AuthorAddModal({
     setFilteredMembers(_filteredMembers);
   };
 
-  const handleSubmit = async ({ author }, { setSubmitting, setFieldError }) => {
+  const handleSubmit = (
+    { author, contribution },
+    { setSubmitting, setFieldError },
+  ) => {
     if (authors.includes(author)) {
       setFieldError("author", "Author is already added!");
       return;
     }
 
-    onAddAuthor(author);
+    onAddAuthor({ author, contribution });
 
     setSubmitting(false);
     setOpen(false);
@@ -44,19 +48,24 @@ export default function AuthorAddModal({
   return (
     <BaseModal title="Add Author" open={open} setOpen={setOpen}>
       <Formik
-        initialValues={{ author: {} }}
-        validationSchema={Yup.object({ author })}
+        initialValues={{ author: {}, contribution: 0 }}
+        validationSchema={Yup.object({ author, contribution })}
         onSubmit={handleSubmit}
       >
         <Form>
           <AuthorCombobox
-            label=""
+            label="Author"
             id="author"
             name="author"
             value={selectedMember}
             onChange={setSelectedMember}
             setQuery={handleQuery}
             filteredItems={filteredMembers}
+          />
+          <BaseInput
+            label="Contribution (Hours)"
+            name="contribution"
+            type="number"
           />
           <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
             <BaseButton
