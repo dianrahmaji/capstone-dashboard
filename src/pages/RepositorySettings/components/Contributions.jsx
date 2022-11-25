@@ -4,52 +4,18 @@ import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
-const data = [
-  {
-    name: "Monica",
-    steps: 45688,
-    pictureSettings: {
-      src: "https://www.amcharts.com/wp-content/uploads/2019/04/monica.jpg",
-    },
-  },
-  {
-    name: "Joey",
-    steps: 35781,
-    pictureSettings: {
-      src: "https://www.amcharts.com/wp-content/uploads/2019/04/joey.jpg",
-    },
-  },
-  {
-    name: "Ross",
-    steps: 25464,
-    pictureSettings: {
-      src: "https://www.amcharts.com/wp-content/uploads/2019/04/ross.jpg",
-    },
-  },
-  {
-    name: "Phoebe",
-    steps: 18788,
-    pictureSettings: {
-      src: "https://www.amcharts.com/wp-content/uploads/2019/04/phoebe.jpg",
-    },
-  },
-  {
-    name: "Rachel",
-    steps: 15465,
-    pictureSettings: {
-      src: "https://www.amcharts.com/wp-content/uploads/2019/04/rachel.jpg",
-    },
-  },
-  {
-    name: "Chandler",
-    steps: 11561,
-    pictureSettings: {
-      src: "https://www.amcharts.com/wp-content/uploads/2019/04/chandler.jpg",
-    },
-  },
-];
+import useSelectedTeam from "~/hooks/useSelectedTeam";
 
 export default function Contributions() {
+  const { members } = useSelectedTeam();
+
+  const data = members.map((m) => ({
+    ...m,
+    pictureSettings: {
+      src: "https://flyinryanhawks.org/wp-content/uploads/2016/08/profile-placeholder.png",
+    },
+  }));
+
   useLayoutEffect(() => {
     const root = am5.Root.new("contribution_chart");
 
@@ -81,7 +47,7 @@ export default function Contributions() {
 
     const yAxis = chart.yAxes.push(
       am5xy.CategoryAxis.new(root, {
-        categoryField: "name",
+        categoryField: "fullName",
         renderer: yRenderer,
         paddingRight: 40,
       }),
@@ -89,18 +55,18 @@ export default function Contributions() {
 
     const series = chart.series.push(
       am5xy.ColumnSeries.new(root, {
-        name: "Income",
+        name: "Contributions",
         xAxis,
         yAxis,
-        valueXField: "steps",
-        categoryYField: "name",
+        valueXField: "contributions",
+        categoryYField: "fullName",
         sequencedInterpolation: true,
         calculateAggregates: true,
         maskBullets: false,
         tooltip: am5.Tooltip.new(root, {
           dy: -30,
           pointerOrientation: "vertical",
-          labelText: "{valueX}",
+          labelText: "{valueX} Hours",
         }),
       }),
     );
@@ -196,15 +162,15 @@ export default function Contributions() {
     series.set("heatRules", [
       {
         dataField: "valueX",
-        min: am5.color(0xe5dc36),
-        max: am5.color(0x5faa46),
+        min: am5.color(0xfdcb2c),
+        max: am5.color(0x073c64),
         target: series.columns.template,
         key: "fill",
       },
       {
         dataField: "valueX",
-        min: am5.color(0xe5dc36),
-        max: am5.color(0x5faa46),
+        min: am5.color(0xfdcb2c),
+        max: am5.color(0x073c64),
         target: circleTemplate,
         key: "fill",
       },

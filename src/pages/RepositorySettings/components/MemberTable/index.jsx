@@ -11,7 +11,7 @@ import BaseTableItem from "~/components/generic/table/BaseTableItem";
 import MemberAddModal from "./MemberAddModal";
 import MemberEditModal from "./MemberEditModal";
 
-const header = ["Name", "Faculty", "Type", "Role"];
+const header = ["Name", "Faculty", "Contributions", "Type", "Role"];
 
 function MemberTable() {
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -47,6 +47,7 @@ function MemberTable() {
             <tr key={m._id}>
               <BaseTableItem>{m.fullName}</BaseTableItem>
               <BaseTableItem>{m.faculty}</BaseTableItem>
+              <BaseTableItem>{m.contributions} Hour(s)</BaseTableItem>
               <BaseTableItem>{m.accountType}</BaseTableItem>
               <BaseTableItem>
                 {m.isAdmin ? "Administrator" : "Researcher"}

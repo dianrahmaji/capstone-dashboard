@@ -7,7 +7,7 @@ import { userApi } from "~/api";
 import BaseTable from "~/components/generic/table/BaseTable";
 import BaseTableItem from "~/components/generic/table/BaseTableItem";
 
-const header = ["Name", "Title", "Time", "Status", "Year"];
+const header = ["Name", "Title", "Contributions", "Status", "Year"];
 
 function RepositoryHistory() {
   const [teams, setTeams] = useState([]);
@@ -39,8 +39,7 @@ function RepositoryHistory() {
             <tr key={t._id}>
               <BaseTableItem>{t.name}</BaseTableItem>
               <BaseTableItem>{t.repository.title}</BaseTableItem>
-              {/* TODO: Add hours field */}
-              <BaseTableItem>100 Hours</BaseTableItem>
+              <BaseTableItem>{t.contributions} Hours</BaseTableItem>
               <BaseTableItem>
                 <span
                   className={clsx(
