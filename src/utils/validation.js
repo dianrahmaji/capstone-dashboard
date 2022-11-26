@@ -8,9 +8,6 @@ export const contribution = Yup.number()
   .required("contribution is required")
   .min(1, "Must be more than 0");
 export const contributions = Yup.array().min(1, "Contributions are required");
-export const craftingTime = Yup.number()
-  .required("Crafting time is required")
-  .min(1, "Must be more than 0");
 export const date = Yup.date().required("Date is required");
 export const description = Yup.string().required("Description is required");
 export const documentName = Yup.string().required("Document name is required");

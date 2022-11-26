@@ -2,19 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 
-import {
-  contributions,
-  craftingTime,
-  description,
-  files,
-  status,
-} from "~/utils/validation";
+import { contributions, description, files, status } from "~/utils/validation";
 import { addDocument } from "~/store/actions/documentActions";
 import useSelectedTeam from "~/hooks/useSelectedTeam";
 
 import AuthorInput from "./AuthorInput";
 import BaseModal from "~/components/generic/modal/BaseModal";
-import BaseInput from "~/components/generic/form/BaseInput";
 import BaseFileUpload from "~/components/generic/form/BaseFileUpload";
 import BaseSelect from "~/components/generic/form/BaseSelect";
 import BaseTextArea from "~/components/generic/form/BaseTextArea";
@@ -56,11 +49,9 @@ export default function DocumentAddModal({ open, setOpen, title }) {
           contributions: [],
           status: "",
           files: [],
-          craftingTime: 0,
         }}
         validationSchema={Yup.object({
           contributions,
-          craftingTime,
           description,
           files,
           status,
@@ -78,11 +69,6 @@ export default function DocumentAddModal({ open, setOpen, title }) {
             <option value="done">Done</option>
             <option value="critical">Critical</option>
           </BaseSelect>
-          <BaseInput
-            label="Crafting Time (Hours)"
-            name="craftingTime"
-            type="number"
-          />
           <BaseTextArea label="Description" name="description" />
           <AuthorInput label="contributions" name="contributions" />
           <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">

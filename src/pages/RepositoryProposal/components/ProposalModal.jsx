@@ -1,7 +1,7 @@
 import BaseInput from "~/components/generic/form/BaseInput";
 import BaseMultipleInput from "~/components/generic/form/BaseMultipleInput";
+import BaseTextArea from "~/components/generic/form/BaseTextArea";
 import FormModal from "~/components/FormModal";
-import TextEditorInput from "~/components/TextEditorInput";
 
 import { name, title, topics, description, date } from "~/utils/validation";
 
@@ -35,7 +35,7 @@ function ProposalModal(props) {
         <BaseInput label="Start Date" name="startDate" type="date" />
         <BaseInput label="End Date" name="endDate" type="date" />
       </div>
-      <TextEditorInput label="Description" name="description" />
+      <BaseTextArea label="Description" name="description" />
     </FormModal>
   );
 }

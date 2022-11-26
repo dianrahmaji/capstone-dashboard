@@ -1,17 +1,10 @@
 import { useField } from "formik";
 import { useDispatch } from "react-redux";
 
-import {
-  craftingTime,
-  description,
-  name,
-  status,
-  contributions,
-} from "~/utils/validation";
+import { description, name, status, contributions } from "~/utils/validation";
 import { updateDocument } from "~/store/actions/documentActions";
 
 import AuthorInput from "./AuthorInput";
-import BaseInput from "~/components/generic/form/BaseInput";
 import BaseSelect from "~/components/generic/form/BaseSelect";
 import BaseTextArea from "~/components/generic/form/BaseTextArea";
 import FormModal from "~/components/FormModal";
@@ -55,12 +48,10 @@ export default function DocumentEditModal(props) {
   const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
-    const { _id, contributions, description, name, status, craftingTime } =
-      values;
+    const { _id, contributions, description, name, status } = values;
     const payload = {
       _id,
       name,
-      craftingTime,
       status,
       description,
       contributions: contributions.map((c) => ({
@@ -77,7 +68,7 @@ export default function DocumentEditModal(props) {
   return (
     <FormModal
       title="Edit Document"
-      validation={{ craftingTime, description, name, status, contributions }}
+      validation={{ description, name, status, contributions }}
       handleSubmit={handleSubmit}
       {...props}
     >
@@ -86,11 +77,6 @@ export default function DocumentEditModal(props) {
         name="name"
         type="text"
         extension={extension}
-      />
-      <BaseInput
-        label="Crafting Time (Hours)"
-        name="craftingTime"
-        type="number"
       />
       <BaseSelect label="Status" name="status">
         <option value="" disabled defaultValue>
