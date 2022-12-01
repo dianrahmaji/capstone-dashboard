@@ -104,7 +104,7 @@ function Attachment({ attachment }) {
         ) : (
           <DownloadIcon
             onClick={() => handleDownload(attachment.url)}
-            className="mr-3 h-5 w-5 cursor-pointer"
+            className="mr-3 h-5 w-5 cursor-pointer text-gray-400 hover:text-accent"
           />
         )}
       </div>
