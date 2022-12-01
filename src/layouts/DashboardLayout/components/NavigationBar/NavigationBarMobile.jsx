@@ -21,7 +21,7 @@ function NavigationBarMobile({ sidebarOpen, setSidebarOpen }) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Dialog.Overlay className="fixed inset-0 bg-gray-600 bg-opacity-75" />
+          <Dialog.Overlay className="fixed inset-0 bg-gray-600/75" />
         </Transition.Child>
         <Transition.Child
           as={Fragment}
@@ -32,7 +32,7 @@ function NavigationBarMobile({ sidebarOpen, setSidebarOpen }) {
           leaveFrom="translate-x-0"
           leaveTo="-translate-x-full"
         >
-          <div className="relative flex w-full max-w-xs flex-1 flex-col bg-indigo-700 pt-5 pb-4">
+          <div className="relative flex w-full max-w-xs flex-1 flex-col bg-primary pt-5 pb-4">
             <Transition.Child
               as={Fragment}
               enter="ease-in-out duration-300"

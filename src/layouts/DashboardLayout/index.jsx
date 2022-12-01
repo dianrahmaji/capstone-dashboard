@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 
+import Header from "./components/Header";
 import NavigationBar from "./components/NavigationBar";
 
 const whitelist = ["/", "/proposal", "/profile"];
@@ -30,6 +31,7 @@ function DashboardLayout({ children }) {
         setSidebarOpen={setSidebarOpen}
       />
       <div className="flex h-screen w-screen flex-1 flex-col md:pl-64">
+        <Header setSidebarOpen={setSidebarOpen} />
         <main className="h-full">{children}</main>
       </div>
     </div>
