@@ -20,7 +20,7 @@ function RepositoryDetails() {
       <div className="my-6 ml-4 flex flex-col space-y-2">
         <div>
           <dt className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
-            Topics
+            Topik
           </dt>
           <dd className="mt-1 text-base text-gray-900 sm:col-span-2">
             {team.topics.length > 0 &&
@@ -29,7 +29,7 @@ function RepositoryDetails() {
         </div>
         <div>
           <dt className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
-            Date
+            Tanggal
           </dt>
           <dd className="mt-1 text-base text-gray-900 sm:col-span-2">
             <time dateTime={repository?.startDate}>
@@ -43,7 +43,7 @@ function RepositoryDetails() {
         </div>
         <div>
           <dt className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
-            Description
+            Deskripsi
           </dt>
           <dd className="mt-1 text-base text-gray-900 sm:col-span-2">
             {/* eslint-disable react/no-danger */}
@@ -63,7 +63,7 @@ function RepositoryDetails() {
         )}
       </div>
       <RepositoryEditModal
-        title="Repository Edit Modal"
+        title="Edit Informasi Repositori"
         open={openDialog}
         setOpen={setOpenDialog}
         initialValues={{

@@ -32,7 +32,7 @@ function DashboardLayout({ children }) {
       />
       <div className="flex h-screen w-screen flex-1 flex-col md:pl-64">
         <Header setSidebarOpen={setSidebarOpen} />
-        <main className="h-full">{children}</main>
+        <main className="h-5/6">{children}</main>
       </div>
     </div>
   );

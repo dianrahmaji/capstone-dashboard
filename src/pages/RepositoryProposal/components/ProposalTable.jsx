@@ -13,7 +13,7 @@ import BaseTable from "~/components/generic/table/BaseTable";
 import BaseTableItem from "~/components/generic/table/BaseTableItem";
 import ProposalModal from "./ProposalModal";
 
-const header = ["Title", "Status", "Actions"];
+const header = ["Judul", "Status", "Aksi"];
 
 function ProposalTable() {
   const [openDialog, setOpenDialog] = useState(false);

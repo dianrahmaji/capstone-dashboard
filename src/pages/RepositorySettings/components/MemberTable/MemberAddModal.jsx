@@ -51,7 +51,7 @@ function MemberAddModal({ open, setOpen, members, teamId }) {
   };
 
   return (
-    <BaseModal title="Add Member" open={open} setOpen={setOpen}>
+    <BaseModal title="Tambah Anggota" open={open} setOpen={setOpen}>
       <Formik
         initialValues={{ researcher: "", role: "" }}
         validationSchema={Yup.object({ researcher, role })}
@@ -59,7 +59,7 @@ function MemberAddModal({ open, setOpen, members, teamId }) {
       >
         <Form>
           <ResearcherCombobox
-            label="Search by Fullname or Email"
+            label="Cari dengan Nama atau Email"
             id="researcher"
             name="researcher"
             value={selectedReseracher}
@@ -70,10 +70,10 @@ function MemberAddModal({ open, setOpen, members, teamId }) {
           />
           <BaseSelect label="Role" name="role">
             <option value="" disabled defaultValue>
-              Select role
+              Pilih
             </option>
-            <option value="administrator">Administrator</option>
-            <option value="researcher">Researcher</option>
+            <option value="administrator">Group Manager</option>
+            <option value="researcher">Peneliti</option>
           </BaseSelect>
           <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
             <BaseButton

@@ -32,7 +32,7 @@ function ChatInput() {
             name="name"
             id="name"
             className="block w-full rounded-full border-gray-300 px-4 shadow-sm focus:border-primary focus:ring-primary sm:text-sm"
-            placeholder="Message"
+            placeholder="Pesan"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={handleSubmit}

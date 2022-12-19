@@ -43,7 +43,7 @@ function FolderCard({ folder }) {
             <BaseMenu>
               <BaseMenuItem
                 icon={InformationCircleIcon}
-                name="Details"
+                name="Detail"
                 onClick={() => setOpenInfoModal(true)}
               />
               <BaseMenuItem
@@ -53,7 +53,7 @@ function FolderCard({ folder }) {
               />
               <BaseMenuItem
                 icon={TrashIcon}
-                name="Delete"
+                name="Hapus"
                 onClick={() => handleDelete(folder._id)}
               />
             </BaseMenu>
@@ -82,7 +82,7 @@ export default function FolderCardList() {
   return (
     folders?.length > 0 && (
       <div className="mt-3 px-4 sm:px-6 md:px-8">
-        <h2 className="text-sm font-medium text-gray-500">Folders</h2>
+        <h2 className="text-sm font-medium text-gray-500">Folder</h2>
         <ul className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
           {folders.map((folder) => (
             <FolderCard folder={folder} key={folder.name} />

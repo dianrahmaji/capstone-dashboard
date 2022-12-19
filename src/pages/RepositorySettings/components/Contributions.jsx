@@ -66,7 +66,7 @@ export default function Contributions() {
         tooltip: am5.Tooltip.new(root, {
           dy: -30,
           pointerOrientation: "vertical",
-          labelText: "{valueX} Hours",
+          labelText: "{valueX} Jam",
         }),
       }),
     );
@@ -201,7 +201,7 @@ export default function Contributions() {
 
   return (
     <div>
-      <h2 className="mt-3 text-xl font-medium">Contributions</h2>
+      <h2 className="mt-3 text-xl font-medium">Kontribusi</h2>
       <div id="contribution_chart" className="h-[500px] w-full" />
     </div>
   );

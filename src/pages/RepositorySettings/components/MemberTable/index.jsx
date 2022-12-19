@@ -11,7 +11,7 @@ import BaseTableItem from "~/components/generic/table/BaseTableItem";
 import MemberAddModal from "./MemberAddModal";
 import MemberEditModal from "./MemberEditModal";
 
-const header = ["Name", "Faculty", "Contributions", "Type", "Role"];
+const header = ["Nama", "Fakultas", "Kontribusi", "Tipe", "Role"];
 
 function MemberTable() {
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -40,17 +40,19 @@ function MemberTable() {
 
   return (
     <div>
-      <h2 className="mt-3 text-xl font-medium">Research Member</h2>
-      <BaseTable header={[...header, isAdmin && "Action"]} loading={loading}>
+      <h2 className="mt-3 text-xl font-medium">Anggota Peneliti</h2>
+      <BaseTable header={[...header, isAdmin && "Aksi"]} loading={loading}>
         {members &&
           members.map((m) => (
             <tr key={m._id}>
               <BaseTableItem>{m.fullName}</BaseTableItem>
               <BaseTableItem>{m.faculty}</BaseTableItem>
-              <BaseTableItem>{m.contributions} Hour(s)</BaseTableItem>
-              <BaseTableItem>{m.accountType}</BaseTableItem>
+              <BaseTableItem>{m.contributions} Jam</BaseTableItem>
               <BaseTableItem>
-                {m.isAdmin ? "Administrator" : "Researcher"}
+                {m.accountType === "student" ? "Mahasiswa" : "Dosen"}
+              </BaseTableItem>
+              <BaseTableItem>
+                {m.isAdmin ? "Group Manager" : "Peneliti"}
               </BaseTableItem>
               {isAdmin && userId !== m._id && (
                 <BaseTableItem className="relative flex gap-2">

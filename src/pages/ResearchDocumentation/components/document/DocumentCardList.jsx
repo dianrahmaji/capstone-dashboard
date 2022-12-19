@@ -56,12 +56,12 @@ function DocumentCard({ document }) {
           <BaseMenu>
             <BaseMenuItem
               icon={DownloadIcon}
-              name="Download"
+              name="Unduh"
               onClick={() => handleDownload(document.url)}
             />
             <BaseMenuItem
               icon={InformationCircleIcon}
-              name="Details"
+              name="Detail"
               onClick={() => setOpenInfoModal(true)}
             />
             <BaseMenuItem
@@ -71,7 +71,7 @@ function DocumentCard({ document }) {
             />
             <BaseMenuItem
               icon={TrashIcon}
-              name="Delete"
+              name="Hapus"
               onClick={() => handleDelete(document)}
             />
           </BaseMenu>
@@ -98,7 +98,7 @@ function DocumentCardList() {
   return (
     documents?.length > 0 && (
       <div className="px-4 sm:px-6 md:px-8">
-        <h2 className="text-sm font-medium text-gray-500">Documents</h2>
+        <h2 className="text-sm font-medium text-gray-500">Dokumen</h2>
         <ul className="mx-auto mt-3 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-5 xl:gap-x-8">
           {documents.map((document) => (
             <DocumentCard document={document} key={document._id} />

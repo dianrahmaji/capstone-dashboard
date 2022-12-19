@@ -77,7 +77,7 @@ function Register() {
           <LockClosedIcon className="h-10 w-10 text-primary" />
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Sign in to your account
+          Sign Up
         </h2>
       </div>
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -96,27 +96,27 @@ function Register() {
             }}
             handleSubmit={handleSubmit}
           >
-            <BaseInput label="Full Name" name="fullName" type="text" />
+            <BaseInput label="Nama" name="fullName" type="text" />
             <BaseInput label="Email" name="email" type="email" />
             <BaseInput label="NIM / NIP" name="userId" type="text" />
-            <BaseInput label="Faculty" name="faculty" type="text" />
-            <BaseInput label="Major" name="major" type="text" />
-            <BaseMultipleInput label="Specialities" name="specialities" />
-            <BaseSelect label="Account Type" name="accountType">
+            <BaseInput label="Fakultas" name="faculty" type="text" />
+            <BaseInput label="Program Studi" name="major" type="text" />
+            <BaseMultipleInput label="Keahlian" name="specialities" />
+            <BaseSelect label="Tipe Akun" name="accountType">
               <option value="" disabled defaultValue>
-                Select account type
+                Pilih tipe akun
               </option>
-              <option value="lecturer">Lecturer</option>
-              <option value="student">Student</option>
+              <option value="lecturer">Dosen</option>
+              <option value="student">Mahasiswa</option>
             </BaseSelect>
             <BaseInput label="Password" name="password" type="password" />
             <BaseButton className="mt-6 w-full" type="submit">
-              Register
+              Daftar
             </BaseButton>
           </BaseForm>
           <div className="mt-6">
             <p className="mt-2 text-center text-sm text-gray-600">
-              Already have an account?{" "}
+              Sudah memiliki akun?{" "}
               <Link
                 to="/login"
                 className="font-medium text-primary hover:text-accent"

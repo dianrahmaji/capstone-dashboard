@@ -30,23 +30,23 @@ function MemberEditModal({ teamId, setOpen, initialValues, ...props }) {
 
   return (
     <FormModal
-      title="Edit Member"
+      title="Edit Anggota"
       setOpen={setOpen}
       validation={{ fullName, role }}
       handleSubmit={handleSubmit}
       initialValues={initialValues}
       {...props}
     >
-      <BaseInput label="Full Name" name="fullName" type="text" disabled />
+      <BaseInput label="Peneliti" name="fullName" type="text" disabled />
       <BaseSelect label="Role" name="role">
         <option value="" disabled defaultValue>
-          Select role
+          Pilih role
         </option>
         <option value="administrator" disabled={initialValues?.isAdmin}>
-          Administrator
+          Group Manager
         </option>
         <option value="researcher" disabled={!initialValues?.isAdmin}>
-          Researcher
+          Peneliti
         </option>
       </BaseSelect>
     </FormModal>

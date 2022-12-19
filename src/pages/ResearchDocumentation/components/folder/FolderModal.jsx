@@ -24,8 +24,8 @@ function FolderModal({ setOpen, ...props }) {
       setOpen={setOpen}
       {...props}
     >
-      <BaseInput label="Folder Name" name="name" />
-      <BaseTextArea label="Description" name="description" />
+      <BaseInput label="Nama Folder" name="name" />
+      <BaseTextArea label="Deskripsi" name="description" />
     </FormModal>
   );
 }

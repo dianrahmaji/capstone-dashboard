@@ -7,7 +7,13 @@ import { userApi } from "~/api";
 import BaseTable from "~/components/generic/table/BaseTable";
 import BaseTableItem from "~/components/generic/table/BaseTableItem";
 
-const header = ["Name", "Title", "Contributions", "Status", "Year"];
+const header = [
+  "Nama Tim",
+  "Judul Repositori",
+  "Kontribusi",
+  "Status",
+  "Tahun",
+];
 
 function RepositoryHistory() {
   const [teams, setTeams] = useState([]);
@@ -31,7 +37,7 @@ function RepositoryHistory() {
   return (
     <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 md:px-8">
       <h1 className="text-2xl font-semibold text-gray-900">
-        Repository Penelitian
+        Repositori Penelitian
       </h1>
       <BaseTable header={header} loading={loading} empty={teams.length === 0}>
         {teams &&
@@ -39,7 +45,7 @@ function RepositoryHistory() {
             <tr key={t._id}>
               <BaseTableItem>{t.name}</BaseTableItem>
               <BaseTableItem>{t.repository.title}</BaseTableItem>
-              <BaseTableItem>{t.contributions} Hours</BaseTableItem>
+              <BaseTableItem>{t.contributions} Jam</BaseTableItem>
               <BaseTableItem>
                 <span
                   className={clsx(

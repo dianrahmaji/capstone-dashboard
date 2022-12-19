@@ -66,7 +66,7 @@ export default function TeamInfo({ open, setOpen }) {
                           <dl className="space-y-8 px-4 sm:space-y-6 sm:px-6">
                             <div>
                               <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-                                Description
+                                Deskripsi
                               </dt>
                               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
                                 {/* eslint-disable react/no-danger */}
@@ -80,7 +80,7 @@ export default function TeamInfo({ open, setOpen }) {
                             </div>
                             <div>
                               <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-                                Topics
+                                Topik
                               </dt>
                               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
                                 {team.topics.length > 0 &&
@@ -91,7 +91,7 @@ export default function TeamInfo({ open, setOpen }) {
                             </div>
                             <div>
                               <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-                                Date
+                                Tanggal
                               </dt>
                               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
                                 <time dateTime={repository?.startDate}>
@@ -108,7 +108,7 @@ export default function TeamInfo({ open, setOpen }) {
                       </div>
                       <div className="px-4 sm:px-6">
                         <div className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-                          Members
+                          Anggota
                         </div>
                         <ul className="flex-1 divide-y divide-gray-200 overflow-y-auto">
                           {members &&
@@ -161,7 +161,7 @@ export default function TeamInfo({ open, setOpen }) {
                                           &nbsp;
                                           {person.isAdmin && (
                                             <span className="text-gray-700">
-                                              (Administrator)
+                                              (Group Manager)
                                             </span>
                                           )}
                                         </div>

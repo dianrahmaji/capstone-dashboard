@@ -46,7 +46,7 @@ export default function AuthorAddModal({
   };
 
   return (
-    <BaseModal title="Add Author" open={open} setOpen={setOpen}>
+    <BaseModal title="Tambah Author" open={open} setOpen={setOpen}>
       <Formik
         initialValues={{ author: {}, contribution: 0 }}
         validationSchema={Yup.object({ author, contribution })}
@@ -54,7 +54,7 @@ export default function AuthorAddModal({
       >
         <Form>
           <AuthorCombobox
-            label="Author"
+            label="Peneliti"
             id="author"
             name="author"
             value={selectedMember}
@@ -63,7 +63,7 @@ export default function AuthorAddModal({
             filteredItems={filteredMembers}
           />
           <BaseInput
-            label="Contribution (Hours)"
+            label="Kontribusi (Jam)"
             name="contribution"
             type="number"
           />

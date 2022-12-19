@@ -28,14 +28,14 @@ function ProposalModal(props) {
       initialValues={initialValues}
       {...props}
     >
-      <BaseInput label="Team Name" name="name" type="text" />
-      <BaseInput label="Repository Title" name="title" type="text" />
-      <BaseMultipleInput label="Topics" name="topics" />
+      <BaseInput label="Nama Tim" name="name" type="text" />
+      <BaseInput label="Judul Repositori" name="title" type="text" />
+      <BaseMultipleInput label="Topik" name="topics" />
       <div className="grid grid-cols-2 gap-3">
-        <BaseInput label="Start Date" name="startDate" type="date" />
-        <BaseInput label="End Date" name="endDate" type="date" />
+        <BaseInput label="Tanggal Mulai" name="startDate" type="date" />
+        <BaseInput label="Tanggal Selesai" name="endDate" type="date" />
       </div>
-      <BaseTextArea label="Description" name="description" />
+      <BaseTextArea label="Deskripsi" name="description" />
     </FormModal>
   );
 }

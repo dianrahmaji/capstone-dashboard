@@ -59,18 +59,18 @@ export default function DocumentAddModal({ open, setOpen, title }) {
         onSubmit={handleSubmit}
       >
         <Form>
-          <BaseFileUpload label="Documents" name="files" id="files" />
+          <BaseFileUpload label="Dokumen" name="files" id="files" />
           <BaseSelect label="Status" name="status">
             <option value="" disabled defaultValue>
-              Select current status
+              Pilih status
             </option>
             <option value="ongoing">Ongoing</option>
             <option value="draft">Draft</option>
             <option value="done">Done</option>
             <option value="critical">Critical</option>
           </BaseSelect>
-          <BaseTextArea label="Description" name="description" />
-          <AuthorInput label="contributions" name="contributions" />
+          <BaseTextArea label="Deskripsi" name="description" />
+          <AuthorInput label="Kontribusi" name="contributions" />
           <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
             <BaseButton
               type="submit"

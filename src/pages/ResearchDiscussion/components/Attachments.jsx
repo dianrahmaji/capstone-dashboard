@@ -50,7 +50,7 @@ function AddFileButton() {
     >
       <div className="flex flex-col items-center justify-center">
         <PlusIcon className="h-8 w-8" />
-        <span>Add File</span>
+        <span>Tambah File</span>
       </div>
       <input
         ref={fileInputRef}
@@ -140,7 +140,7 @@ export default function Attachments() {
                 name="name"
                 id="name"
                 className="block w-full rounded-full border-gray-300 px-4 shadow-sm focus:border-primary focus:ring-primary sm:text-sm"
-                placeholder="Message (Optional)"
+                placeholder="Pesan"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyDown={handleSubmit}

@@ -52,7 +52,7 @@ function Authors({ authors, onUpdateContribution, onDelete }) {
                       onUpdateContribution(author._id, e.target.value)
                     }
                   />
-                  Hour(s)
+                  Jam
                   <XIcon
                     className="h-5 w-5 rounded-md text-gray-400 hover:cursor-pointer hover:text-blue-700"
                     onClick={() => onDelete(index)}
@@ -104,7 +104,7 @@ export default function AuthorInput({ label, ...props }) {
         htmlFor={props.id || props.name}
         className="block text-sm font-medium text-gray-700"
       >
-        Contribution(s)
+        Kontribusi
       </label>
       <div onBlur={handleBlur}>
         <Authors
@@ -118,7 +118,7 @@ export default function AuthorInput({ label, ...props }) {
           onClick={() => setOpenAddAuthorModal(true)}
         >
           <PlusIcon className="mr-2 h-5 w-5" />
-          <span>Add Author</span>
+          <span>Tambah Author</span>
         </BaseButton>
         <AuthorAddModal
           authors={value}

@@ -25,7 +25,7 @@ function DetailProfile() {
         )}
         <div className="grid grid-cols-[1fr_2fr]">
           <dd className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
-            Name
+            Nama
           </dd>
           <dt className="text-base text-gray-900">{user.fullName}</dt>
           <dd className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
@@ -33,15 +33,15 @@ function DetailProfile() {
           </dd>
           <dt className="text-base text-gray-900">{user.email}</dt>
           <dd className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
-            Faculty
+            Fakultas
           </dd>
           <dt className="text-base text-gray-900">{user.faculty}</dt>
           <dd className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
-            Major
+            Program Studi
           </dd>
           <dt className="text-base text-gray-900">{user.major}</dt>
           <dd className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
-            Specialities
+            Keahlian
           </dd>
           <dt className="text-base text-gray-900">
             {user.specialities.length > 0 &&

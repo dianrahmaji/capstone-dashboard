@@ -58,7 +58,7 @@ function BaseMultipleInput({ label, ...props }) {
       >
         {label}{" "}
         <span className="font-normal">
-          (separate with <span className="italic">space</span>)
+          (pisahkan dengan <span className="italic">spasi</span>)
         </span>
       </label>
       <div className="mt-1">

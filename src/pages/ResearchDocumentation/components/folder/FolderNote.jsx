@@ -37,7 +37,7 @@ export default function FolderNote() {
               onClick={handleSubmit}
             >
               <PencilAltIcon className="h-5 w-5" />
-              Save Note
+              Simpan Catatan
             </BaseButton>
           </div>
         </>
@@ -53,7 +53,7 @@ export default function FolderNote() {
               onClick={() => setIsEditing(true)}
             >
               <PencilAltIcon className="h-5 w-5" />
-              Edit Note
+              Edit Catatan
             </BaseButton>
           </div>
         </div>

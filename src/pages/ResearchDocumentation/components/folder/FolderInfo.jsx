@@ -71,7 +71,7 @@ export default function FolderInfo({ open, setOpen }) {
                             <dl className="space-y-8 px-4 sm:space-y-6 sm:px-6">
                               <div>
                                 <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-                                  Created At
+                                  Waktu Dibuat
                                 </dt>
                                 <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
                                   {toLocaleFormat(createdAt)}
@@ -79,7 +79,7 @@ export default function FolderInfo({ open, setOpen }) {
                               </div>
                               <div>
                                 <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-                                  Last Modified
+                                  Terakhir Diubah
                                 </dt>
                                 <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
                                   {toLocaleFormat(updatedAt)}
@@ -87,7 +87,7 @@ export default function FolderInfo({ open, setOpen }) {
                               </div>
                               <div>
                                 <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-                                  Description
+                                  Deskripsi
                                 </dt>
                                 <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
                                   {description}
@@ -120,7 +120,7 @@ export default function FolderInfo({ open, setOpen }) {
                         </div>
                         <div className="px-4 sm:px-6">
                           <div className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-                            Author(s)
+                            Author
                           </div>
                           <ul className="flex-1 divide-y divide-gray-200 overflow-y-auto">
                             {authors &&
@@ -189,7 +189,7 @@ export default function FolderInfo({ open, setOpen }) {
                           className="mx-6 mt-2"
                           onClick={() => setOpenEditInfo(true)}
                         >
-                          Edit Details
+                          Edit Detail
                         </BaseButton>
                       </div>
                     )}

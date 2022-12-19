@@ -15,7 +15,7 @@ export default function InfoModal({ item, onOpenEditModal, ...props }) {
         <dl className="space-y-8 px-4 sm:space-y-6 sm:px-6">
           <div>
             <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-              Created At
+              Waktu Dibuat
             </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
               {toLocaleFormat(createdAt)}
@@ -23,7 +23,7 @@ export default function InfoModal({ item, onOpenEditModal, ...props }) {
           </div>
           <div>
             <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-              Last Modified
+              Terakhir Diubah
             </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
               {toLocaleFormat(updatedAt)}
@@ -31,7 +31,7 @@ export default function InfoModal({ item, onOpenEditModal, ...props }) {
           </div>
           <div>
             <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-              Description
+              Deskripsi
             </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
               {description}
@@ -61,7 +61,7 @@ export default function InfoModal({ item, onOpenEditModal, ...props }) {
 
           <div>
             <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-              Contribution(s)
+              Kontribusi
             </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
               <ul className="flex-1 divide-y divide-gray-200 overflow-y-auto">
@@ -103,7 +103,7 @@ export default function InfoModal({ item, onOpenEditModal, ...props }) {
                             </div>
                           </div>
                         </div>
-                        <div>{contribution} Hour(s)</div>
+                        <div>{contribution} Jam</div>
                       </div>
                     </li>
                   ))}
@@ -115,7 +115,7 @@ export default function InfoModal({ item, onOpenEditModal, ...props }) {
           className="mt-5 inline-flex w-full justify-center rounded-md border border-transparent px-4 py-2 shadow-sm focus:outline-none sm:col-start-2 sm:text-sm"
           onClick={onOpenEditModal}
         >
-          Edit Details
+          Edit Detail
         </BaseButton>
       </div>
     </BaseModal>

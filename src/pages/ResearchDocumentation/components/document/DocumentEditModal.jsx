@@ -67,28 +67,28 @@ export default function DocumentEditModal(props) {
 
   return (
     <FormModal
-      title="Edit Document"
+      title="Edit Dokumen"
       validation={{ description, name, status, contributions }}
       handleSubmit={handleSubmit}
       {...props}
     >
       <InputWithAddOns
-        label="Name"
+        label="Nama"
         name="name"
         type="text"
         extension={extension}
       />
       <BaseSelect label="Status" name="status">
         <option value="" disabled defaultValue>
-          Select current status
+          Pilih status
         </option>
         <option value="ongoing">Ongoing</option>
         <option value="draft">Draft</option>
         <option value="done">Done</option>
         <option value="critical">Critical</option>
       </BaseSelect>
-      <BaseTextArea label="Description" name="description" />
-      <AuthorInput label="contributions" name="contributions" />
+      <BaseTextArea label="Deskripsi" name="description" />
+      <AuthorInput label="Kontribusi" name="contributions" />
     </FormModal>
   );
 }

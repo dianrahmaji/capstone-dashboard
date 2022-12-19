@@ -25,14 +25,14 @@ function ActionContainer() {
             onClick={() => setOpenFolderDialog(true)}
           >
             <FolderAddIcon className="h-6 w-6" />{" "}
-            <span className="text-xs md:text-sm">Add Folder</span>
+            <span className="text-xs md:text-sm">Tambah Folder</span>
           </BaseButton>
           <BaseButton
             className="mt-3 flex items-center gap-3"
             onClick={() => setOpenDocumentDialog(true)}
           >
             <DocumentAddIcon className="h-6 w-6" />{" "}
-            <span className="text-xs md:text-sm">Upload Document</span>
+            <span className="text-xs md:text-sm">Tambah Dokumen</span>
           </BaseButton>
         </div>
         <div className="ml-4 mt-4 flex shrink-0">
@@ -42,13 +42,13 @@ function ActionContainer() {
         </div>
       </div>
       <FolderModal
-        title="Add Folder"
+        title="Tambah Folder"
         open={openFolderDialog}
         setOpen={setOpenFolderDialog}
         initialValues={{ name: "", description: "" }}
       />
       <DocumentAddModal
-        title="Add Document"
+        title="Tambah Dokumen"
         open={openDocumentDialog}
         setOpen={setOpenDocumentDialog}
       />
