@@ -1,5 +1,4 @@
 import {
-  HomeIcon,
   FolderIcon,
   ChatAlt2Icon,
   CogIcon,
@@ -7,7 +6,6 @@ import {
   UserIcon,
 } from "@heroicons/react/outline";
 
-import Home from "~/pages/Home";
 import ResearchDocumentation from "~/pages/ResearchDocumentation";
 import ResearchDiscussion from "~/pages/ResearchDiscussion";
 import RepositorySettings from "~/pages/RepositorySettings";
@@ -15,12 +13,6 @@ import RepositoryProposal from "~/pages/RepositoryProposal";
 import UserProfile from "~/pages/UserProfile";
 
 const dashboard = {
-  root: {
-    path: "/",
-    name: "Beranda",
-    icon: HomeIcon,
-    element: <Home />,
-  },
   documentation: {
     path: "/documentation/:folderId",
     name: "Dokumentasi Penelitian",
@@ -46,7 +38,7 @@ const dashboard = {
     element: <RepositoryProposal />,
   },
   profile: {
-    path: "/profile",
+    path: "/",
     name: "Profil",
     icon: UserIcon,
     element: <UserProfile />,
