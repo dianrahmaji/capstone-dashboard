@@ -2,7 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 
-import { contributions, description, files, status } from "~/utils/validation";
+import {
+  contributions,
+  description,
+  files,
+  references,
+  status,
+} from "~/utils/validation";
 import { addDocument } from "~/store/actions/documentActions";
 import useSelectedTeam from "~/hooks/useSelectedTeam";
 
@@ -12,6 +18,7 @@ import BaseFileUpload from "~/components/generic/form/BaseFileUpload";
 import BaseSelect from "~/components/generic/form/BaseSelect";
 import BaseTextArea from "~/components/generic/form/BaseTextArea";
 import BaseButton from "~/components/generic/button/BaseButton";
+import ReferenceInput from "./ReferenceInput";
 
 export default function DocumentAddModal({ open, setOpen, title }) {
   const dispatch = useDispatch();
@@ -23,7 +30,7 @@ export default function DocumentAddModal({ open, setOpen, title }) {
   } = useSelectedTeam();
 
   const handleSubmit = async (values, { setSubmitting }) => {
-    const { files, contributions, ...rest } = values;
+    const { files, contributions, references, ...rest } = values;
 
     const payload = {
       folderId,
@@ -31,6 +38,7 @@ export default function DocumentAddModal({ open, setOpen, title }) {
         author: author._id,
         contribution,
       })),
+      references: references.map((r) => r._id),
       ...files[0],
       repositoryId,
       ...rest,
@@ -47,11 +55,13 @@ export default function DocumentAddModal({ open, setOpen, title }) {
         initialValues={{
           description: "",
           contributions: [],
+          references: [],
           status: "",
           files: [],
         }}
         validationSchema={Yup.object({
           contributions,
+          references,
           description,
           files,
           status,
@@ -59,7 +69,12 @@ export default function DocumentAddModal({ open, setOpen, title }) {
         onSubmit={handleSubmit}
       >
         <Form>
-          <BaseFileUpload label="Dokumen" name="files" id="files" />
+          <BaseFileUpload
+            label="Dokumen"
+            name="files"
+            id="files"
+            location={repositoryId}
+          />
           <BaseSelect label="Status" name="status">
             <option value="" disabled defaultValue>
               Pilih status
@@ -71,6 +86,7 @@ export default function DocumentAddModal({ open, setOpen, title }) {
           </BaseSelect>
           <BaseTextArea label="Deskripsi" name="description" />
           <AuthorInput label="Kontribusi" name="contributions" />
+          <ReferenceInput label="Referensi" name="references" />
           <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
             <BaseButton
               type="submit"

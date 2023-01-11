@@ -46,7 +46,12 @@ function ProposalModal(props) {
         <BaseInput label="Tanggal Selesai" name="endDate" type="date" />
       </div>
       <BaseTextArea label="Deskripsi" name="description" />
-      <BaseFileUpload label="Dokumen" name="files" id="files" />
+      <BaseFileUpload
+        label="Dokumen"
+        name="files"
+        id="files"
+        location="proposal"
+      />
     </FormModal>
   );
 }

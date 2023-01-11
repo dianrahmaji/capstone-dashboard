@@ -69,6 +69,7 @@ function FolderCard({ folder }) {
       />
       <InfoModal
         item={folder}
+        type="folder"
         open={openInfoModal}
         setOpen={setOpenInfoModal}
         onOpenEditModal={handleOpenEditModal}

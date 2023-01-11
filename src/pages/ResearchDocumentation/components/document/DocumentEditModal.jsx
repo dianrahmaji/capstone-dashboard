@@ -1,13 +1,20 @@
 import { useField } from "formik";
 import { useDispatch } from "react-redux";
 
-import { description, name, status, contributions } from "~/utils/validation";
+import {
+  description,
+  name,
+  status,
+  contributions,
+  references,
+} from "~/utils/validation";
 import { updateDocument } from "~/store/actions/documentActions";
 
 import AuthorInput from "./AuthorInput";
 import BaseSelect from "~/components/generic/form/BaseSelect";
 import BaseTextArea from "~/components/generic/form/BaseTextArea";
 import FormModal from "~/components/FormModal";
+import ReferenceInput from "./ReferenceInput";
 
 export function InputWithAddOns({ label, extension, ...props }) {
   const [field, meta] = useField(props);
@@ -48,7 +55,8 @@ export default function DocumentEditModal(props) {
   const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
-    const { _id, contributions, description, name, status } = values;
+    const { _id, contributions, description, name, references, status } =
+      values;
     const payload = {
       _id,
       name,
@@ -59,6 +67,7 @@ export default function DocumentEditModal(props) {
         contribution: parseInt(c.contribution, 10),
         author: c.author._id,
       })),
+      references: references.map((r) => r._id),
     };
 
     dispatch(updateDocument(payload));
@@ -68,7 +77,7 @@ export default function DocumentEditModal(props) {
   return (
     <FormModal
       title="Edit Dokumen"
-      validation={{ description, name, status, contributions }}
+      validation={{ description, name, status, contributions, references }}
       handleSubmit={handleSubmit}
       {...props}
     >
@@ -89,6 +98,7 @@ export default function DocumentEditModal(props) {
       </BaseSelect>
       <BaseTextArea label="Deskripsi" name="description" />
       <AuthorInput label="Kontribusi" name="contributions" />
+      <ReferenceInput label="Referensi" name="references" />
     </FormModal>
   );
 }

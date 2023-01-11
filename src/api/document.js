@@ -4,4 +4,6 @@ export default (client) => ({
     client.put(`/api/document/${documentId}`, data),
   deleteDocument: ({ documentId }) =>
     client.delete(`/api/document/${documentId}`),
+  searchDocument: (query) =>
+    client.get(`/api/document/search?searchText=${query}`),
 });

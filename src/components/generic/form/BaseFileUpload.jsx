@@ -9,23 +9,18 @@ import {
 import { UploadIcon } from "@heroicons/react/solid";
 
 import { storage, timestamp } from "~/config/firebase";
-import useSelectedTeam from "~/hooks/useSelectedTeam";
 import { splitNameAndExtension } from "~/utils/file";
 
 // https://alexsidorenko.com/blog/react-list-rerender/
-function FileItem({ file, onSuccessUpload, onDelete }) {
+function FileItem({ file, location, onSuccessUpload, onDelete }) {
   const [percentage, setPercentage] = useState(0);
   const sizeRef = useRef(0);
   const storageDirRef = useRef("");
 
-  const {
-    repository: { _id: repositoryId },
-  } = useSelectedTeam();
-
   useEffect(() => {
     const uploadFile = () => {
       // TODO: Implement nested structure based on mongoDB
-      storageDirRef.current = `/${repositoryId}/${timestamp.now().toMillis()}_${
+      storageDirRef.current = `/${location}/${timestamp.now().toMillis()}_${
         file.name
       }`;
       const storageRef = ref(storage, storageDirRef.current);
@@ -55,7 +50,7 @@ function FileItem({ file, onSuccessUpload, onDelete }) {
       );
     };
     uploadFile();
-  }, [file, repositoryId, onSuccessUpload]);
+  }, [file, location, onSuccessUpload]);
 
   const handleDelete = async () => {
     try {
@@ -99,7 +94,7 @@ function FileItem({ file, onSuccessUpload, onDelete }) {
   );
 }
 
-function BaseFileUpload({ label, multiple, ...props }) {
+function BaseFileUpload({ label, multiple, location, ...props }) {
   const [files, setFiles] = useState([]);
   const [inputValue, setInputValue] = useState([]);
   const [field, meta, helpers] = useField(props);
@@ -170,6 +165,7 @@ function BaseFileUpload({ label, multiple, ...props }) {
           <FileItem
             file={file}
             key={file.name}
+            location={location}
             onSuccessUpload={handleSuccessUpload}
             onDelete={() => handleDelete(index)}
           />

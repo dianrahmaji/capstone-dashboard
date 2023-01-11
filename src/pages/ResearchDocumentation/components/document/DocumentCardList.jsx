@@ -79,6 +79,7 @@ function DocumentCard({ document }) {
       </li>
       <InfoModal
         item={document}
+        type="document"
         open={openInfoModal}
         setOpen={setOpenInfoModal}
         onOpenEditModal={handleOpenEditModal}
