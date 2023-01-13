@@ -1,9 +1,11 @@
 import { LogoutIcon } from "@heroicons/react/solid";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import dashboard from "~/config/dashboard";
 import { selectTeam } from "~/store/actions/teamActions";
+import { logout } from "~/store/actions/userActions";
 
 import BaseCombobox from "~/components/generic/form/BaseCombobox";
 import NavigationBarItem from "./NavigationBarItem";
@@ -13,6 +15,7 @@ export default function NavigationList() {
   const [selectedTeam, setSelectedTeam] = useState({});
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const selectedTeamId = useSelector((state) => state.selectedTeamId);
   const { data: acceptedTeams } = useSelector((state) => state.acceptedTeams);
@@ -34,7 +37,10 @@ export default function NavigationList() {
           team.name.toLowerCase().includes(query.toLowerCase()),
         );
 
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
 
   return (
     <nav className="flex-1 space-y-1 px-2 pb-4">
@@ -73,13 +79,9 @@ export default function NavigationList() {
           <NavigationBarItem {...dashboard.profile} />
         </>
       )}
-      <div className="pt-3">
-        <NavigationBarItem
-          name="Keluar"
-          path="#"
-          icon={LogoutIcon}
-          onLogout={handleLogout}
-        />
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
+      <div className="pt-3" onClick={handleLogout}>
+        <NavigationBarItem name="Keluar" path="#" icon={LogoutIcon} />
       </div>
     </nav>
   );

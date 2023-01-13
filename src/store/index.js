@@ -29,7 +29,7 @@ const persistConfig = {
   ],
 };
 
-const reducer = combineReducers({
+const appReducer = combineReducers({
   chat: chatReducer,
   attachments: attachmentReducer,
   folder: folderReducer,
@@ -41,9 +41,18 @@ const reducer = combineReducers({
   selectedTeamId: selectedTeamIdReducer,
 });
 
+const rootReducer = (state, action) => {
+  if (action.type === "USER_LOGOUT") {
+    localStorage.removeItem("persist:root");
+    return appReducer(undefined, action);
+  }
+
+  return appReducer(state, action);
+};
+
 const middlewares = [thunk];
 
-const persistedReducer = persistReducer(persistConfig, reducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = createStore(
   persistedReducer,
