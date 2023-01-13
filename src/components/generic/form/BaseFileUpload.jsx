@@ -137,10 +137,7 @@ function BaseFileUpload({ label, multiple, location, ...props }) {
 
   return (
     <div className="mt-3">
-      <div className="block text-sm font-medium text-gray-700">
-        {label}{" "}
-        <span className="font-normal italic">(*Accepted file type TBD)</span>
-      </div>
+      <div className="block text-sm font-medium text-gray-700">{label}</div>
       {((files.length === 0 && !multiple) || multiple) && (
         <label
           htmlFor={props.id || props.name}

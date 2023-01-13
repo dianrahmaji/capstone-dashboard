@@ -35,13 +35,13 @@ const dashboard = {
   },
   settings: {
     path: "/settings",
-    name: "Pengaturan Repository",
+    name: "Pengaturan Project",
     icon: CogIcon,
     element: <RepositorySettings />,
   },
   proposal: {
     path: "/proposal",
-    name: "Ajukan Repository",
+    name: "Ajukan Project",
     icon: PlusIcon,
     element: <RepositoryProposal />,
   },

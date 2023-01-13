@@ -54,11 +54,16 @@ export const createTeam = (payload) => async (dispatch) => {
   }
 };
 
-export const updateTeam = (payload) => async (dispatch) => {
+export const updateTeam = (payload) => async (dispatch, getState) => {
+  const prevStatus = getState().teams.data.filter(
+    ({ _id }) => _id === payload._id,
+  );
+  const status = prevStatus === "pending" ? "pending" : "updated";
+
   try {
     await teamApi.updateTeam({ teamId: payload._id }, payload);
 
-    dispatch({ type: EDIT_TEAM, payload });
+    dispatch({ type: EDIT_TEAM, payload: { ...payload, status } });
   } catch (error) {
     dispatch({
       type: ERROR_TEAM,

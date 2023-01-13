@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
-import { PencilAltIcon, TrashIcon } from "@heroicons/react/outline";
+import {
+  AnnotationIcon,
+  DownloadIcon,
+  PencilAltIcon,
+  TrashIcon,
+} from "@heroicons/react/outline";
 
 import {
   fetchTeams,
@@ -11,12 +16,14 @@ import {
 
 import BaseTable from "~/components/generic/table/BaseTable";
 import BaseTableItem from "~/components/generic/table/BaseTableItem";
-import ProposalModal from "./ProposalModal";
+import ProposalEditModal from "./ProposalEditModal";
+import ReviewModal from "./ReviewModal";
 
 const header = ["Judul", "Status", "Aksi"];
 
 function ProposalTable() {
   const [openDialog, setOpenDialog] = useState(false);
+  const [openReview, setOpenReview] = useState(false);
   const [selectedProposal, setSelectedProposal] = useState(null);
 
   const dispatch = useDispatch();
@@ -36,12 +43,17 @@ function ProposalTable() {
     setOpenDialog(true);
   };
 
+  const handleOpenReview = (p) => {
+    setSelectedProposal(p);
+    setOpenReview(true);
+  };
+
   const handleDelete = (id) => {
     dispatch(deleteTeam(id));
   };
 
   const handleSubmit = (values) => {
-    dispatch(updateTeam({ ...values, status: "updated" }));
+    dispatch(updateTeam(values));
     setOpenDialog(false);
   };
 
@@ -68,9 +80,19 @@ function ProposalTable() {
                 </span>
               </BaseTableItem>
               <BaseTableItem className="relative flex gap-2">
+                {p.status === "rejected" && (
+                  <AnnotationIcon
+                    className="h-6 w-6 rounded-md text-gray-400 hover:cursor-pointer hover:text-blue-700"
+                    onClick={() => handleOpenReview(p)}
+                  />
+                )}
                 <PencilAltIcon
                   className="h-6 w-6 rounded-md text-gray-400 hover:cursor-pointer hover:text-blue-700"
                   onClick={() => handleEdit(p)}
+                />
+                <DownloadIcon
+                  className="h-6 w-6 rounded-md text-gray-400 hover:cursor-pointer hover:text-green-700"
+                  onClick={() => window.open(p.document)}
                 />
                 <TrashIcon
                   className="h-6 w-6 rounded-md text-gray-400 hover:cursor-pointer hover:text-red-700"
@@ -80,12 +102,17 @@ function ProposalTable() {
             </tr>
           ))}
       </BaseTable>
-      <ProposalModal
-        title="Edit Repository"
+      <ProposalEditModal
         open={openDialog}
         setOpen={setOpenDialog}
         initialValues={selectedProposal}
         handleSubmit={handleSubmit}
+      />
+
+      <ReviewModal
+        open={openReview}
+        setOpen={setOpenReview}
+        selectedProposal={selectedProposal}
       />
     </>
   );

@@ -11,6 +11,9 @@ export const contributions = Yup.array().min(1, "Contributions are required");
 export const date = Yup.date().required("Date is required");
 export const description = Yup.string().required("Description is required");
 export const documentName = Yup.string().required("Document name is required");
+export const document = Yup.string()
+  .nullable()
+  .required("Document is required!");
 export const email = Yup.string().required("Email is required");
 export const faculty = Yup.string().required("Faculty is required");
 export const files = Yup.array().min(1, "File is required");

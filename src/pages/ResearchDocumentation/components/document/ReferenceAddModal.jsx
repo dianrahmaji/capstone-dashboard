@@ -35,7 +35,7 @@ export default function ReferenceAddModal({
       setFieldError("reference", "Please select a reference!");
       return;
     }
-    if (references.map((r) => r.reference._id).includes(reference._id)) {
+    if (references.map((r) => r._id).includes(reference._id)) {
       setFieldError("reference", "Reference is already added!");
       return;
     }
