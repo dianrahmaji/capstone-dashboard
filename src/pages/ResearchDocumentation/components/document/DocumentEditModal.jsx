@@ -7,6 +7,7 @@ import {
   status,
   contributions,
   references,
+  version,
 } from "~/utils/validation";
 import { updateDocument } from "~/store/actions/documentActions";
 
@@ -15,6 +16,7 @@ import BaseSelect from "~/components/generic/form/BaseSelect";
 import BaseTextArea from "~/components/generic/form/BaseTextArea";
 import FormModal from "~/components/FormModal";
 import ReferenceInput from "./ReferenceInput";
+import BaseInput from "~/components/generic/form/BaseInput";
 
 export function InputWithAddOns({ label, extension, ...props }) {
   const [field, meta] = useField(props);
@@ -55,13 +57,21 @@ export default function DocumentEditModal(props) {
   const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
-    const { _id, contributions, description, name, references, status } =
-      values;
+    const {
+      _id,
+      contributions,
+      description,
+      name,
+      references,
+      status,
+      version,
+    } = values;
     const payload = {
       _id,
       name,
       status,
       description,
+      version,
       contributions: contributions.map((c) => ({
         ...c,
         contribution: parseInt(c.contribution, 10),
@@ -77,7 +87,14 @@ export default function DocumentEditModal(props) {
   return (
     <FormModal
       title="Edit Dokumen"
-      validation={{ description, name, status, contributions, references }}
+      validation={{
+        description,
+        name,
+        status,
+        contributions,
+        references,
+        version,
+      }}
       handleSubmit={handleSubmit}
       {...props}
     >
@@ -94,8 +111,8 @@ export default function DocumentEditModal(props) {
         <option value="ongoing">Ongoing</option>
         <option value="draft">Draft</option>
         <option value="done">Done</option>
-        <option value="critical">Critical</option>
       </BaseSelect>
+      <BaseInput label="Versi" name="version" />
       <BaseTextArea label="Deskripsi" name="description" />
       <AuthorInput label="Kontribusi" name="contributions" />
       <ReferenceInput label="Referensi" name="references" />

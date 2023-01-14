@@ -8,6 +8,7 @@ import {
   files,
   references,
   status,
+  version,
 } from "~/utils/validation";
 import { addDocument } from "~/store/actions/documentActions";
 import useSelectedTeam from "~/hooks/useSelectedTeam";
@@ -19,6 +20,7 @@ import BaseSelect from "~/components/generic/form/BaseSelect";
 import BaseTextArea from "~/components/generic/form/BaseTextArea";
 import BaseButton from "~/components/generic/button/BaseButton";
 import ReferenceInput from "./ReferenceInput";
+import BaseInput from "~/components/generic/form/BaseInput";
 
 export default function DocumentAddModal({ open, setOpen, title }) {
   const dispatch = useDispatch();
@@ -58,6 +60,7 @@ export default function DocumentAddModal({ open, setOpen, title }) {
           references: [],
           status: "",
           files: [],
+          version: "",
         }}
         validationSchema={Yup.object({
           contributions,
@@ -65,6 +68,7 @@ export default function DocumentAddModal({ open, setOpen, title }) {
           description,
           files,
           status,
+          version,
         })}
         onSubmit={handleSubmit}
       >
@@ -82,8 +86,8 @@ export default function DocumentAddModal({ open, setOpen, title }) {
             <option value="ongoing">Ongoing</option>
             <option value="draft">Draft</option>
             <option value="done">Done</option>
-            <option value="critical">Critical</option>
           </BaseSelect>
+          <BaseInput label="Versi" name="version" />
           <BaseTextArea label="Deskripsi" name="description" />
           <AuthorInput label="Kontribusi" name="contributions" />
           <ReferenceInput label="Referensi" name="references" />

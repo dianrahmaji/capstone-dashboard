@@ -31,3 +31,4 @@ export const status = Yup.string().required("Status is required");
 export const topics = Yup.array().min(1, "Topics are required");
 export const title = Yup.string().required("Title is required");
 export const userId = Yup.string().required("User ID is required");
+export const version = Yup.string().required("Version is required");
