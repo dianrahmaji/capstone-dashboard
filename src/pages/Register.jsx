@@ -41,7 +41,7 @@ function Register() {
   } = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (token) navigate("/", { replace: true });
+    if (token) navigate("/profile", { replace: true });
   }, [token, navigate]);
 
   const handleSubmit = (values) => {

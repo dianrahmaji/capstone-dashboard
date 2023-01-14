@@ -69,7 +69,9 @@ export default function NavigationList() {
               key={navigation.name}
             />
           ) : (
-            <NavigationBarItem {...navigation} key={navigation.name} />
+            navigation.path !== "/" && (
+              <NavigationBarItem {...navigation} key={navigation.name} />
+            )
           );
         })
       ) : (

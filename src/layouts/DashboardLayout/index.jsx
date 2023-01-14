@@ -21,7 +21,7 @@ function DashboardLayout({ children }) {
   useEffect(() => {
     if (!token) navigate("/login");
     if (token && acceptedTeams.length === 0 && !whitelist.includes(pathname))
-      navigate("/");
+      navigate("/profile");
   }, [token, navigate, pathname, acceptedTeams]);
 
   return (

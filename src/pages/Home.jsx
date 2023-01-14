@@ -1,9 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import DashboardLayout from "~/layouts/DashboardLayout";
 import ReactQuill from "~/components/ReactQuill";
 
 function Home() {
   const [value, setValue] = useState("");
+
+  const navigate = useNavigate();
+
+  const {
+    data: { token },
+  } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (token) navigate("/profile", { replace: true });
+  }, [token, navigate]);
 
   return (
     <DashboardLayout>
