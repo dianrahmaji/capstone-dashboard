@@ -68,6 +68,7 @@ function Register() {
         password,
       ),
     );
+    navigate("/login");
   };
 
   return (
