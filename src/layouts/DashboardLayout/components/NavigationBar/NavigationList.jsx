@@ -76,7 +76,7 @@ export default function NavigationList() {
         })
       ) : (
         <>
-          <NavigationBarItem {...dashboard.root} />
+          {/* <NavigationBarItem {...dashboard.root} /> */}
           <NavigationBarItem {...dashboard.proposal} />
           <NavigationBarItem {...dashboard.profile} />
         </>
