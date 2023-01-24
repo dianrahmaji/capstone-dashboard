@@ -8,6 +8,7 @@ import {
   DELETE_TEAM_MEMBER,
   EDIT_ACCEPTED_TEAM,
   EDIT_TEAM,
+  EDIT_TEAM_MEMBER,
   ERROR_ACCEPTED_TEAM,
   ERROR_TEAM,
   FETCH_ACCEPTED_TEAM,
@@ -155,7 +156,7 @@ export const updateTeamMember = (payload) => async (dispatch) => {
     });
 
     dispatch({
-      type: ADD_TEAM_MEMBER,
+      type: EDIT_TEAM_MEMBER,
       payload: {
         teamId,
         researcher: { ...researcher, isAdmin },

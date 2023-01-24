@@ -47,7 +47,7 @@ function MemberTable() {
             <tr key={m._id}>
               <BaseTableItem>{m.fullName}</BaseTableItem>
               <BaseTableItem>{m.faculty}</BaseTableItem>
-              <BaseTableItem>{m.contributions} Jam</BaseTableItem>
+              <BaseTableItem>{m.contributions || 0} Jam</BaseTableItem>
               <BaseTableItem>
                 {m.accountType === "student" ? "Mahasiswa" : "Dosen"}
               </BaseTableItem>

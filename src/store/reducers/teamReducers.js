@@ -144,7 +144,14 @@ export const acceptedTeamsReducer = (
       const { teamId, researcher } = action.payload;
 
       const data = state.data.map((d) =>
-        d._id === teamId ? { ...d, members: [...d.members, researcher] } : d,
+        d._id === teamId
+          ? {
+              ...d,
+              members: d.members.map((m) =>
+                m._id === researcher._id ? researcher : m,
+              ),
+            }
+          : d,
       );
 
       return { loading: false, error: null, data };
