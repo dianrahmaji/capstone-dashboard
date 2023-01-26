@@ -108,15 +108,16 @@ export const acceptedTeamsReducer = (
     case EDIT_ACCEPTED_TEAM: {
       const { title, description, startDate, endDate, ...rest } =
         action.payload;
+
       const data = state.data.map((d) =>
         d._id === action.payload._id
           ? {
               ...d,
               ...rest,
+              description,
               repository: {
                 ...d.repository,
                 title,
-                description,
                 startDate,
                 endDate,
               },
