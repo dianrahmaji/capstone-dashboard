@@ -63,7 +63,7 @@ function RepositoryDetails() {
         )}
       </div>
       <RepositoryEditModal
-        title="Edit Informasi Repositori"
+        title="Edit Informasi Proyek Penelitian"
         open={openDialog}
         setOpen={setOpenDialog}
         initialValues={{

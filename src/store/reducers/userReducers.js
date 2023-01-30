@@ -5,6 +5,7 @@ import {
   USER_LOGIN,
   USER_LOGOUT,
   USER_REGISTER,
+  USER_UPDATE,
 } from "../constants/userConstants";
 
 /** TODO: Try wether `loading` and `error` could be omitted
@@ -30,6 +31,13 @@ export const userReducer = (
     }
     case USER_LOGOUT: {
       return { loading: false, error: null, data: {} };
+    }
+    case USER_UPDATE: {
+      return {
+        loading: false,
+        error: null,
+        data: { ...state.data, ...action.payload },
+      };
     }
     case ERROR_USER: {
       return { loading: false, error: action.payload, data: state.data };

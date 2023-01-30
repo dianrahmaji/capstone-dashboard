@@ -6,6 +6,7 @@ import {
   USER_LOGIN,
   USER_LOGOUT,
   USER_REGISTER,
+  USER_UPDATE,
 } from "../constants/userConstants";
 
 export const login = (email, password) => async (dispatch) => {
@@ -58,6 +59,25 @@ export const register =
       });
 
       dispatch({ type: USER_REGISTER, payload: data });
+    } catch (error) {
+      dispatch({
+        type: ERROR_USER,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+export const updateUser =
+  ({ _id: id, ...rest }) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: LOADING_USER });
+      const { data } = await userApi.updateUser({ id }, rest);
+
+      dispatch({ type: USER_UPDATE, payload: data });
     } catch (error) {
       dispatch({
         type: ERROR_USER,

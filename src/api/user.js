@@ -7,4 +7,5 @@ export default (client) => ({
     client.get(`/api/user/${id}/team?accepted=true`),
   login: (data) => client.post("/api/user/login", data),
   register: (data) => client.post("/api/user", data),
+  updateUser: ({ id }, data) => client.put(`/api/user/${id}`, data),
 });

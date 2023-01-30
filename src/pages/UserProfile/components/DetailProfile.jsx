@@ -1,8 +1,13 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import { getProfileFromFullName } from "~/utils/text";
 
+import BaseButton from "~/components/generic/button/BaseButton";
+import ProfileEditModal from "./ProfileEditModal";
+
 function DetailProfile() {
+  const [openDialog, setOpenDialog] = useState(false);
   const { data: user } = useSelector((state) => state.user);
 
   return (
@@ -41,6 +46,10 @@ function DetailProfile() {
           </dd>
           <dt className="text-base text-gray-900">{user.major}</dt>
           <dd className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
+            NIM
+          </dd>
+          <dt className="text-base text-gray-900">{user.userId}</dt>
+          <dd className="text-base font-medium text-gray-500 sm:w-40 sm:shrink-0">
             Keahlian
           </dd>
           <dt className="text-base text-gray-900">
@@ -49,6 +58,14 @@ function DetailProfile() {
           </dt>
         </div>
       </div>
+      <div className="mt-8 flex justify-end">
+        <BaseButton onClick={() => setOpenDialog(true)}>Edit</BaseButton>
+      </div>
+      <ProfileEditModal
+        open={openDialog}
+        setOpen={setOpenDialog}
+        initialValues={user}
+      />
     </div>
   );
 }
