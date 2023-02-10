@@ -70,7 +70,7 @@ export default function ChatProvider({ children }) {
       socketRef.current?.off("receive_message");
       socketRef.current?.emit("leave_room", roomId);
     };
-  }, [dispatch, roomId, _id, acceptedTeams]);
+  }, [dispatch, roomId, _id, acceptedTeams.length]);
 
   const value = {
     socket: socketRef.current,
