@@ -42,9 +42,14 @@ function ReferenceEntry({ reference }) {
             </div>
           </div>
         </div>
+
         <ExternalLinkIcon
           className="h-5 w-5 cursor-pointer hover:text-accent"
-          onClick={() => window.open(reference.url)}
+          onClick={() =>
+            window.open(
+              `https://capstone-repository.vercel.app/file-detail/${reference._id}`,
+            )
+          }
         />
       </div>
     </li>
