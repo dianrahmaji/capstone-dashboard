@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "react-quill/dist/quill.snow.css";
 
 import BaseButton from "~/components/generic/button/BaseButton";
 import useSelectedTeam from "~/hooks/useSelectedTeam";
@@ -48,7 +49,7 @@ function RepositoryDetails() {
           <dd className="mt-1 text-base text-gray-900 sm:col-span-2">
             {/* eslint-disable react/no-danger */}
             <div
-              className="prose"
+              className="ql-editor prose p-0"
               dangerouslySetInnerHTML={{
                 __html: team.description,
               }}
