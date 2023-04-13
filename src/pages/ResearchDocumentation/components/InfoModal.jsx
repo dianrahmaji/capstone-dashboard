@@ -56,7 +56,13 @@ function ReferenceEntry({ reference }) {
   );
 }
 
-export default function InfoModal({ item, onOpenEditModal, type, ...props }) {
+export default function InfoModal({
+  item,
+  onOpenEditModal,
+  onOpenHistoryModal,
+  type,
+  ...props
+}) {
   const {
     createdAt,
     description,
@@ -199,12 +205,20 @@ export default function InfoModal({ item, onOpenEditModal, type, ...props }) {
             </>
           )}
         </dl>
-        <BaseButton
-          className="mt-5 inline-flex w-full justify-center rounded-md border border-transparent px-4 py-2 shadow-sm focus:outline-none sm:col-start-2 sm:text-sm"
-          onClick={onOpenEditModal}
-        >
-          Edit Detail
-        </BaseButton>
+        <div className="flex gap-4">
+          <BaseButton
+            className="mt-5 inline-flex w-full justify-center rounded-md border border-transparent px-4 py-2 shadow-sm focus:outline-none sm:col-start-2 sm:text-sm"
+            onClick={onOpenEditModal}
+          >
+            Perbarui Dokumen
+          </BaseButton>
+          <BaseButton
+            className="mt-5 inline-flex w-full justify-center rounded-md border border-transparent px-4 py-2 shadow-sm focus:outline-none sm:col-start-2 sm:text-sm"
+            onClick={onOpenHistoryModal}
+          >
+            Lihat Riwayat
+          </BaseButton>
+        </div>
       </div>
     </BaseModal>
   );
