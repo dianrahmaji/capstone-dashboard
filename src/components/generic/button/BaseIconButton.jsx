@@ -17,7 +17,7 @@ function BaseIconButton({ children, className, secondary, loading, ...props }) {
       {...props}
     >
       {loading ? (
-        <svg className="ml-3 mr-3 h-5 w-5 animate-spin" viewBox="0 0 24 24">
+        <svg className="mx-3 h-5 w-5 animate-spin" viewBox="0 0 24 24">
           <circle
             className="opacity-25"
             cx="12"

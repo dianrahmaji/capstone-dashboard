@@ -2,16 +2,18 @@ import {
   HomeIcon,
   FolderIcon,
   ChatAlt2Icon,
+  ClipboardCheckIcon,
   CogIcon,
   PlusIcon,
   UserIcon,
 } from "@heroicons/react/outline";
 
 import Home from "~/pages/Home";
+import RepositoryProposal from "~/pages/RepositoryProposal";
+import RepositorySettings from "~/pages/RepositorySettings";
 import ResearchDocumentation from "~/pages/ResearchDocumentation";
 import ResearchDiscussion from "~/pages/ResearchDiscussion";
-import RepositorySettings from "~/pages/RepositorySettings";
-import RepositoryProposal from "~/pages/RepositoryProposal";
+import ReserachEvaluation from "~/pages/ResearchEvaluation";
 import UserProfile from "~/pages/UserProfile";
 
 const dashboard = {
@@ -38,6 +40,12 @@ const dashboard = {
     name: "Pengaturan Project",
     icon: CogIcon,
     element: <RepositorySettings />,
+  },
+  evaluation: {
+    path: "/evaluation",
+    name: "Evaluasi Project",
+    icon: ClipboardCheckIcon,
+    element: <ReserachEvaluation />,
   },
   proposal: {
     path: "/proposal",

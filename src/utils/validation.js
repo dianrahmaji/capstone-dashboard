@@ -15,6 +15,7 @@ export const document = Yup.string()
   .nullable()
   .required("Document is required!");
 export const email = Yup.string().required("Email is required");
+export const evaluation = Yup.string().required("Evaluation is required");
 export const faculty = Yup.string().required("Faculty is required");
 export const files = Yup.array().min(1, "File is required");
 export const fullName = Yup.string().required("Full name is required");
