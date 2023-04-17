@@ -64,9 +64,9 @@ function Tabs() {
       </Tab.List>
       <Tab.Panels className="mt-2">
         <Tab.Panel>
-          <h2 className="mt-6 text-xl font-semibold text-gray-900">
+          <li className="mt-6 text-xl font-semibold text-gray-900">
             Evaluasi Project secara Keseluruhan
-          </h2>
+          </li>
           <BaseForm
             initialValues={{ evaluation: "" }}
             validation={evaluation}
@@ -82,9 +82,9 @@ function Tabs() {
               </BaseButton>
             </div>
           </BaseForm>
-          <h2 className="mt-6 text-xl font-semibold text-gray-900">
+          <li className="mt-6 text-xl font-semibold text-gray-900">
             Evaluasi Anggota Peneliti
-          </h2>
+          </li>
           <div className="mt-5 flex items-center gap-4">
             <div className="my-auto  flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
               <div className=" text-sm text-primary">
@@ -144,17 +144,17 @@ function Tabs() {
             <span className="font-bold">Dzakiy Harissalam</span>
           </div>
           <div className="ml-10">
-            <h2 className="mt-6 text-base font-semibold text-gray-900">
+            <li className="mt-6 text-base font-semibold text-gray-900">
               Evaluasi Project secara Keseluruhan
-            </h2>
-            <p className="mt-2">
+            </li>
+            <p className="mt-2 ml-6">
               Projek penelitian berhasil dilakukan dengan baik, tetapi masih ada
               banyak perbaikan yang dapat dilakukan
             </p>
-            <h2 className="mt-6 text-base font-semibold text-gray-900">
+            <li className="mt-6 text-base font-semibold text-gray-900">
               Evaluasi untuk Anda
-            </h2>
-            <p className="mt-2">
+            </li>
+            <p className="mt-2 ml-6">
               Dian Rahmaji dapat mengerjakan pembagian proyek penelitian dengan
               baik
             </p>
@@ -170,17 +170,17 @@ function Tabs() {
             </span>
           </div>
           <div className="ml-10">
-            <h2 className="mt-6 text-base font-semibold text-gray-900">
+            <li className="mt-6 text-base font-semibold text-gray-900">
               Evaluasi Project secara Keseluruhan
-            </h2>
-            <p className="mt-2">
+            </li>
+            <p className="mt-2 ml-6">
               Projek penelitian berhasil dilakukan dengan baik, tetapi masih ada
               banyak perbaikan yang dapat dilakukan
             </p>
-            <h2 className="mt-6 text-base font-semibold text-gray-900">
+            <li className="mt-6 text-base font-semibold text-gray-900">
               Evaluasi untuk Anda
-            </h2>
-            <p className="mt-2">
+            </li>
+            <p className="mt-2 ml-6">
               Berhasil menyelesaikan proyek tetapi masih ada perbaikan yang
               harus dilakukan
             </p>
